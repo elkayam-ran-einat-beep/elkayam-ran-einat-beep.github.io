@@ -1000,7 +1000,9 @@ var CFG = {
       if(!id) return;
       var input = document.createElement('input');
       input.type = 'hidden';
-      input.name = id;
+      /* גוגל מצפה לשם בצורה entry.123456, וההגדרות מחזיקות את
+         המספר בלבד. התחילית נוספת כאן, ולא נדרסת אם היא כבר קיימת. */
+      input.name = (String(id).indexOf('entry.') === 0) ? id : 'entry.' + id;
       input.value = payload[k];
       f.appendChild(input);
     });
