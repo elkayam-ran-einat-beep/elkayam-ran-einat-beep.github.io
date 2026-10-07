@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>שיחת אבחון | עינת רן אלקיים</title>
-<meta name="description" content="שיחת אבחון קצרה על מבנה גוף, על הפריטים שמחמיאים לך ועל מה שכדאי להוציא מהמלתחה. ממלאות שאלון קצר, ואני חוזרת אלייך. עינת רן אלקיים, סטיילינג, תדמית ומסר חזותי.">
+<title>שיחה בסטייל | עינת רן אלקיים</title>
+<meta name="description" content="שיחה בסטייל: אבחון מבנה גוף וסטייל אישי, כדי שתדעי מה מחמיא לך ומה חסר במלתחה. ממלאות שאלון קצר, ואני חוזרת אלייך. עינת רן אלקיים, סטיילינג, תדמית ומסר חזותי.">
 <meta name="theme-color" content="#6E1B2A">
 
 <!--
   ══════════════════════════════════════════════════════════════
-  שיחת אבחון · דף נחיתה קצר · ספטמבר 2026
+  שיחה בסטייל · דף נחיתה · עודכן אוקטובר 2026
   אותה מערכת עיצוב של "מלתחה בהלימה": דידון לכותרות, קווי שיער,
   פינות חדות, בלוק בורדו אחד לסגירה.
 
@@ -21,8 +21,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:site_name" content="עינת רן אלקיים">
-<meta property="og:title" content="שיחת אבחון | עינת רן אלקיים">
-<meta property="og:description" content="מבנה גוף, פריטים מחמיאים ומה חובה להוציא מהמלתחה. שאלון קצר, ואז שיחה.">
+<meta property="og:title" content="שיחה בסטייל | עינת רן אלקיים">
+<meta property="og:description" content="תגידי, את חוזרת כל בוקר לאותם שלושה שילובים? שאלון קצר, ואז שיחה שבה נאבחן מבנה גוף וסטייל אישי.">
 <meta property="og:url" content="https://elkayam-ran-einat-beep.github.io/">
 <meta property="og:image" content="https://elkayam-ran-einat-beep.github.io/img-abchon/abchon-hero.jpg">
 <meta property="og:image:width" content="1100">
@@ -317,6 +317,23 @@ fieldset.q:first-of-type{border-top-width:1px;}
 }
 .vid .cap{font-size:.68rem;font-weight:700;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;}
 
+/* ═══════════════ המתנה ═══════════════
+   יושב בתוך בלוק הבורדו, ולכן מסגרת בהירה שקופה ולא רקע נוסף. */
+.gift{
+  border:1px solid rgba(251,245,236,.34);
+  padding:30px 28px;
+  display:flex;flex-direction:column;gap:11px;
+}
+.gift .cap{
+  font-size:.66rem;font-weight:700;letter-spacing:.26em;
+  color:rgba(251,245,236,.72);text-transform:uppercase;
+}
+.gift h3{
+  font-family:'Bellefair',serif;font-size:clamp(1.5rem,3.4vw,2.1rem);
+  font-weight:400;line-height:1.22;color:var(--on-accent);letter-spacing:-.008em;
+}
+.gift p{font-size:.96rem;line-height:1.7;color:rgba(251,245,236,.82);}
+
 /* קישור מילוט. מוצג רק כשאין עדיין טופס גוגל ונדרשת שליחה בוואטסאפ */
 .fallback{display:none;}
 .fallback.on{display:block;}
@@ -414,10 +431,10 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   <div class="hero" id="hero">
     <div class="stack-lg">
       <div class="col stack">
-        <div class="eyebrow">שיחת אבחון</div>
+        <div class="eyebrow">שיחה בסטייל</div>
         <h1>תגידי, את חוזרת כל בוקר לאותם שלושה שילובים?</h1>
         <p class="lede">זה כמעט אף פעם לא עניין של כמות. הגוף השתנה, מה שעבד עד היום כבר לא מסתדר, ובלי לשים לב את חוזרת למה שבטוח.</p>
-        <p>אני מזמינה אותך לשיחת אבחון שבה תביני מה באמת מחמיא למבנה הגוף שלך ומה חסר במלתחה, כדי שיהיה לך קל להתלבש ולהיראות במיטבך.</p>
+        <p>אני מזמינה אותך לשיחה בסטייל, שבה נאבחן יחד את מבנה הגוף ואת הסטייל האישי שלך. תצאי ממנה כשאת יודעת מה באמת מחמיא לך ומה חסר במלתחה, כדי שיהיה לך קל להתלבש ולהיראות במיטבך.</p>
         <hr class="rule-gold">
         <div class="cta-row">
           <a class="cta" href="#שאלון">לשאלון ההתאמה</a>
@@ -478,7 +495,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       <div class="stack">
         <div class="col stack-sm">
           <div class="eyebrow">מה קורה בשיחה</div>
-          <h2>שני דברים שתדעי בסוף</h2>
+          <h2>שלושה דברים שתדעי בסוף</h2>
         </div>
         <div class="col-wide steps">
 
@@ -494,9 +511,18 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
           <div class="step">
             <div class="n">02</div>
             <div class="body">
+              <div class="dur">סטייל אישי</div>
+              <h3>מה הסטייל שלך, ולא מה התרגלת ללבוש</h3>
+              <p>נדבר על מה שאת רוצה לשדר ועל מה שאת רוצה שישתקף בחזרה אלייך, ונזהה את הפער בין זה לבין מה שיוצא מהמלתחה בפועל. אצל רוב הנשים הפער הזה הוא ההרגל, ולא הטעם.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="n">03</div>
+            <div class="body">
               <div class="dur">פריטי חובה</div>
               <h3>הבעיה כמעט אף פעם אינה הכמות</h3>
-              <p>תספרי לי מה את לובשת בפועל ואיפה זה נתקע, ואני אגיד לך אילו פריטים חסרים לך כדי שהשאר יתחיל להשתלב, ואילו כבר לא עובדים בשבילך. אצל רוב הנשים שמגיעות אליי יש הרבה פריטים ומעט מהם מדברים זה עם זה, וזה מה שמחזיר אותן בכל בוקר לאותם שניים שלושה צירופים.</p>
+              <p>תספרי לי מה את לובשת בפועל ואיפה זה נתקע, ואני אגיד לך אילו פריטים חסרים לך כדי שהשאר יתחיל להשתלב, ואילו כבר לא עובדים בשבילך. אצל רוב הנשים יש הרבה פריטים ומעט מהם מדברים זה עם זה.</p>
             </div>
           </div>
 
@@ -560,7 +586,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
         <div class="eyebrow">שאלון התאמה</div>
         <h2>שש שאלות, ואז נדע אם זה מתאים</h2>
         <p class="lede">אין כאן תשובות נכונות. בחרי את המשפט שהכי קרוב למה שקורה אצלך היום, גם אם אף אחד מהם אינו מדויק לחלוטין.</p>
-        <p class="small">אני קוראת כל שאלון בעצמי. למי שהתהליך מתאים לה אני שולחת קישור לקביעת שיחת האבחון, ולמי שלא, אני אומרת את זה בכנות ומפנה למה שכן נכון לה עכשיו.</p>
+        <p class="small">אני קוראת כל שאלון בעצמי. למי שהתהליך מתאים לה אני שולחת קישור לקביעת שיחה בסטייל, ולמי שלא, אני אומרת את זה בכנות ומפנה למה שכן נכון לה עכשיו.</p>
       </div>
 
       <form class="col-wide" id="form" novalidate>
@@ -705,12 +731,12 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
                 <label class="opt">
                   <input type="radio" name="q6" value="א">
                   <span class="box"></span><span class="ltr">א</span>
-                  <span class="txt">אני מוכנה להשקיע בליווי אישי של מומחית שתחסוך לי זמן, טעויות וקניות מיותרות ותוביל אותי לתוצאה מדויקת.</span>
+                  <span class="txt">אני מוכנה להשקיע בליווי אישי מלא של מומחית, שיחסוך לי זמן, טעויות וקניות מיותרות ויוביל אותי לתוצאה מדויקת.</span>
                 </label>
                 <label class="opt">
                   <input type="radio" name="q6" value="ב">
                   <span class="box"></span><span class="ltr">ב</span>
-                  <span class="txt">אני מעדיפה ללמוד בתהליך דיגיטלי מסודר, בקצב שלי ובהשקעה נמוכה יותר.</span>
+                  <span class="txt">אני מחפשת יום קניות ממוקד, שבו נקנה יחד את מה שחסר לי.</span>
                 </label>
                 <label class="opt">
                   <input type="radio" name="q6" value="ג">
@@ -766,7 +792,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
     <div class="col-wide stack">
       <div class="eyebrow">קיבלתי את התשובות שלך</div>
       <h2>נשמע שזה בדיוק המקום שלך</h2>
-      <p class="lede">מהתשובות שלך עולה שאת בנקודה שבה ליווי אישי עושה את ההבדל הגדול ביותר. צפי בסרטון הקצר, ואז בחרי לנו שעה ביומן.</p>
+      <p class="lede">מהתשובות שלך עולה שאת בנקודה שבה ליווי אישי מלא עושה את ההבדל הגדול ביותר. צפי בסרטון הקצר, ואז בחרי לנו שעה ביומן לשיחה בסטייל.</p>
       <div class="vid" data-vid="invite">
         <div class="play"></div>
         <div class="cap">הסרטון בדרך</div>
@@ -776,31 +802,53 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
         <a class="cta on-dark" id="link-cal" href="#">בחרי שעה ביומן שלי</a>
         <a class="cta ghost" id="link-wa" href="#">בואי נדבר בוואטסאפ</a>
       </div>
-      <p class="small">שיחת אבחון בזום או בטלפון, כפי שנוח לך. אחרי שתקבעי אשלח לך הנחיה קצרה לתמונות, כדי שאגיע לשיחה מוכנה. ואם לא מצאת מועד שמתאים, כתבי לי בוואטסאפ ונמצא.</p>
+      <p class="small">השיחה בזום או בטלפון, כפי שנוח לך. אחרי שתקבעי אשלח לך הנחיה קצרה לתמונות, כדי שאגיע לשיחה מוכנה. ואם לא מצאת מועד שמתאים, כתבי לי בוואטסאפ ונמצא.</p>
       <p class="small fallback"><a id="fb-1" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
     </div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
-     09 מסך התוצאה, מסלול התוכן
-     מוצג למי שענתה בעיקר ג, כלומר ארבע תשובות ג ומעלה.
+     09 מסך התוצאה, מסלול יום הקניות
+     מוצג למי שבחרה ב בשאלה 6. אין כאן קישור ליומן, כי
+     היומן שמור לשיחה בסטייל שמובילה לתהליך המלא.
+     ══════════════════════════════════════════════════════════ -->
+<div class="closing result" id="תוצאה-קניות">
+  <div class="wrap">
+    <div class="col-wide stack">
+      <div class="eyebrow">קיבלתי את התשובות שלך</div>
+      <h2>יום קניות ממוקד יכול להיות בדיוק זה</h2>
+      <p class="lede">מהתשובות שלך עולה שמה שאת מחפשת עכשיו הוא לצאת ולקנות נכון, ולא תהליך מלא. זה לגמרי אפשרי, ויש לכך דרך משלה.</p>
+      <p class="small">אחזור אלייך בוואטסאפ עם הפרטים, ונראה יחד אם זה אכן מה שנכון לך עכשיו או שדווקא כדאי להתחיל אחרת. לפעמים יום קניות בלי אבחון קודם מבזבז את היום, ואני אגיד לך את זה בכנות.</p>
+      <hr class="rule-gold">
+      <div class="cta-row">
+        <a class="cta on-dark" id="link-wa-shop" href="#">לכתוב לי בוואטסאפ</a>
+      </div>
+      <p class="small fallback"><a id="fb-3" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     10 מסך התוצאה, מסלול התוכן והמתנה
+     מוצג למי שבחרה ג בשאלה 6.
      ══════════════════════════════════════════════════════════ -->
 <div class="closing result" id="תוצאה-תוכן">
   <div class="wrap">
     <div class="col-wide stack">
       <div class="eyebrow">קיבלתי את התשובות שלך</div>
       <h2>כרגע תהליך אישי כנראה לא הדבר הנכון לך</h2>
-      <p class="lede">מהתשובות שלך עולה שאת במקום טוב, ושמה שיעזור לך עכשיו הוא רעיונות ולא ליווי צמוד. צפי בסרטון הקצר, ותישארי איתי. אני מקליטה סרטון על מבני גוף ועל האזורים שמחמיאים לכל אחת, והוא יעלה אצלי באינסטגרם.</p>
-      <div class="vid" data-vid="follow">
-        <div class="play"></div>
-        <div class="cap">הסרטון בדרך</div>
+      <p class="lede">מהתשובות שלך עולה שאת במקום טוב, ושמה שיעזור לך עכשיו הוא רעיונות ולא ליווי צמוד. אז אני שולחת לך מתנה.</p>
+      <div class="gift">
+        <div class="cap">מתנה בדרך אלייך</div>
+        <h3>המדריך לאריזת המזוודה המושלמת</h3>
+        <p>כולל לוקבוק של שלושים לוקים מוכנים, כדי שתדעי בדיוק מה לקחת ואיך לשלב. אשלח לך אותו למייל שהשארת.</p>
       </div>
       <hr class="rule-gold">
       <div class="cta-row">
         <a class="cta on-dark" id="link-ig" href="#">לעקוב באינסטגרם</a>
       </div>
-      <p class="small">וכשתרגישי שהגיע הזמן לתהליך מלא, אני כאן.</p>
+      <p class="small">באינסטגרם אני מעלה כל הזמן תוכן על מבני גוף, על גזרות ועל מה שמחמיא. וכשתרגישי שהגיע הזמן לתהליך מלא, אני כאן.</p>
       <p class="small fallback"><a id="fb-2" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
     </div>
   </div>
@@ -837,11 +885,10 @@ var CFG = {
   /* עמוד האינסטגרם */
   instagram: 'https://www.instagram.com/einat_ran_elkayam',
 
-  /* שני הסרטונים. מדביקים כאן קישור יוטיוב רגיל, למשל
-     https://www.youtube.com/watch?v=abc123 , והסרטון מוטמע לבד.
-     כל עוד זה ריק, מוצגת מסגרת עם הכיתוב "הסרטון בדרך". */
+  /* הסרטון במסך של מי שמוזמנת לשיחה. מדביקים כאן קישור יוטיוב
+     רגיל, למשל https://www.youtube.com/watch?v=abc123 , והוא
+     מוטמע לבד. כל עוד זה ריק, מוצגת מסגרת עם "הסרטון בדרך". */
   videoInvite: '',
-  videoFollow: '',
 
   /* ═══ טופס גוגל ═══
      כל עוד formId ריק, השליחה נפתחת בוואטסאפ עם כל התשובות
@@ -874,7 +921,9 @@ var CFG = {
   document.getElementById('link-cal').href = CFG.calendar;
   document.getElementById('link-ig').href  = CFG.instagram;
   document.getElementById('link-wa').href  = waBase + '?text=' +
-    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לקבוע שיחת אבחון');
+    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לקבוע שיחה בסטייל');
+  document.getElementById('link-wa-shop').href = waBase + '?text=' +
+    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לשמוע על יום קניות ממוקד');
 
   /* ── הטמעת הסרטונים ──
      ממירים קישור יוטיוב רגיל, מקוצר או של שורטס לכתובת הטמעה. */
@@ -898,7 +947,6 @@ var CFG = {
     box.appendChild(f);
   }
   fillVideo('invite', CFG.videoInvite);
-  fillVideo('follow', CFG.videoFollow);
 
   /* ── הסרגל הקבוע מופיע רק אחרי הפולד הראשון ──
      כך שבמסך הפתיחה יש קריאה אחת לפעולה ולא שתיים. */
@@ -952,27 +1000,36 @@ var CFG = {
     return out;
   }
 
-  /* ── הניקוד ──
-     ארבע תשובות ג ומעלה מתוך שש הן "בעיקר ג", וזה מסלול התוכן.
-     כל שאר הצירופים, כולל א ו־ב מעורבים, מקבלים הזמנה לשיחה.
-     הסף נוטה לטובת ההזמנה בכוונה, כדי לא לאבד פנייה גבולית. */
+  /* ── הניתוב ──
+     שאלה 6 היא שקובעת, כי היא ההצהרה הישירה של האישה על מה
+     שהיא מחפשת. חמש הראשונות מתארות את הצורך, והשישית את
+     הדרך, ולכן היא הסימן האמין ביותר לכוונה.
+       א  ליווי אישי מלא   ← הזמנה לקבוע ביומן
+       ב  יום קניות ממוקד  ← אני חוזרת אליה עם הפרטים
+       ג  תוכן ורעיונות    ← מתנה ומעקב באינסטגרם */
   function route(a){
-    var g = 0;
-    QUESTIONS.forEach(function(n){ if(a[n] === 'ג') g++; });
-    return g >= 4 ? 'follow' : 'invite';
+    if(a.q6 === 'ב') return 'shopping';
+    if(a.q6 === 'ג') return 'follow';
+    return 'invite';
   }
+
+  var ROUTE_NAMES = {
+    invite:   'תהליך מלא',
+    shopping: 'יום קניות',
+    follow:   'תוכן ומתנה'
+  };
 
   /* ── טקסט ההודעה לוואטסאפ, כשאין עדיין טופס גוגל ── */
   function waText(a, d, r){
     var lines = [
-      'שאלון התאמה מהדף של שיחת האבחון',
+      'שאלון התאמה מהדף של השיחה בסטייל',
       '',
       'שם: ' + d.name,
       'טלפון: ' + d.phone,
       'מייל: ' + d.email,
       '',
       'תשובות: ' + QUESTIONS.map(function(n,i){ return (i+1) + a[n]; }).join(' · '),
-      'מסלול: ' + (r === 'invite' ? 'הזמנה לשיחה' : 'תוכן')
+      'מסלול: ' + ROUTE_NAMES[r]
     ];
     return lines.join('\n');
   }
@@ -988,7 +1045,7 @@ var CFG = {
     var payload = {};
     QUESTIONS.forEach(function(n){ payload[n] = a[n]; });
     payload.name = d.name; payload.phone = d.phone; payload.email = d.email;
-    payload.result = (r === 'invite' ? 'הזמנה לשיחה' : 'תוכן');
+    payload.result = ROUTE_NAMES[r];
 
     Object.keys(payload).forEach(function(k){
       var id = CFG.entries[k];
@@ -1011,7 +1068,7 @@ var CFG = {
   function showResult(r){
     quizSec.style.display = 'none';
     sticky.remove();
-    var id = (r === 'invite') ? 'תוצאה-הזמנה' : 'תוצאה-תוכן';
+    var id = {invite:'תוצאה-הזמנה', shopping:'תוצאה-קניות', follow:'תוצאה-תוכן'}[r];
     var box = document.getElementById(id);
     box.classList.add('on');
     box.setAttribute('tabindex','-1');
@@ -1072,7 +1129,7 @@ var CFG = {
       /* אין עדיין טופס גוגל. פותחים וואטסאפ עם התשובות מוכנות.
          אם הדפדפן חוסם את החלון, קישור המילוט במסך התוצאה מציל את הפנייה. */
       var waFull = waBase + '?text=' + encodeURIComponent(waText(a, d, r));
-      ['fb-1','fb-2'].forEach(function(id){
+      ['fb-1','fb-2','fb-3'].forEach(function(id){
         var el = document.getElementById(id);
         el.href = waFull;
         el.parentNode.classList.add('on');
