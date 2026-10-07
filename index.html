@@ -115,18 +115,6 @@ section{padding:96px 0;}
 .stack-sm{display:flex;flex-direction:column;gap:14px;}
 .stack-lg{display:flex;flex-direction:column;gap:56px;}
 
-/* ═══════════════ מסטהד ═══════════════ */
-.masthead{padding:26px 0 22px;text-align:center;}
-.masthead .inner{padding-top:22px;}
-.masthead .name{
-  font-family:'Bellefair',serif;font-size:clamp(1.5rem,3.4vw,2.1rem);
-  letter-spacing:.42em;line-height:1.2;padding-left:.42em;
-}
-.masthead .sub{
-  font-size:.65rem;letter-spacing:.3em;color:var(--ink-faint);
-  font-weight:600;padding-top:9px;
-}
-
 /* ═══════════════ כפתורים ═══════════════ */
 .cta{
   display:inline-block;background:var(--accent);color:var(--on-accent);
@@ -347,7 +335,9 @@ fieldset.q:first-of-type{border-top-width:1px;}
 .closing .vid .cap{color:rgba(251,245,236,.72);}
 .closing .vid .play{border-inline-end-color:var(--on-accent);}
 
-/* ═══════════════ סרגל קבוע במובייל ═══════════════ */
+/* ═══════════════ סרגל קבוע במובייל ═══════════════
+   מופיע רק אחרי שהפולד הראשון נגלל. במסך הפתיחה כבר יש
+   כפתור, ושניים באותו מסך זה אחד יותר מדי. */
 .sticky{
   display:none;position:fixed;inset:auto 0 0 0;z-index:40;
   background:var(--paper);border-top:1px solid var(--rule-strong);
@@ -378,8 +368,6 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   .hero{padding:32px 0 48px;}
   .closing{padding:64px 0;}
   .wrap{padding:0 22px;}
-  .masthead{padding:20px 0 16px;}
-  .masthead .name{letter-spacing:.26em;padding-left:.26em;}
 
   .step{grid-template-columns:1fr;gap:12px;}
   .step .n{padding-top:0;}
@@ -403,11 +391,11 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   .proofitem:last-child{padding-bottom:0;}
 
   /* רצפת קריאות: התוויות הזעירות קטנות מדי בטלפון */
-  .eyebrow,.masthead .sub,.proofitem .tag,.tcard .who,
+  .eyebrow,.proofitem .tag,.tcard .who,
   .step .dur,.sig-sub,.field label,.vid .cap{font-size:.72rem;}
 
   .cta{width:100%;text-align:center;padding-inline:20px;}
-  .sticky{display:block;}
+  .sticky.on{display:block;}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -420,28 +408,21 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
 
 <div class="wrap">
 
-  <!-- ══════ מסטהד ══════ -->
-  <div class="masthead">
-    <hr class="hair-strong">
-    <div class="inner">
-      <div class="name">EINAT RAN ELKAYAM</div>
-      <div class="sub">סטיילינג · תדמית · מסר חזותי</div>
-    </div>
-  </div>
-  <hr class="hair-strong">
-
-  <!-- ══════ 01 פולד ראשון ══════ -->
-  <div class="hero">
+  <!-- ══════ 01 פולד ראשון ══════
+       בלי מסטהד מעל. במסך הפתיחה של דף נחיתה, השאלה היא
+       שצריכה להיות הדבר הראשון, והחתימה נשארת בתחתית הדף. -->
+  <div class="hero" id="hero">
     <div class="stack-lg">
       <div class="col stack">
         <div class="eyebrow">שיחת אבחון</div>
-        <h1>מבנה גוף, פריטים מחמיאים ומה חובה להוציא מהמלתחה</h1>
-        <p class="lede">שיחה קצרה שבה נעבור על הפרופורציות שלך, על הגזרות שעובדות איתן, ועל מה שכדאי שיישאר במלתחה לצד מה שכבר סיים את התפקיד שלו.</p>
+        <h1>תגידי, את חוזרת כל בוקר לאותם שלושה שילובים?</h1>
+        <p class="lede">זה כמעט אף פעם לא עניין של כמות. הגוף השתנה, מה שעבד עד היום כבר לא מסתדר, ובלי לשים לב את חוזרת למה שבטוח.</p>
+        <p>אני מזמינה אותך לשיחת אבחון שבה תביני מה באמת מחמיא למבנה הגוף שלך ומה חסר במלתחה, כדי שיהיה לך קל להתלבש ולהיראות במיטבך.</p>
         <hr class="rule-gold">
         <div class="cta-row">
-          <a class="cta" href="#שאלון">למילוי השאלון</a>
+          <a class="cta" href="#שאלון">לשאלון ההתאמה</a>
         </div>
-        <p class="cta-note">שש שאלות, פחות משתי דקות. אני קוראת את התשובות ומתאמת איתך שיחה.</p>
+        <p class="cta-note">שש שאלות, פחות משתי דקות. <strong>לא כל אישה מתאימה לתהליך אישי</strong>, ולכן אני קוראת את התשובות לפני שאנחנו קובעות.</p>
       </div>
       <figure class="plate wide">
         <img class="ph" src="img-abchon/abchon-hero.jpg" width="1100" height="1467" alt="עינת רן אלקיים, סטייליסטית אישית ויועצת תדמית">
@@ -579,6 +560,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
         <div class="eyebrow">שאלון התאמה</div>
         <h2>שש שאלות, ואז נדע אם זה מתאים</h2>
         <p class="lede">אין כאן תשובות נכונות. בחרי את המשפט שהכי קרוב למה שקורה אצלך היום, גם אם אף אחד מהם אינו מדויק לחלוטין.</p>
+        <p class="small">אני קוראת כל שאלון בעצמי. למי שהתהליך מתאים לה אני שולחת קישור לקביעת שיחת האבחון, ולמי שלא, אני אומרת את זה בכנות ומפנה למה שכן נכון לה עכשיו.</p>
       </div>
 
       <form class="col-wide" id="form" novalidate>
@@ -917,6 +899,18 @@ var CFG = {
   }
   fillVideo('invite', CFG.videoInvite);
   fillVideo('follow', CFG.videoFollow);
+
+  /* ── הסרגל הקבוע מופיע רק אחרי הפולד הראשון ──
+     כך שבמסך הפתיחה יש קריאה אחת לפעולה ולא שתיים. */
+  var hero = document.getElementById('hero');
+  if(hero && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(entries){
+      sticky.classList.toggle('on', !entries[0].isIntersecting);
+    }, {threshold:0}).observe(hero);
+  } else {
+    /* בדפדפן ישן, מציגים אותו תמיד ולא מסתירים קריאה לפעולה */
+    sticky.classList.add('on');
+  }
 
   /* ── בדיקות תקינות ── */
   function isEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); }
