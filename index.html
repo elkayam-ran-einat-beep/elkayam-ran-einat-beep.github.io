@@ -527,6 +527,8 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
           </div>
 
         </div>
+
+        <p class="frame-note col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים, וזאת העבודה שאני עושה.</p>
       </div>
     </section>
   </div>
@@ -736,7 +738,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
                 <label class="opt">
                   <input type="radio" name="q6" value="ב">
                   <span class="box"></span><span class="ltr">ב</span>
-                  <span class="txt">אני מחפשת יום קניות ממוקד, שבו נקנה יחד את מה שחסר לי.</span>
+                  <span class="txt">אני מחפשת עזרה ממוקדת ולא תהליך מלא, משהו נקודתי שיזיז אותי קדימה.</span>
                 </label>
                 <label class="opt">
                   <input type="radio" name="q6" value="ג">
@@ -817,9 +819,9 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   <div class="wrap">
     <div class="col-wide stack">
       <div class="eyebrow">קיבלתי את התשובות שלך</div>
-      <h2>יום קניות ממוקד יכול להיות בדיוק זה</h2>
-      <p class="lede">מהתשובות שלך עולה שמה שאת מחפשת עכשיו הוא לצאת ולקנות נכון, ולא תהליך מלא. זה לגמרי אפשרי, ויש לכך דרך משלה.</p>
-      <p class="small">אחזור אלייך בוואטסאפ עם הפרטים, ונראה יחד אם זה אכן מה שנכון לך עכשיו או שדווקא כדאי להתחיל אחרת. לפעמים יום קניות בלי אבחון קודם מבזבז את היום, ואני אגיד לך את זה בכנות.</p>
+      <h2>בואי נדבר ונראה מה נכון לך עכשיו</h2>
+      <p class="lede">מהתשובות שלך עולה שתהליך מלא אינו מה שאת מחפשת כרגע, ואני מעדיפה להגיד את זה בכנות מאשר למכור לך משהו שלא יושב.</p>
+      <p class="small">אני קוראת את השאלון שלך בעצמי ואחזור אלייך. יש עוד דרכים לעבוד יחד, ואם אחת מהן מתאימה למה שתיארת, אציע לך אותה.</p>
       <hr class="rule-gold">
       <div class="cta-row">
         <a class="cta on-dark" id="link-wa-shop" href="#">לכתוב לי בוואטסאפ</a>
@@ -923,7 +925,7 @@ var CFG = {
   document.getElementById('link-wa').href  = waBase + '?text=' +
     encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לקבוע שיחה בסטייל');
   document.getElementById('link-wa-shop').href = waBase + '?text=' +
-    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לשמוע על יום קניות ממוקד');
+    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לשמוע מה מתאים לי');
 
   /* ── הטמעת הסרטונים ──
      ממירים קישור יוטיוב רגיל, מקוצר או של שורטס לכתובת הטמעה. */
@@ -1005,8 +1007,11 @@ var CFG = {
      שהיא מחפשת. חמש הראשונות מתארות את הצורך, והשישית את
      הדרך, ולכן היא הסימן האמין ביותר לכוונה.
        א  ליווי אישי מלא   ← הזמנה לקבוע ביומן
-       ב  יום קניות ממוקד  ← אני חוזרת אליה עם הפרטים
-       ג  תוכן ורעיונות    ← מתנה ומעקב באינסטגרם */
+       ב  עזרה ממוקדת      ← אני חוזרת אליה ומציעה בעצמי
+       ג  תוכן ורעיונות    ← מתנה ומעקב באינסטגרם
+
+     יום קניות אינו מופיע בדף בשום מקום, בכוונה. הוא מוצע
+     אישית רק אחרי שהשאלון מראה שתהליך מלא אינו מתאים. */
   function route(a){
     if(a.q6 === 'ב') return 'shopping';
     if(a.q6 === 'ג') return 'follow';
@@ -1015,7 +1020,7 @@ var CFG = {
 
   var ROUTE_NAMES = {
     invite:   'תהליך מלא',
-    shopping: 'יום קניות',
+    shopping: 'עזרה ממוקדת',
     follow:   'תוכן ומתנה'
   };
 
