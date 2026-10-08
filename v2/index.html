@@ -818,9 +818,11 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       <h2>בואי נדבר ונראה מה נכון לך עכשיו</h2>
       <p class="lede">מהתשובות שלך עולה שאת מחפשת משהו ממוקד ולא תהליך מלא, ואני מעדיפה להגיד את זה בכנות מאשר למכור לך משהו שלא יושב.</p>
       <p class="small">אני קוראת את השאלון שלך בעצמי ואחזור אלייך. יש כמה דרכים ממוקדות לעבוד יחד, ואחרי שאקרא מה כתבת אציע לך את זו שמתאימה למה שתיארת.</p>
+      <p class="small">ואם בא לך בינתיים רק להסתכל ולהתרשם, גם זה לגמרי בסדר. אפשר לעקוב אחריי באינסטגרם ולראות אם זה מדבר אלייך.</p>
       <hr class="rule-gold">
       <div class="cta-row">
         <a class="cta on-dark" id="link-wa-shop" href="#">לכתוב לי בוואטסאפ</a>
+        <a class="cta ghost" id="link-ig-soft" href="#">לעקוב באינסטגרם</a>
       </div>
       <p class="small fallback"><a id="fb-3" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
     </div>
@@ -839,7 +841,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       <p class="lede">מהתשובות שלך עולה שמה שיעזור לך עכשיו הוא רעיונות ולא ליווי צמוד, ואני מעדיפה להגיד את זה בכנות. אז הנה משהו שתוכלי להשתמש בו כבר השבוע.</p>
       <div class="gift">
         <div class="cap">מתנה בדרך אלייך</div>
-        <h3>המדריך לאריזת המזוודה המושלמת</h3>
+        <h3>המדריך לאריזת המזוודה המושלמת לאירופה</h3>
         <p>כולל לוקבוק של שלושים לוקים מוכנים, כדי שתדעי בדיוק מה לקחת ואיך לשלב. אשלח לך אותו למייל שהשארת.</p>
       </div>
       <hr class="rule-gold">
@@ -918,6 +920,7 @@ var CFG = {
   var waBase = 'https://wa.me/' + CFG.whatsapp;
   document.getElementById('link-cal').href = CFG.calendar;
   document.getElementById('link-ig').href  = CFG.instagram;
+  document.getElementById('link-ig-soft').href = CFG.instagram;
   document.getElementById('link-wa').href  = waBase + '?text=' +
     encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לקבוע שיחה בסטייל');
   document.getElementById('link-wa-shop').href = waBase + '?text=' +
