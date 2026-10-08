@@ -299,8 +299,6 @@ fieldset.q:first-of-type{border-top-width:1px;}
 .q.bad{background:rgba(140,43,30,.045);}
 
 /* ═══════════════ מסך התוצאה ═══════════════ */
-.result{display:none;}
-.result.on{display:block;}
 .vid{
   width:100%;aspect-ratio:16/9;background:var(--paper-3);
   border:1px solid var(--rule-strong);
@@ -317,27 +315,7 @@ fieldset.q:first-of-type{border-top-width:1px;}
 }
 .vid .cap{font-size:.68rem;font-weight:700;letter-spacing:.26em;color:var(--gold);text-transform:uppercase;}
 
-/* ═══════════════ המתנה ═══════════════
-   יושב בתוך בלוק הבורדו, ולכן מסגרת בהירה שקופה ולא רקע נוסף. */
-.gift{
-  border:1px solid rgba(251,245,236,.34);
-  padding:30px 28px;
-  display:flex;flex-direction:column;gap:11px;
-}
-.gift .cap{
-  font-size:.66rem;font-weight:700;letter-spacing:.26em;
-  color:rgba(251,245,236,.72);text-transform:uppercase;
-}
-.gift h3{
-  font-family:'Bellefair',serif;font-size:clamp(1.5rem,3.4vw,2.1rem);
-  font-weight:400;line-height:1.22;color:var(--on-accent);letter-spacing:-.008em;
-}
-.gift p{font-size:.96rem;line-height:1.7;color:rgba(251,245,236,.82);}
 
-/* קישור מילוט. מוצג רק כשאין עדיין טופס גוגל ונדרשת שליחה בוואטסאפ */
-.fallback{display:none;}
-.fallback.on{display:block;}
-.fallback a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:2px;}
 
 /* ═══════════════ סגירה ═══════════════ */
 .closing{background:var(--accent);color:var(--on-accent);padding:96px 0;}
@@ -444,7 +422,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       </div>
       <figure class="plate wide">
         <img class="ph" src="../img-abchon/abchon-hero.jpg" width="1100" height="1467" alt="עינת רן אלקיים, סטייליסטית אישית ויועצת תדמית">
-        <figcaption class="margin-note">אנחנו עובדות עם מה שיש, ועם זה ננצח.</figcaption>
+        <figcaption class="margin-note">אנחנו עובדות עם מה שיש, עם הגוף ועם האישה שאת היום, ועם זה ננצח.</figcaption>
       </figure>
     </div>
   </div>
@@ -463,7 +441,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       </div>
       <div class="proofitem">
         <div class="n">99%</div>
-        <div class="t">מהפריטים במלתחה משתלבים זה עם זה</div>
+        <div class="t">מהמלתחה פריטים שאת אוהבת, שמחמיאים לך ושאת יודעת לשלב</div>
       </div>
     </div>
   </div>
@@ -530,7 +508,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
 
         </div>
 
-        <p class="frame-note col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים, וזאת העבודה שאני עושה.</p>
+        <p class="frame-note col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים לפחות, ולפעמים יותר, לפי מה שהיא צריכה.</p>
       </div>
     </section>
   </div>
@@ -781,78 +759,6 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   </section>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     08 מסך התוצאה, מסלול ההזמנה
-     מוצג למי שענתה בעיקר א או ב. בלוק בורדו מלא.
-     ══════════════════════════════════════════════════════════ -->
-<div class="closing result" id="תוצאה-הזמנה">
-  <div class="wrap">
-    <div class="col-wide stack">
-      <div class="eyebrow">קיבלתי את התשובות שלך</div>
-      <h2>נשמע שזה בדיוק המקום שלך</h2>
-      <p class="lede">מהתשובות שלך עולה שאת בנקודה שבה ליווי אישי מלא עושה את ההבדל הגדול ביותר. צפי בסרטון הקצר, ואז בחרי לנו שעה ביומן לשיחה בסטייל.</p>
-      <div class="vid" data-vid="invite">
-        <div class="play"></div>
-        <div class="cap">הסרטון בדרך</div>
-      </div>
-      <hr class="rule-gold">
-      <div class="cta-row">
-        <a class="cta on-dark" id="link-cal" href="#">בחרי שעה ביומן שלי</a>
-        <a class="cta ghost" id="link-wa" href="#">בואי נדבר בוואטסאפ</a>
-      </div>
-      <p class="small">השיחה בזום. אחרי שתקבעי אני עוברת על השאלון שלך ושולחת לך הנחיה קצרה לתמונות, כדי שאגיע לשיחה עם אבחון מוכן ולא נתחיל מאפס. ואם לא מצאת מועד שמתאים, כתבי לי בוואטסאפ ונמצא.</p>
-      <p class="small fallback"><a id="fb-1" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     09 מסך התוצאה, מסלול יום הקניות
-     מוצג למי שבחרה ב בשאלה 6. אין כאן קישור ליומן, כי
-     היומן שמור לשיחה בסטייל שמובילה לתהליך המלא.
-     ══════════════════════════════════════════════════════════ -->
-<div class="closing result" id="תוצאה-קניות">
-  <div class="wrap">
-    <div class="col-wide stack">
-      <div class="eyebrow">קיבלתי את התשובות שלך</div>
-      <h2>בואי נדבר ונראה מה נכון לך עכשיו</h2>
-      <p class="lede">מהתשובות שלך עולה שאת מחפשת משהו ממוקד ולא תהליך מלא, ואני מעדיפה להגיד את זה בכנות מאשר למכור לך משהו שלא יושב.</p>
-      <p class="small">אני קוראת את השאלון שלך בעצמי ואחזור אלייך. יש כמה דרכים ממוקדות לעבוד יחד, ואחרי שאקרא מה כתבת אציע לך את זו שמתאימה למה שתיארת.</p>
-      <p class="small">ואם בא לך בינתיים רק להסתכל ולהתרשם, גם זה לגמרי בסדר. אפשר לעקוב אחריי באינסטגרם ולראות אם זה מדבר אלייך.</p>
-      <hr class="rule-gold">
-      <div class="cta-row">
-        <a class="cta on-dark" id="link-wa-shop" href="#">לכתוב לי בוואטסאפ</a>
-        <a class="cta ghost" id="link-ig-soft" href="#">לעקוב באינסטגרם</a>
-      </div>
-      <p class="small fallback"><a id="fb-3" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     10 מסך התוצאה, מסלול התוכן והמתנה
-     מוצג למי שבחרה ג בשאלה 6.
-     ══════════════════════════════════════════════════════════ -->
-<div class="closing result" id="תוצאה-תוכן">
-  <div class="wrap">
-    <div class="col-wide stack">
-      <div class="eyebrow">קיבלתי את התשובות שלך</div>
-      <h2>קחי מתנה, ובואי נישאר בקשר</h2>
-      <p class="lede">מהתשובות שלך עולה שמה שיעזור לך עכשיו הוא רעיונות ולא ליווי צמוד, ואני מעדיפה להגיד את זה בכנות. אז הנה משהו שתוכלי להשתמש בו כבר השבוע.</p>
-      <div class="gift">
-        <div class="cap">מתנה בדרך אלייך</div>
-        <h3>המדריך לאריזת המזוודה המושלמת לאירופה</h3>
-        <p>כולל לוקבוק של שלושים לוקים מוכנים, כדי שתדעי בדיוק מה לקחת ואיך לשלב. אשלח לך אותו למייל שהשארת.</p>
-      </div>
-      <hr class="rule-gold">
-      <div class="cta-row">
-        <a class="cta on-dark" id="link-ig" href="#">לעקוב באינסטגרם</a>
-      </div>
-      <p class="small">באינסטגרם אני מעלה כל הזמן תוכן על מבני גוף, על גזרות ועל מה שמחמיא. וכשתרגישי שהגיע הזמן לתהליך מלא, אני כאן.</p>
-      <p class="small fallback"><a id="fb-2" href="#">אם הוואטסאפ לא נפתח לבד, לחצי כאן לשליחת התשובות</a></p>
-    </div>
-  </div>
-</div>
 
 <div class="wrap">
   <footer>
@@ -885,10 +791,6 @@ var CFG = {
   /* עמוד האינסטגרם */
   instagram: 'https://www.instagram.com/einat_ran_elkayam',
 
-  /* הסרטון במסך של מי שמוזמנת לשיחה. מדביקים כאן קישור יוטיוב
-     רגיל, למשל https://www.youtube.com/watch?v=abc123 , והוא
-     מוטמע לבד. כל עוד זה ריק, מוצגת מסגרת עם "הסרטון בדרך". */
-  videoInvite: '',
 
   /* ═══ טופס גוגל ═══
      כל עוד formId ריק, השליחה נפתחת בוואטסאפ עם כל התשובות
@@ -918,36 +820,10 @@ var CFG = {
 
   /* ── קישורים שמגיעים מההגדרות ── */
   var waBase = 'https://wa.me/' + CFG.whatsapp;
-  document.getElementById('link-cal').href = CFG.calendar;
-  document.getElementById('link-ig').href  = CFG.instagram;
-  document.getElementById('link-ig-soft').href = CFG.instagram;
-  document.getElementById('link-wa').href  = waBase + '?text=' +
-    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לקבוע שיחה בסטייל');
-  document.getElementById('link-wa-shop').href = waBase + '?text=' +
-    encodeURIComponent('היי עינת, מילאתי את השאלון ואשמח לשמוע מה מתאים לי');
-
-  /* ── הטמעת הסרטונים ──
-     ממירים קישור יוטיוב רגיל, מקוצר או של שורטס לכתובת הטמעה. */
-  function ytEmbed(url){
-    if(!url) return '';
-    var m = url.match(/(?:youtu\.be\/|v=|\/embed\/|\/shorts\/)([A-Za-z0-9_-]{11})/);
-    return m ? 'https://www.youtube.com/embed/' + m[1] : '';
-  }
-  function fillVideo(key, url){
-    var box = document.querySelector('[data-vid="' + key + '"]');
-    if(!box) return;
-    var src = ytEmbed(url);
-    if(!src) return;
-    box.classList.add('filled');
-    box.innerHTML = '';
-    var f = document.createElement('iframe');
-    f.src = src;
-    f.title = 'סרטון מאת עינת רן אלקיים';
-    f.allow = 'accelerometer; clipboard-write; encrypted-media; picture-in-picture';
-    f.allowFullscreen = true;
-    box.appendChild(f);
-  }
-  fillVideo('invite', CFG.videoInvite);
+  /* דפי התודה יושבים בשורש האתר, והדף יכול לרוץ גם מתוך
+     תיקיית וריאציה, ולכן מחשבים את השורש ולא מניחים אותו */
+  var ROOT = location.pathname.replace(/(v[1-5])?\/?$/, '');
+  if(ROOT.slice(-1) !== '/') ROOT += '/';
 
   /* ── הסרגל הקבוע מופיע רק אחרי הפולד הראשון ──
      כך שבמסך הפתיחה יש קריאה אחת לפעולה ולא שתיים. */
@@ -1083,16 +959,21 @@ var CFG = {
     setTimeout(function(){ f.remove(); }, 2000);
   }
 
-  /* ── מעבר למסך התוצאה ── */
-  function showResult(r){
-    quizSec.style.display = 'none';
-    sticky.remove();
-    var id = {invite:'תוצאה-הזמנה', shopping:'תוצאה-קניות', follow:'תוצאה-תוכן'}[r];
-    var box = document.getElementById(id);
-    box.classList.add('on');
-    box.setAttribute('tabindex','-1');
-    box.scrollIntoView({block:'start'});
-    box.focus({preventScroll:true});
+  /* ── מעבר לדף התודה ──
+     לכל מסלול דף משלו. המעבר קורה רק אחרי שהשליחה לגוגל
+     יצאה, אחרת ניווט מהיר מדי היה קוטע אותה באמצע.
+     אם משום מה אין תשובה, יש מנגנון זמן שמעביר בכל זאת
+     אחרי שתי שניות וחצי, כדי שהיא לא תיתקע על מסך ריק. */
+  var THANKS = {
+    invite:   'toda-tahalich',
+    shopping: 'toda-memukad',
+    follow:   'toda-matana'
+  };
+
+  function goThanks(r){
+    if(goThanks.done) return;
+    goThanks.done = true;
+    location.href = ROOT + THANKS[r] + '/';
   }
 
   /* ── השליחה ── */
@@ -1143,22 +1024,21 @@ var CFG = {
     btn.textContent = 'שולחת';
 
     if(CFG.formId){
+      /* ממתינים לתשובת גוגל ורק אז עוברים, ובמקביל מפעילים
+         שעון ביטחון כדי שלא תיתקע אם התשובה לא מגיעה */
+      var sink = document.getElementById('sink');
+      sink.addEventListener('load', function(){ goThanks(r); });
+      setTimeout(function(){ goThanks(r); }, 2500);
       sendToGoogle(a, d, r);
+      return;
     } else {
       /* אין עדיין טופס גוגל. פותחים וואטסאפ עם התשובות מוכנות.
          אם הדפדפן חוסם את החלון, קישור המילוט במסך התוצאה מציל את הפנייה. */
-      var waFull = waBase + '?text=' + encodeURIComponent(waText(a, d, r));
-      ['fb-1','fb-2','fb-3'].forEach(function(id){
-        var el = document.getElementById(id);
-        el.href = waFull;
-        el.parentNode.classList.add('on');
-      });
-      /* כפתור הוואטסאפ במסך ההזמנה נושא גם הוא את התשובות המלאות */
-      document.getElementById('link-wa').href = waFull;
-      window.open(waFull, '_blank');
+      /* אין עדיין טופס גוגל. פותחים וואטסאפ עם התשובות מוכנות,
+         ואז עוברים לדף התודה בכל מקרה. */
+      window.open(waBase + '?text=' + encodeURIComponent(waText(a, d, r)), '_blank');
+      goThanks(r);
     }
-
-    showResult(r);
   });
 
 })();
