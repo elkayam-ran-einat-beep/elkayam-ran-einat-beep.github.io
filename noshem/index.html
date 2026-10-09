@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>שיחה בסטייל | עינת רן אלקיים</title>
-<meta name="description" content="שיחה בסטייל: אבחון מבנה גוף וסטייל אישי, כדי שהבוקר יפסיק להיות החלטה. שאלון קצר, ואני חוזרת אלייך.">
+<meta name="description" content="שיחה בסטייל: נבחן יחד את מבנה הגוף, את הסטייל האישי שלך ואת מה שאת רוצה לשדר, ונזהה מה מחמיא לך ומה חסר במלתחה.">
 <meta name="theme-color" content="#6E1B2A">
 
 <!--
@@ -22,8 +22,8 @@
 <meta property="og:locale" content="he_IL">
 <meta property="og:site_name" content="עינת רן אלקיים">
 <meta property="og:title" content="שיחה בסטייל | עינת רן אלקיים">
-<meta property="og:description" content="כמה זמן את מבזבזת כל בוקר מול המלתחה?">
-<meta property="og:url" content="https://elkayam-ran-einat-beep.github.io/v3/">
+<meta property="og:description" content="את בשיא שלך. למה הבגדים עדיין לא מספרים את זה?">
+<meta property="og:url" content="https://elkayam-ran-einat-beep.github.io/noshem/">
 <meta property="og:image" content="https://elkayam-ran-einat-beep.github.io/img-abchon/abchon-hero.jpg">
 <meta property="og:image:width" content="1100">
 <meta property="og:image:height" content="1466">
@@ -402,7 +402,58 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
    עיצוב ייעודי לגרסה. ריק ברוב הגרסאות, ויושב כאן בסוף
    כדי שגרסה תוכל לשנות רווחים וגדלים בלי לגעת בשאר.
    ═══════════════════════════════════════════════════════ */
+/* ── יותר אוויר ── */
+section{padding:136px 0;}
+.hero{padding:62px 0 96px;}
+.stack{gap:36px;}
+.stack-sm{gap:20px;}
+.stack-lg{gap:78px;}
+.lede{font-size:1.38rem;line-height:1.78;}
+p{line-height:1.86;}
+.small{line-height:1.82;}
+.mirror-line{padding:26px 0;line-height:1.7;}
+.step{padding:48px 0;}
+.step p{line-height:1.88;}
+.step .body{gap:16px;}
+.frame-note{padding-top:38px;margin-top:22px;}
 
+/* ── משפטי המחץ ──
+   דידון בגודל כותרת, עם קו זהב בצד שמוציא אותם מגוף הטקסט.
+   Bellefair נשבר מתחת ל־10pt, וכאן הוא גדול, ולכן זה בטוח. */
+.punch{
+  font-family:'Bellefair','Frank Ruhl Libre',Georgia,serif;
+  font-weight:400;
+  font-size:clamp(1.72rem,4.3vw,2.7rem);
+  line-height:1.26;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  text-wrap:balance;
+}
+/* שלוש שורות קצרות זו מתחת לזו, כמו נשימה */
+.punch-stack{
+  display:flex;flex-direction:column;gap:4px;
+  border-inline-start:2px solid var(--gold);
+  padding-inline-start:28px;
+  margin:14px 0 6px;
+}
+.punch-stack .punch{font-size:clamp(1.5rem,3.9vw,2.3rem);}
+.punch-stack .punch:last-child{color:var(--accent);}
+
+/* משפט בודד שעומד לבדו, בלי קו */
+.punch-solo{margin:18px 0 4px;}
+
+@media (max-width:620px){
+  section{padding:80px 0;}
+  .hero{padding:36px 0 60px;}
+  .stack{gap:28px;}
+  .stack-sm{gap:17px;}
+  .stack-lg{gap:54px;}
+  .lede{font-size:1.2rem;line-height:1.74;}
+  .mirror-line{padding:19px 0;}
+  .step{padding:34px 0;}
+  .frame-note{padding-top:28px;margin-top:14px;}
+  .punch-stack{padding-inline-start:20px;}
+}
 </style>
 </head>
 <body>
@@ -416,10 +467,16 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
     <div class="stack-lg">
       <div class="col stack">
         <div class="eyebrow">שיחה בסטייל</div>
-        <h1>כמה בקרים כבר התחילו בעמידה מול המלתחה?</h1>
-        <p class="lede">את מקבלת החלטות כל היום. ודווקא ההחלטה הראשונה, זו של שבע בבוקר, היא זו שמתישה. מודדת, מחליפה, מוותרת, וחוזרת לאותם שניים שלושה לוקים שאת יודעת שעובדים.</p>
-        <p>זה לא חוסר זמן ולא חוסר טעם. זו מלתחה שלא נבנתה כמערכת, ולכן כל בוקר את מרכיבה אותה מחדש מאפס. ואת, עם כל הניסיון והאוטוריטה שצברת, מתחילה את היום בוויתור קטן.</p>
-        <p>אני מזמינה אותך לשיחה בסטייל, שבה נאבחן יחד את מבנה הגוף ואת הסטייל האישי שלך, כדי שתדעי מה באמת מחמיא לך ומה חסר במלתחה.</p>
+        <h1>את בשיא שלך. למה הבגדים עדיין לא מספרים את זה?</h1>
+        <p class="lede">פעם היה לך ברור מה ללבוש. נכנסת לחנות, מדדת, מצאת משהו שאהבת ויצאת מרוצה. היום זה כבר מרגיש אחרת.</p>
+        <div class="punch-stack">
+          <p class="punch">הגוף השתנה.</p>
+          <p class="punch">החיים השתנו.</p>
+          <p class="punch">את השתנית.</p>
+        </div>
+        <p>בינתיים צברת ניסיון, מקצועיות, ביטחון ואוטוריטה. את יודעת מי את ומה את מביאה לעולם. אבל כשאת פותחת את הארון בבוקר או מסתכלת במראה, לא תמיד את רואה שם את אותה אישה.</p>
+        <p class="punch punch-solo">וזה בדיוק הפער שאני רוצה לעזור לך לסגור.</p>
+        <p>לא להפוך אותך למישהי אחרת, אלא לגרום למה שאת לובשת סוף סוף להרגיש כמוך. בשיחה בסטייל נבחן יחד את מבנה הגוף, את הסטייל האישי שלך ואת מה שאת רוצה לשדר.</p>
         <hr class="rule-gold">
         <div class="cta-row">
           <a class="cta" href="#שאלון">לשאלון ההתאמה</a>
@@ -458,16 +515,20 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   <div class="wrap">
     <section>
       <div class="col stack">
-        <div class="eyebrow">מה זה עולה לך באמת</div>
-        <h2>ההחלטה שחוזרת כל יום</h2>
-        <p class="lede">הזמן הוא רק החלק שרואים. מה שבאמת נגמר הוא האנרגיה שנשארת לשאר היום.</p>
+        <div class="eyebrow">נקודת הפתיחה</div>
+        <h2>משהו השתנה, והמלתחה שלך עדיין שייכת לגרסה הקודמת שלך</h2>
+        <p class="punch punch-solo">נשמע מוכר?</p>
+        <p class="lede">את כבר לא אותה אישה שהיית לפני כמה שנים. הגוף השתנה, העבודה השתנתה והתפקיד שלך השתנה. גם את השתנית. והמלתחה, לפעמים, פשוט נשארה מאחור.</p>
         <div class="mirror">
-          <div class="mirror-line"><span class="mark">01</span><span>את קמה מוקדם יותר כדי שיהיה זמן למדוד, ובסוף לובשת את מה שבטוח.</span></div>
-          <div class="mirror-line"><span class="mark">02</span><span>לפני יום חשוב את מתלבטת ערב שלם, ועדיין יוצאת לא בטוחה.</span></div>
-          <div class="mirror-line"><span class="mark">03</span><span>נסיעה או אירוע הופכים לפרויקט, כי אין לך מערכת שאפשר לארוז ממנה.</span></div>
-          <div class="mirror-line"><span class="mark">04</span><span>קניות נדחו לסוף הרשימה, כי אין לך אנרגיה למדידות.</span></div>
+          <div class="mirror-line"><span class="mark">01</span><span>הבגדים שאהבת פעם יושבים עלייך אחרת, ואת לא באמת יודעת במה להחליף אותם.</span></div>
+          <div class="mirror-line"><span class="mark">02</span><span>המקצועיות והאחריות שלך עלו מדרגה, אבל כשאת מתלבשת בבוקר הנראות שלך עדיין לא שם איתך.</span></div>
+          <div class="mirror-line"><span class="mark">03</span><span>את נכנסת לחנות, רואה המון אפשרויות ויוצאת בעיקר מבולבלת ועייפה.</span></div>
+          <div class="mirror-line"><span class="mark">04</span><span>את מזמינה באונליין, מחזירה חצי מההזמנה ותוהה למה זה נראה כל כך טוב על אחרות.</span></div>
+          <div class="mirror-line"><span class="mark">05</span><span>יש במלתחה בגדים שקנית כי הם היו יפים, ובכל פעם שאת לובשת אותם משהו פשוט לא מרגיש נכון.</span></div>
+          <div class="mirror-line"><span class="mark">06</span><span>ולפעמים את מסתכלת על אישה אחרת וחושבת: איך היא תמיד נראית כל כך מדויקת?</span></div>
         </div>
-        <p class="frame-note">מלתחה שדורשת ממך משמעת עצמית כל בוקר היא מלתחה שלא נבנתה נכון.</p>
+        <p>זה אף פעם לא היה עניין של טעם. מה שחסר הוא ההיגיון שמחבר בין מי שאת היום לבין מה שאת לובשת.</p>
+        <p class="frame-note">וזה בדיוק מה שאנחנו הולכות לעשות בשיחה.</p>
       </div>
     </section>
   </div>
@@ -479,8 +540,9 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
     <section>
       <div class="stack">
         <div class="col stack-sm">
-          <div class="eyebrow">מה קורה בשיחה</div>
-          <h2>שלושה דברים שתדעי בסוף</h2>
+          <div class="eyebrow">ההבטחה</div>
+          <h2>בסוף השיחה יהיה לך הרבה יותר ברור מה נכון לך</h2>
+          <p class="lede">בלי רשימת כללים של מותר ואסור, בלי להכניס אותך לתבנית של מבנה גוף, ובלי עוד קנייה בתקווה שהפעם זה יעבוד. שלושה דברים נבין יחד.</p>
         </div>
         <div class="col-wide steps">
 
@@ -489,7 +551,8 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="body">
               <div class="dur">מבנה גוף ופרופורציות</div>
               <h3>מה הכי מחמיא לפרופורציות שלך</h3>
-              <p>נבחן את מבנה הגוף והפרופורציות שלך ונבין איך הם עובדים יחד בהרמוניה. נזהה את האזורים המחמיאים שאליהם נרצה להביא את תשומת הלב, ואת אלה שנעדיף להשאיר בשקט. מרגע שיש לך את ההיגיון, את יכולה להפעיל אותו בכל חנות.</p>
+              <p>נבחן את מבנה הגוף והפרופורציות שלך ונבין איך הם עובדים יחד בהרמוניה. איפה נכון ליצור עניין, לאן כדאי למשוך את העין ומה פחות משרת אותך.</p>
+              <p>כשההיגיון הזה יהיה אצלך, לא תצטרכי לזכור רשימת חוקים בכל פעם שאת נכנסת לחנות.</p>
             </div>
           </div>
 
@@ -497,8 +560,9 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="n">02</div>
             <div class="body">
               <div class="dur">סטייל אישי</div>
-              <h3>מה הסטייל שלך, ולא מה התרגלת ללבוש</h3>
-              <p>נדבר על מה שאת רוצה שהנראות והמסר החזותי שלך יגידו עוד לפני שאמרת מילה, על מה שאת רוצה לשדר, על מה שאת רוצה שישתקף בחזרה אלייך, והכי חשוב, איך את רוצה להרגיש בבגדים שלך.</p>
+              <h3>מה את רוצה שהנראות והמסר החזותי שלך יגידו עוד לפני שאמרת מילה</h3>
+              <p>מקצועיות? נוכחות? נשיות? עוצמה? קלילות? נבדוק את הפער בין האישה שאת היום לבין מה שהמלתחה שלך מספרת כרגע, ומה את רוצה שישתקף בחזרה אלייך.</p>
+              <p>והכי חשוב, איך את רוצה להרגיש בבגדים שלך.</p>
             </div>
           </div>
 
@@ -506,14 +570,19 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="n">03</div>
             <div class="body">
               <div class="dur">פריטי חובה</div>
-              <h3>מה באמת חסר לך במלתחה, ולא עוד רשימת "פריטי חובה"</h3>
-              <p>תספרי לי מה את לובשת בפועל ואיפה זה נתקע, ואני אגיד לך אילו פריטים חסרים לך כדי שהשאר יתחיל להשתלב, ואילו כבר לא עובדים בשבילך. המטרה היא שיהיו לך יותר אפשרויות מהבגדים שכבר יש לך, ולא רק לקנות עוד בגדים חדשים.</p>
+              <h3>מה באמת חסר לך במלתחה</h3>
+              <p>לא עוד רשימת "פריטי חובה". נבין מה את לובשת בפועל, איפה את נתקעת ומה כבר לא עובד בשבילך, ואז נדע אילו פריטים יפתחו לך את המלתחה ואיך לגרום למה שכבר יש לך להתחיל לעבוד יחד.</p>
+              <p>המטרה היא לא עוד בגדים, אלא יותר אפשרויות מאלה שכבר יש לך.</p>
             </div>
           </div>
 
         </div>
 
-        <p class="frame-note col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים לפחות, לפי מה שהיא צריכה.</p>
+        <div class="col">
+          <p class="punch punch-solo">שתפתחי את הארון בבוקר ולא תחשבי "מה אני לובשת", אלא "זה בדיוק אני".</p>
+        </div>
+
+        <p class="frame-note col-wide">הגיע הזמן שהנראות שלך תספר את הסיפור שהחיים שלך כבר מספרים. השיחה עצמה בלי עלות ובלי התחייבות, ומי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים לפחות, לפי מה שהיא צריכה.</p>
       </div>
     </section>
   </div>

@@ -397,6 +397,12 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   *{transition:none !important;animation:none !important;}
   html{scroll-behavior:auto;}
 }
+
+/* ═══════════════════════════════════════════════════════
+   עיצוב ייעודי לגרסה. ריק ברוב הגרסאות, ויושב כאן בסוף
+   כדי שגרסה תוכל לשנות רווחים וגדלים בלי לגעת בשאר.
+   ═══════════════════════════════════════════════════════ */
+
 </style>
 </head>
 <body>
@@ -824,7 +830,7 @@ var CFG = {
   /* דפי התודה יושבים בשורש האתר, והדף יכול לרוץ גם מתוך
      תיקיית וריאציה, ולכן מחשבים את השורש ולא מניחים אותו.
      שמות התיקיות מוזרקים מהבונה, כדי שווריאציה חדשה לא תישבר. */
-  var ROOT = location.pathname.replace(/(v1|v2|v3|v4|v5|kazar)?\/?$/, '');
+  var ROOT = location.pathname.replace(/(v1|v2|v3|v4|v5|kazar|noshem)?\/?$/, '');
   if(ROOT.slice(-1) !== '/') ROOT += '/';
 
   /* ── הסרגל הקבוע מופיע רק אחרי הפולד הראשון ──
