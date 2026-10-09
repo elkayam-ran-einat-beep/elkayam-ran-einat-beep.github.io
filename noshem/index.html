@@ -445,7 +445,9 @@ p{line-height:1.86;}
 /* ── רשת הלוקים ──
    ארבע תמונות אמיתיות מתוך תהליכים. פינות חדות, בלי מסגרות
    ובלי צל, כדי שזה יישאר מגזין ולא קטלוג. */
-.looks{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+/* רחב מעמודת הטקסט בכוונה. ב-800 פיקסלים כל תמונה יוצאת
+   כ-185 פיקסלים ונראית כמו תמונה ממוזערת, ולא כמו לוק. */
+.looks{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:none;}
 .looks figure{margin:0;display:flex;flex-direction:column;gap:12px;}
 .looks img{
   width:100%;height:auto;display:block;
