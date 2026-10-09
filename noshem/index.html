@@ -441,11 +441,32 @@ p{line-height:1.86;}
 
 /* משפט בודד שעומד לבדו, בלי קו */
 .punch-solo{margin:18px 0 4px;}
+
+/* ── רשת הלוקים ──
+   ארבע תמונות אמיתיות מתוך תהליכים. פינות חדות, בלי מסגרות
+   ובלי צל, כדי שזה יישאר מגזין ולא קטלוג. */
+.looks{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.looks figure{margin:0;display:flex;flex-direction:column;gap:12px;}
+.looks img{
+  width:100%;height:auto;display:block;
+  aspect-ratio:3/5;object-fit:cover;object-position:center top;
+  background:var(--paper-3);
+}
+.looks figcaption{
+  font-size:.86rem;line-height:1.6;color:var(--ink-soft);
+  border-top:1px solid var(--rule);padding-top:10px;
+}
+.looks-note{font-size:.86rem;line-height:1.7;color:var(--ink-faint);}
 /* המשפט שסוגר בלוק, בבורדו */
 .punch-accent{color:var(--accent);}
 
+@media (max-width:980px){
+  .looks{grid-template-columns:repeat(2,1fr);gap:18px;}
+}
 @media (max-width:620px){
   section{padding:80px 0;}
+  .looks{gap:14px;}
+  .looks figcaption{font-size:.82rem;padding-top:8px;}
   .hero{padding:36px 0 60px;}
   .stack{gap:28px;}
   .stack-sm{gap:17px;}
@@ -613,9 +634,25 @@ p{line-height:1.86;}
     <section>
       <div class="stack">
         <div class="col stack-sm">
+          <div class="eyebrow">לוקים מהתהליך</div>
+          <h2>ככה זה נראה בחיים האמיתיים</h2>
+          <p class="lede">ארבעה לוקים שנבנו בתהליך, על הגוף של היום ועל החיים של היום. לא דוגמניות, ולא הפקה.</p>
+        </div>
+
+        <div class="col-wide looks">
+          <figure><img src="../img-abchon/look-01.jpg" width="760" height="1267" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>בלייזר כחול־אפור, גופייה קרם, ג'ינס בוטקאט כהה וחגורה חומה</figcaption></figure>
+          <figure><img src="../img-abchon/look-02.jpg" width="760" height="1267" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>בלייזר שחור, סריג זהוב, מכנסיים ישרים ועקב שחור</figcaption></figure>
+          <figure><img src="../img-abchon/look-03.jpg" width="760" height="1267" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>גופיית סאטן, מכנסיים רחבים וחגורה דקה</figcaption></figure>
+          <figure><img src="../img-abchon/look-04.jpg" width="760" height="1267" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצת פשתן קשורה, חצאית מידי וכפכפי עקב</figcaption></figure>
+        </div>
+
+        <p class="looks-note col-wide">הפנים מחוץ לפריים לבקשת הלקוחות, והתמונות מתפרסמות באישורן.</p>
+
+        <div class="col stack-sm">
           <div class="eyebrow">מה שנשים מספרות אחרי</div>
           <h2>אף אחת מהן לא מדברת על בגד</h2>
         </div>
+
         <div class="tgrid">
           <div class="tcard">
             <q>מאז שהתחלנו את התהליך, אני פשוט לא מפסיקה לקבל מחמאות על הלוק שלי, כמה הבגדים מחמיאים, כמה נשית אני נראית, ושאלות של אם חזרתי לעבוד.</q>
@@ -624,6 +661,10 @@ p{line-height:1.86;}
           <div class="tcard">
             <q>אחד הדברים הכי חשובים שלימדת אותי זה לשלב ולעבוד עם מה שיש. הלוק בתמונה הזאת בכלל בלי בגדים חדשים. ובעיקר ממש עוררת אותי חזרה לחיים.</q>
             <div class="who">לקוחה, אחרי מפגש המלתחה</div>
+          </div>
+          <div class="tcard">
+            <q>הבנתי כמה נכון מלתחה מדויקת ולא ארון מפוצץ. הבנתי כמה חלק מהגזרות שלבשתי לא מתאימות לי. יש לי הרבה מה ללמוד, וכמו ספוג רוצה לשמוע ולגלות על עצמי.</q>
+            <div class="who">לקוחה, אחרי המפגש הראשון בלבד</div>
           </div>
           <div class="tcard wide">
             <q>אני לא יודעת איזה קסם עשית, אבל הצלחת לגרום לאמא שלי לאהוב קניות. דברים ששנים אני ואחיות שלי לא מצליחות לעשות. מעבר לזה, היא מתלבשת וואו, בזכותך.</q>
