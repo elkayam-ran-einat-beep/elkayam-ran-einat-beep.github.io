@@ -463,7 +463,10 @@ p{line-height:1.86;}
 
 .fphoto{display:flex;flex-direction:column;gap:10px;}
 .fphoto img{
-  width:100%;aspect-ratio:9/16;object-fit:cover;object-position:center top;
+  /* height:auto חובה. בלעדיו תכונת height בתגית נחשבת גובה
+     מפורש, היא גוברת על aspect-ratio, והתמונה יוצאת 1280 גובה */
+  width:100%;height:auto;aspect-ratio:9/16;
+  object-fit:cover;object-position:center top;
   display:block;background:var(--paper-3);
 }
 .fphoto figcaption{font-size:.78rem;line-height:1.5;color:var(--ink-soft);}
