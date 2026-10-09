@@ -923,30 +923,43 @@ var CFG = {
   }
 
   /* ── שליחה לטופס גוגל דרך המסגרת הנסתרת ── */
-  function sendToGoogle(a, d, r){
-    var f = document.createElement('form');
-    f.action = 'https://docs.google.com/forms/d/e/' + CFG.formId + '/formResponse';
-    f.method = 'POST';
-    f.target = 'sink';
-    f.style.display = 'none';
+  function sendToGoogle(a, d, r, done){
+    var url = 'https://docs.google.com/forms/d/e/' + CFG.formId + '/formResponse';
 
     var payload = {};
     QUESTIONS.forEach(function(n){ payload[n] = a[n]; });
     payload.name = d.name; payload.phone = d.phone; payload.email = d.email;
     payload.result = ROUTE_NAMES[r];
 
+    var fields = [];
     Object.keys(payload).forEach(function(k){
       var id = CFG.entries[k];
       if(!id) return;
-      var input = document.createElement('input');
-      input.type = 'hidden';
       /* גוגל מצפה לשם בצורה entry.123456, וההגדרות מחזיקות את
          המספר בלבד. התחילית נוספת כאן, ולא נדרסת אם היא כבר קיימת. */
-      input.name = (String(id).indexOf('entry.') === 0) ? id : 'entry.' + id;
-      input.value = payload[k];
-      f.appendChild(input);
+      fields.push([(String(id).indexOf('entry.') === 0) ? id : 'entry.' + id, payload[k]]);
     });
 
+    /* הדרך המועדפת: fetch עם keepalive. הבקשה ממשיכה להישלח גם
+       אחרי שהדפדפן כבר עבר לדף התודה, ולכן פנייה לא הולכת לאיבוד
+       ברשת סלולרית איטית. נוסף ב-9 באוקטובר 2026. */
+    if(window.fetch && window.URLSearchParams){
+      var body = new URLSearchParams();
+      fields.forEach(function(p){ body.append(p[0], p[1]); });
+      fetch(url, {method:'POST', mode:'no-cors', keepalive:true, body:body})
+        .then(done, done);
+      return;
+    }
+
+    /* גיבוי לדפדפן ישן: טופס מוסתר ששולח לתוך iframe */
+    var f = document.createElement('form');
+    f.action = url; f.method = 'POST'; f.target = 'sink'; f.style.display = 'none';
+    fields.forEach(function(p){
+      var input = document.createElement('input');
+      input.type = 'hidden'; input.name = p[0]; input.value = p[1];
+      f.appendChild(input);
+    });
+    document.getElementById('sink').addEventListener('load', done);
     document.body.appendChild(f);
     f.submit();
     setTimeout(function(){ f.remove(); }, 2000);
@@ -1018,11 +1031,11 @@ var CFG = {
 
     if(CFG.formId){
       /* ממתינים לתשובת גוגל ורק אז עוברים, ובמקביל מפעילים
-         שעון ביטחון כדי שלא תיתקע אם התשובה לא מגיעה */
-      var sink = document.getElementById('sink');
-      sink.addEventListener('load', function(){ goThanks(r); });
-      setTimeout(function(){ goThanks(r); }, 2500);
-      sendToGoogle(a, d, r);
+         שעון ביטחון כדי שלא תיתקע אם התשובה לא מגיעה.
+         השעון ארוך בכוונה. ב-9 באוקטובר 2026 התברר שבשתיים וחצי
+         שניות הוא עלול לנתק שליחה באמצע ברשת איטית, ולאבד פנייה. */
+      setTimeout(function(){ goThanks(r); }, 8000);
+      sendToGoogle(a, d, r, function(){ goThanks(r); });
       return;
     } else {
       /* אין עדיין טופס גוגל. פותחים וואטסאפ עם התשובות מוכנות.
