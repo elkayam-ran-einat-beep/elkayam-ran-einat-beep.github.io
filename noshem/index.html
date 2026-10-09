@@ -473,23 +473,26 @@ p{line-height:1.86;}
 }
 .fphoto figcaption{font-size:.78rem;line-height:1.5;color:var(--ink-soft);}
 
-/* כרטיס הודעה. בעברית ההודעה שהתקבלה יושבת בצד ימין,
-   ולכן הפינה החדה היא העליונה־ימנית. */
+/* כרטיס הודעה: צילום מסך של וואטסאפ. הרקע הוא הדוגמה שעינת
+   שלחה, הבועה יושבת עליו, והייחוס יורד מתחת לכרטיס כמו כיתוב
+   מתחת לתמונה, כדי שהכרטיס עצמו ייראה כמו צילום מסך אמיתי.
+   בעברית הודעה שהתקבלה יושבת בצד ימין, ולכן הפינה החדה היא
+   העליונה־ימנית. אין וי כפול, כי הוא מופיע רק על הודעה שנשלחה. */
+.fmsgwrap{display:flex;flex-direction:column;gap:10px;}
 .fmsg{
-  aspect-ratio:2/3;background:var(--paper-3) url(../img-abchon/wa-bg.jpg) center/cover no-repeat;
-  display:flex;flex-direction:column;justify-content:center;gap:9px;
-  padding:18px 14px;overflow:hidden;
-}
-.fmsg .head{
-  font-size:.6rem;font-weight:700;letter-spacing:.26em;
-  color:var(--ink-faint);text-align:center;margin-bottom:4px;
+  aspect-ratio:2/3;
+  background:var(--paper-2) url(../img-abchon/wa-bg.jpg) center/cover no-repeat;
+  display:flex;flex-direction:column;justify-content:center;gap:7px;
+  padding:20px 14px;overflow:hidden;
 }
 .fmsg .bub{
-  background:var(--paper);color:var(--ink);
+  background:#FFFFFF;color:var(--ink);
   font-size:.84rem;line-height:1.62;
-  padding:12px 13px;border-radius:4px 14px 14px 14px;
+  padding:11px 13px 9px;border-radius:2px 12px 12px 12px;
+  box-shadow:0 1px 1px rgba(20,16,14,.10);
+  max-width:94%;align-self:flex-start;
 }
-.fmsg .who{font-size:.7rem;color:var(--ink-faint);letter-spacing:.04em;text-align:start;}
+.fmsgwrap figcaption{font-size:.78rem;line-height:1.5;color:var(--ink-soft);}
 .feed-hint{font-size:.78rem;color:var(--ink-faint);letter-spacing:.04em;}
 .looks-note{font-size:.86rem;line-height:1.7;color:var(--ink-faint);}
 /* המשפט שסוגר בלוק, בבורדו */
@@ -673,24 +676,24 @@ p{line-height:1.86;}
         <div class="feed-wrap col-wide">
           <div class="feed">
           <figure class="fcard fphoto"><img src="../img-abchon/feed-01.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה לבנה, מכנסי פשתן קרם רחבים, חגורה וכפכפי עקב</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">מאז שהתחלנו את התהליך אני פשוט לא מפסיקה לקבל מחמאות על הלוק שלי, כמה הבגדים מחמיאים וכמה נשית אני נראית.</p><div class="who">לקוחה, אחרי התהליך המלא</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">מאז שהתחלנו את התהליך אני פשוט לא מפסיקה לקבל מחמאות על הלוק שלי, כמה הבגדים מחמיאים וכמה נשית אני נראית.</p></div><figcaption>לקוחה, אחרי התהליך המלא</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-02.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>בלייזר שחור, סריג זהוב, מכנסיים ישרים ועקב שחור</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">לא פשוט לי להתרגל לשינויים בגוף, אבל בזכותך הרגשתי הרבה יותר בנוח עם עצמי ועם האני החדשה שלי.</p><div class="who">לקוחה, אחרי יום קניות</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">לא פשוט לי להתרגל לשינויים בגוף, אבל בזכותך הרגשתי הרבה יותר בנוח עם עצמי ועם האני החדשה שלי.</p></div><figcaption>לקוחה, אחרי יום קניות</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-03.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>צעיף מודפס על מכנסי קורדרוי אדומים</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-04.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה מכופתרת תכלת ארוכה, גופייה שחורה וג'ינס רחב כהה</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">אחד הדברים הכי חשובים שלימדת אותי זה לשלב ולעבוד עם מה שיש.</p><p class="bub">הלוק בתמונה הזאת בכלל בלי בגדים חדשים.</p><div class="who">לקוחה, אחרי מפגש המלתחה</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">אחד הדברים הכי חשובים שלימדת אותי זה לשלב ולעבוד עם מה שיש.</p><p class="bub">הלוק בתמונה הזאת בכלל בלי בגדים חדשים.</p></div><figcaption>לקוחה, אחרי מפגש המלתחה</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-05.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>ווסט שחור ארוך ומכנסיים רחבים שחורים</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">היה לי מהמם היום. אני בטוחה שזה היה לי טיפול רגשי לדעת לשחרר ולהוציא מהארון.</p><p class="bub">הבנתי כמה נכון מלתחה מדויקת ולא ארון מפוצץ. מחכה כבר למפגש הבא.</p><div class="who">לקוחה, אחרי המפגש הראשון בלבד</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">היה לי מהמם היום. אני בטוחה שזה היה לי טיפול רגשי לדעת לשחרר ולהוציא מהארון.</p><p class="bub">הבנתי כמה נכון מלתחה מדויקת ולא ארון מפוצץ. מחכה כבר למפגש הבא.</p></div><figcaption>לקוחה, אחרי המפגש הראשון בלבד</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-06.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה אפורה, מכנסיים רחבים תואמים וכפכפי עקב</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-07.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>גופייה תכלת, ג'ינס כהה רחב, חגורה ותיק קוניאק</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">מרגישה מעולה עם הבגדים החדשים שלי. זה ממש ממש שינה לי המון בתחושה ובביטחון.</p><div class="who">לקוחה, אחרי התהליך</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">מרגישה מעולה עם הבגדים החדשים שלי. זה ממש ממש שינה לי המון בתחושה ובביטחון.</p></div><figcaption>לקוחה, אחרי התהליך</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-08.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>ווסט ג'ינס, גופייה מפוספסת וג'ינס בהיר רחב</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">הרגשתי שיש לי שותפה אמיתית לתהליך.</p><p class="bub">הרגשתי שאני יכולה להשאיר את המוח בבית, ושיש על מי לסמוך.</p><div class="who">לקוחה, אחרי יום קניות</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">הרגשתי שיש לי שותפה אמיתית לתהליך.</p><p class="bub">הרגשתי שאני יכולה להשאיר את המוח בבית, ושיש על מי לסמוך.</p></div><figcaption>לקוחה, אחרי יום קניות</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-09.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה שחורה, מכנסיים לבנים רחבים ומגפונים</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-10.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>ווסט בז', מכנסי בז' רחבים וחגורה</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">בזכותך אני מקבלת מלא פרגונים. חסכת לי מלא זמן בחנויות, וחוויית הרכישה הייתה כיפית וחסכונית.</p><div class="who">לקוחה, אחרי יום קניות</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">בזכותך אני מקבלת מלא פרגונים. חסכת לי מלא זמן בחנויות, וחוויית הרכישה הייתה כיפית וחסכונית.</p></div><figcaption>לקוחה, אחרי יום קניות</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-11.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה שמנת קשורה, חצאית מידי חומה וכפכפי עקב</figcaption></figure>
-          <div class="fcard fmsg"><div class="head">הודעה שהגיעה אחרי</div><p class="bub">אני לא יודעת איזה קסם עשית, אבל הצלחת לגרום לאמא שלי לאהוב קניות.</p><p class="bub">דברים ששנים אני ואחיות שלי לא מצליחות לעשות. מעבר לזה, היא מתלבשת וואו, בזכותך.</p><div class="who">הבת של לקוחה, שכתבה מיוזמתה</div></div>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">אני לא יודעת איזה קסם עשית, אבל הצלחת לגרום לאמא שלי לאהוב קניות.</p><p class="bub">דברים ששנים אני ואחיות שלי לא מצליחות לעשות. מעבר לזה, היא מתלבשת וואו, בזכותך.</p></div><figcaption>הבת של לקוחה, שכתבה מיוזמתה</figcaption></figure>
           <figure class="fcard fphoto"><img src="../img-abchon/feed-12.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה מודפסת, ג'ינס רחב וחגורה</figcaption></figure>
           </div>
         </div>
