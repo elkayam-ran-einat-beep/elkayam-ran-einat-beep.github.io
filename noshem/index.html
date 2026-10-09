@@ -448,6 +448,9 @@ p{line-height:1.86;}
 .feed-wrap{max-width:none;position:relative;}
 .feed{
   display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;
+  /* בלי זה flex מותח את כל הכרטיסים לגובה הגבוה ביותר,
+     ואז object-fit חותך את התמונה ורואים פלג גוף במקום לוק */
+  align-items:flex-start;
   scroll-snap-type:x proximity;padding-bottom:20px;
   scrollbar-width:thin;scrollbar-color:var(--rule-strong) transparent;
   -webkit-overflow-scrolling:touch;
