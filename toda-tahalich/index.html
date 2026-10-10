@@ -385,6 +385,12 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   *{transition:none !important;animation:none !important;}
   html{scroll-behavior:auto;}
 }
+
+/* ═══════════════════════════════════════════════════════
+   עיצוב ייעודי לגרסה. ריק ברוב הגרסאות, ויושב כאן בסוף
+   כדי שגרסה תוכל לשנות רווחים וגדלים בלי לגעת בשאר.
+   ═══════════════════════════════════════════════════════ */
+{{CSS}}
 </style>
 <style>
 /* דף התודה הוא בלוק בורדו אחד שתופס את כל המסך, ולכן הוא
@@ -405,6 +411,18 @@ body{background:var(--accent);}
 .thanks .vid{background:rgba(251,245,236,.08);border-color:rgba(251,245,236,.3);}
 .thanks .vid .cap{color:rgba(251,245,236,.72);}
 .thanks .vid .play{border-inline-end-color:var(--on-accent);}
+/* המתנה. בלי זה הטקסט יורש את הדיו הכהה של הדף הראשי, ועל
+   בורדו הוא כמעט לא קריא. תוקן ב-10 באוקטובר 2026. */
+.thanks .gift{
+  border-top:1px solid rgba(251,245,236,.3);
+  padding-top:24px;display:flex;flex-direction:column;gap:8px;
+}
+.thanks .gift .cap{
+  font-size:.68rem;font-weight:700;letter-spacing:.32em;
+  color:rgba(251,245,236,.62);
+}
+.thanks .gift h3{color:var(--on-accent);}
+.thanks .gift p{color:rgba(251,245,236,.82);line-height:1.72;}
 .sig-dark{
   font-family:'Bellefair',serif;font-size:1.2rem;letter-spacing:.28em;
   padding-left:.28em;color:rgba(251,245,236,.62);padding-top:12px;
