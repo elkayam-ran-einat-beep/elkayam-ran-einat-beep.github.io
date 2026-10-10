@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>שיחה בסטייל | עינת רן אלקיים</title>
-<meta name="description" content="שיחה בסטייל: אבחון מבנה גוף וסטייל אישי, כדי שתדעי מה מחמיא לך ומה חסר במלתחה. ממלאות שאלון קצר, ואני חוזרת אלייך.">
+<meta name="description" content="שיחה בסטייל: נבחן יחד את מבנה הגוף, את הסטייל האישי שלך ואת מה שאת רוצה לשדר, ונזהה מה מחמיא לך ומה חסר במלתחה.">
 <meta name="theme-color" content="#6E1B2A">
 
 <!--
@@ -402,7 +402,116 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
    עיצוב ייעודי לגרסה. ריק ברוב הגרסאות, ויושב כאן בסוף
    כדי שגרסה תוכל לשנות רווחים וגדלים בלי לגעת בשאר.
    ═══════════════════════════════════════════════════════ */
+/* ── יותר אוויר ── */
+section{padding:136px 0;}
+.hero{padding:62px 0 96px;}
+.stack{gap:36px;}
+.stack-sm{gap:20px;}
+.stack-lg{gap:78px;}
+.lede{font-size:1.38rem;line-height:1.78;}
+p{line-height:1.86;}
+.small{line-height:1.82;}
+.mirror-line{padding:26px 0;line-height:1.7;}
+.step{padding:48px 0;}
+.step p{line-height:1.88;}
+.step .body{gap:16px;}
+.frame-note{padding-top:38px;margin-top:22px;}
 
+/* ── משפטי המחץ ──
+   דידון בגודל כותרת, עם קו זהב בצד שמוציא אותם מגוף הטקסט.
+   Bellefair נשבר מתחת ל־10pt, וכאן הוא גדול, ולכן זה בטוח. */
+.punch{
+  font-family:'Bellefair','Frank Ruhl Libre',Georgia,serif;
+  font-weight:400;
+  font-size:clamp(1.72rem,4.3vw,2.7rem);
+  line-height:1.26;
+  letter-spacing:-.01em;
+  color:var(--ink);
+  text-wrap:balance;
+}
+/* שלוש שורות קצרות זו מתחת לזו, כמו נשימה */
+.punch-stack{
+  display:flex;flex-direction:column;gap:4px;
+  border-inline-start:2px solid var(--gold);
+  padding-inline-start:28px;
+  margin:14px 0 6px;
+}
+.punch-stack .punch{font-size:clamp(1.5rem,3.9vw,2.3rem);}
+.punch-stack .punch:last-child{color:var(--accent);}
+
+/* משפט בודד שעומד לבדו, בלי קו */
+.punch-solo{margin:18px 0 4px;}
+
+/* ── הפיד ──
+   גלילה אופקית כמו בטלפון: תמונה, הודעה שהגיעה אחריה, ושוב.
+   היחס 2:3 הוא היחס של התמונות שכבר אושרו לדף "מלתחה בהלימה",
+   והן מוגשות כפי שהן ולא נחתכות מחדש. */
+.feed-wrap{max-width:none;position:relative;}
+.feed{
+  display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;
+  /* בלי זה flex מותח את כל הכרטיסים לגובה הגבוה ביותר,
+     ואז object-fit חותך את התמונה ורואים פלג גוף במקום לוק */
+  align-items:flex-start;
+  scroll-snap-type:x proximity;padding-bottom:20px;
+  scrollbar-width:thin;scrollbar-color:var(--rule-strong) transparent;
+  -webkit-overflow-scrolling:touch;
+}
+.feed::-webkit-scrollbar{height:6px;}
+.feed::-webkit-scrollbar-thumb{background:var(--rule-strong);}
+/* רוחב כרטיס. כרטיס רחב יוצא גבוה מאוד, ואז רואים אחד וחצי
+   במסך וזה מרגיש תמונה בודדת ולא פיד. */
+.fcard{flex:0 0 clamp(176px,45vw,228px);scroll-snap-align:start;margin:0;}
+
+.fphoto{display:flex;flex-direction:column;gap:10px;}
+.fphoto img{
+  /* height:auto חובה. בלעדיו תכונת height בתגית נחשבת גובה
+     מפורש, היא גוברת על aspect-ratio, והתמונה יוצאת בגובה המקור.
+     היחס 2:3 הוא היחס של התמונות המאושרות, ולכן אין חיתוך. */
+  width:100%;height:auto;aspect-ratio:2/3;
+  object-fit:cover;object-position:center top;
+  display:block;background:var(--paper-3);
+}
+.fphoto figcaption{font-size:.78rem;line-height:1.5;color:var(--ink-soft);}
+
+/* כרטיס הודעה: צילום מסך של וואטסאפ. הרקע הוא הדוגמה שעינת
+   שלחה, הבועה יושבת עליו, והייחוס יורד מתחת לכרטיס כמו כיתוב
+   מתחת לתמונה, כדי שהכרטיס עצמו ייראה כמו צילום מסך אמיתי.
+   בעברית הודעה שהתקבלה יושבת בצד ימין, ולכן הפינה החדה היא
+   העליונה־ימנית. אין וי כפול, כי הוא מופיע רק על הודעה שנשלחה. */
+.fmsgwrap{display:flex;flex-direction:column;gap:10px;}
+.fmsg{
+  aspect-ratio:2/3;
+  background:var(--paper-2) url(img-abchon/wa-bg.jpg) center/cover no-repeat;
+  display:flex;flex-direction:column;justify-content:center;gap:7px;
+  padding:20px 14px;overflow:hidden;
+}
+.fmsg .bub{
+  background:#FFFFFF;color:var(--ink);
+  font-size:.84rem;line-height:1.62;
+  padding:11px 13px 9px;border-radius:2px 12px 12px 12px;
+  box-shadow:0 1px 1px rgba(20,16,14,.10);
+  max-width:94%;align-self:flex-start;
+}
+.fmsgwrap figcaption{font-size:.78rem;line-height:1.5;color:var(--ink-soft);}
+.feed-hint{font-size:.78rem;color:var(--ink-faint);letter-spacing:.04em;}
+.looks-note{font-size:.86rem;line-height:1.7;color:var(--ink-faint);}
+/* המשפט שסוגר בלוק, בבורדו */
+.punch-accent{color:var(--accent);}
+
+@media (max-width:620px){
+  section{padding:80px 0;}
+  .feed{gap:12px;}
+  .fmsg{padding:18px 15px;}
+  .hero{padding:36px 0 60px;}
+  .stack{gap:28px;}
+  .stack-sm{gap:17px;}
+  .stack-lg{gap:54px;}
+  .lede{font-size:1.2rem;line-height:1.74;}
+  .mirror-line{padding:19px 0;}
+  .step{padding:34px 0;}
+  .frame-note{padding-top:28px;margin-top:14px;}
+  .punch-stack{padding-inline-start:20px;}
+}
 </style>
 </head>
 <body>
@@ -417,9 +526,15 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       <div class="col stack">
         <div class="eyebrow">שיחה בסטייל</div>
         <h1>את בשיא שלך. למה הבגדים עדיין לא מספרים את זה?</h1>
-        <p class="lede">פעם זה היה פשוט. נכנסת לחנות, מודדת, יוצאת מרוצה. היום הקניות כבר הפכו למטלה שדחית לסוף הרשימה. הגוף השתנה, התפקיד השתנה ואת כבר לא בטוחה מה מחמיא לך.</p>
-        <p>וגם כשאת כן בוחרת משהו, את לא בטוחה שהוא מדויק למה שאת רוצה לשדר ולאיך שאת רוצה להרגיש. בינתיים צברת ניסיון, מקצועיות ואוטוריטה, ומה שאת רואה במראה עדיין לא מספר את זה.</p>
-        <p>אני מזמינה אותך לשיחה בסטייל, שבה נאבחן יחד את מבנה הגוף ואת הסטייל האישי שלך, כדי שתדעי מה באמת מחמיא לך ומה חסר במלתחה.</p>
+        <p class="lede">פעם היה לך ברור מה ללבוש. נכנסת לחנות, מדדת, מצאת משהו שאהבת ויצאת מרוצה. היום זה כבר מרגיש מתיש.</p>
+        <div class="punch-stack">
+          <p class="punch">הגוף השתנה.</p>
+          <p class="punch">החיים השתנו.</p>
+          <p class="punch">את השתנית.</p>
+        </div>
+        <p>בינתיים צברת ניסיון, מקצועיות, ביטחון ואוטוריטה. את יודעת מי את ומה את מביאה לעולם. אבל כשאת פותחת את הארון בבוקר או מסתכלת במראה, את לא רואה שם את אותה אישה.</p>
+        <p class="punch punch-solo">וזה בדיוק הפער שנסגור יחד.</p>
+        <p>המטרה היא שמה שאת לובשת ירגיש סוף סוף כמוך, במיטבך, ולא כמו תחפושת של מישהי אחרת. בשיחה בסטייל נבחן יחד את מבנה הגוף, את הסטייל האישי שלך ואת מה שאת רוצה לשדר.</p>
         <hr class="rule-gold">
         <div class="cta-row">
           <a class="cta" href="#שאלון">לשאלון ההתאמה</a>
@@ -428,7 +543,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
       </div>
       <figure class="plate wide">
         <img class="ph" src="img-abchon/abchon-hero.jpg" width="1100" height="1467" alt="עינת רן אלקיים, סטייליסטית אישית ויועצת תדמית">
-        <figcaption class="margin-note">אנחנו עובדות עם מה שיש, עם הגוף ועם האישה שאת היום, ועם זה ננצח.</figcaption>
+        
       </figure>
     </div>
   </div>
@@ -458,18 +573,20 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
   <div class="wrap">
     <section>
       <div class="col stack">
-        <div class="eyebrow">נקודת הפתיחה</div>
-        <h2>נשמע מוכר?</h2>
-        <p class="lede">מה שעבד עד היום כבר לא מסתדר. לא איתך, לא עם הגוף ולא עם התפקיד שלך.</p>
+        <h2>המלתחה שלך עדיין שייכת לגרסה הקודמת שלך</h2>
+        <p class="punch punch-solo">נשמע מוכר?</p>
+        <p class="lede">בשנים האחרונות עברת דרך ארוכה, בעבודה, בתפקיד ובגוף. המלתחה פשוט נשארה מאחור.</p>
         <div class="mirror">
-          <div class="mirror-line"><span class="mark">01</span><span>הבגדים שאהבת יושבים עלייך אחרת, ואת לא יודעת מה אמור להחליף אותם.</span></div>
-          <div class="mirror-line"><span class="mark">02</span><span>התפקיד שלך עלה מדרגה, והמלתחה נשארה מאחור.</span></div>
-          <div class="mirror-line"><span class="mark">03</span><span>בחנויות את מתבלבלת מהשפע ומתעייפת מהמדידות.</span></div>
-          <div class="mirror-line"><span class="mark">04</span><span>את מזמינה באונליין, ובסוף גם זה לא יוצא מדויק.</span></div>
-          <div class="mirror-line"><span class="mark">05</span><span>קנית, ואז הפריט נשאר תלוי עם התווית, כי משהו בו לא הרגיש כמוך.</span></div>
-          <div class="mirror-line"><span class="mark">06</span><span>את רואה אישה בטוטאל לוק שיקי שנראית מעולה, ושואלת את עצמך למה אצלך זה לא עובד ככה.</span></div>
+          <div class="mirror-line"><span class="mark">01</span><span>הבגדים שאהבת פעם יושבים עלייך אחרת, ואת לא באמת יודעת במה להחליף אותם.</span></div>
+          <div class="mirror-line"><span class="mark">02</span><span>המקצועיות והאחריות שלך עלו מדרגה, אבל בבוקר את עדיין מתלבשת כמו הג'וניורית הטריה במשרד.</span></div>
+          <div class="mirror-line"><span class="mark">03</span><span>את נכנסת לחנות, רואה אין סוף אפשרויות ויוצאת בעיקר מבולבלת ועייפה.</span></div>
+          <div class="mirror-line"><span class="mark">04</span><span>את מזמינה באונליין, מחזירה חצי מההזמנה, ושוב מתאכזבת.</span></div>
+          <div class="mirror-line"><span class="mark">05</span><span>יש במלתחה בגדים שקנית כי הם היו יפים, ובכל פעם שאת לובשת אותם משהו פשוט לא מרגיש כמוך.</span></div>
+          <div class="mirror-line"><span class="mark">06</span><span>ולפעמים את רואה אישה אחרת בבגד פשוט לגמרי, וחושבת: איך זה נראה כל כך טוב עליה?</span></div>
         </div>
-        <p class="frame-note">בממוצע אחת לעשור אנחנו עוברות שינוי שדורש מאיתנו קשב ודיוק. הנראות שלנו היא עוד כלי לביטוי עצמי, והדרך שבה אנחנו מציגות ומביאות את עצמנו החוצה לעולם.</p>
+        <p>זה אף פעם לא היה עניין של טעם.</p>
+        <p class="punch punch-solo">מה שחסר הוא ההיגיון שמחבר בין מי שאת היום לבין מה שאת לובשת.</p>
+        <p class="frame-note">וזה בדיוק מה שאנחנו הולכות לעשות בשיחה.</p>
       </div>
     </section>
   </div>
@@ -481,8 +598,8 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
     <section>
       <div class="stack">
         <div class="col stack-sm">
-          <div class="eyebrow">מה קורה בשיחה</div>
-          <h2>שלושה דברים שתדעי בסוף</h2>
+          <h2>בסוף השיחה יהיה לך הרבה יותר ברור מה נכון לך</h2>
+          <p class="lede">שלושה דברים נבין יחד, ואיתם תצאי עם היגיון שמתאים לך ולגוף שלך היום, במקום עוד רשימה של מותר ואסור.</p>
         </div>
         <div class="col-wide steps">
 
@@ -491,7 +608,8 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="body">
               <div class="dur">מבנה גוף ופרופורציות</div>
               <h3>מה הכי מחמיא לפרופורציות שלך</h3>
-              <p>נבחן את מבנה הגוף והפרופורציות שלך ונבין איך הם עובדים יחד בהרמוניה. נזהה את האזורים המחמיאים שאליהם נרצה להביא את תשומת הלב, ואת אלה שנעדיף להשאיר בשקט. מרגע שיש לך את ההיגיון, את יכולה להפעיל אותו בכל חנות.</p>
+              <p>נבחן את מבנה הגוף והפרופורציות שלך ונבין איך הם עובדים יחד בהרמוניה. איפה נכון ליצור עניין, לאן כדאי למשוך את העין ומה פחות משרת אותך.</p>
+              <p>כשההיגיון הזה אצלך, את יכולה להפעיל אותו בכל חנות ובכל הזמנה באונליין.</p>
             </div>
           </div>
 
@@ -499,8 +617,9 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="n">02</div>
             <div class="body">
               <div class="dur">סטייל אישי</div>
-              <h3>מה הסטייל שלך, ולא מה התרגלת ללבוש</h3>
-              <p>נדבר על מה שאת רוצה שהנראות והמסר החזותי שלך יגידו עוד לפני שאמרת מילה, על מה שאת רוצה לשדר, על מה שאת רוצה שישתקף בחזרה אלייך, והכי חשוב, איך את רוצה להרגיש בבגדים שלך.</p>
+              <h3>מה את רוצה שהנראות והמסר החזותי שלך יגידו עוד לפני שאמרת מילה</h3>
+              <p>מקצועיות? נוכחות? נשיות? עוצמה? קלילות? נבדוק את הפער בין האישה שאת היום לבין מה שהמלתחה שלך מספרת כרגע, ומה את רוצה שישתקף בחזרה אלייך.</p>
+              <p>והכי חשוב, איך את רוצה להרגיש בבגדים שלך.</p>
             </div>
           </div>
 
@@ -508,14 +627,20 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
             <div class="n">03</div>
             <div class="body">
               <div class="dur">פריטי חובה</div>
-              <h3>מה באמת חסר לך במלתחה, ולא עוד רשימת "פריטי חובה"</h3>
-              <p>תספרי לי מה את לובשת בפועל ואיפה זה נתקע, ואני אגיד לך אילו פריטים חסרים לך כדי שהשאר יתחיל להשתלב, ואילו כבר לא עובדים בשבילך. המטרה היא שיהיו לך יותר אפשרויות מהבגדים שכבר יש לך, ולא רק לקנות עוד בגדים חדשים.</p>
+              <h3>מה באמת חסר לך במלתחה</h3>
+              <p>תספרי לי מה את לובשת בפועל, איפה את נתקעת ומה כבר לא עובד בשבילך, ואני אגיד לך אילו פריטים חסרים לך כדי שמה שכבר יש לך יתחיל להשתלב.</p>
+              <p>המטרה היא יותר לוקים מהבגדים שכבר יש לך.</p>
             </div>
           </div>
 
         </div>
 
-        <p class="frame-note col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים לפחות, לפי מה שהיא צריכה.</p>
+        <div class="col stack-sm">
+          <p class="punch punch-solo">ואז את פותחת את הארון בבוקר ולא חושבת "מה אני לובשת", אלא "זה בדיוק אני".</p>
+          <p class="punch punch-accent">הגיע הזמן שהנראות שלך תספר את הסיפור שהחיים שלך כבר מספרים.</p>
+        </div>
+
+        <p class="small col-wide">השיחה עצמה בלי עלות ובלי התחייבות. מי שממשיכה איתי אחריה עושה זאת בתהליך מלא של שלושה מפגשים לפחות, לפי מה שהיא צריכה.</p>
       </div>
     </section>
   </div>
@@ -529,6 +654,7 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
         <p class="lede">יזמית, מעצבת אופנה, סטייליסטית ויועצת לתדמית ולמסר חזותי.</p>
         <p>אני מלווה נשים בתהליכים אישיים, ומעבירה סדנאות והרצאות למוסדות ולארגונים על הקשר בין תדמית, נראות ונוכחות.</p>
         <p>הנראות שלך מדברת אותך לפני שאמרת מילה, וזו הסיבה שזה המקצוע שלי. מה שמניע אותי הוא להרבות יופי בעולם, ובעיניי יופי הוא הדרך שבה מהות פנימית מקבלת צורה, נוכחות ומסר.</p>
+        <p class="punch punch-solo punch-accent">אנחנו עובדות עם מה שיש, עם הגוף ועם האישה שאת היום, ועם זה ננצח.</p>
       </div>
       <figure class="plate">
         <img class="ph" src="img-abchon/abchon-about.jpg" width="950" height="1188" loading="lazy" alt="עינת רן אלקיים">
@@ -545,23 +671,37 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
     <section>
       <div class="stack">
         <div class="col stack-sm">
-          <div class="eyebrow">מה שנשים מספרות אחרי</div>
-          <h2>אף אחת מהן לא מדברת על בגד</h2>
+          <div class="eyebrow">מהטלפון שלי</div>
+          <h2>אף אחת מהן לא מספרת על בגד מסוים</h2>
+          <p class="lede">כל הלוקים כאן הם של נשים אמיתיות, בסוף תהליך סטיילינג אישי או תוך כדי.</p>
+          <p class="feed-hint">אפשר לגלול בצד ←</p>
         </div>
-        <div class="tgrid">
-          <div class="tcard">
-            <q>מאז שהתחלנו את התהליך, אני פשוט לא מפסיקה לקבל מחמאות על הלוק שלי, כמה הבגדים מחמיאים, כמה נשית אני נראית, ושאלות של אם חזרתי לעבוד.</q>
-            <div class="who">לקוחה, אחרי התהליך המלא</div>
-          </div>
-          <div class="tcard">
-            <q>אחד הדברים הכי חשובים שלימדת אותי זה לשלב ולעבוד עם מה שיש. הלוק בתמונה הזאת בכלל בלי בגדים חדשים. ובעיקר ממש עוררת אותי חזרה לחיים.</q>
-            <div class="who">לקוחה, אחרי מפגש המלתחה</div>
-          </div>
-          <div class="tcard wide">
-            <q>אני לא יודעת איזה קסם עשית, אבל הצלחת לגרום לאמא שלי לאהוב קניות. דברים ששנים אני ואחיות שלי לא מצליחות לעשות. מעבר לזה, היא מתלבשת וואו, בזכותך.</q>
-            <div class="who">הבת של לקוחה, שכתבה מיוזמתה</div>
+
+        <div class="feed-wrap col-wide">
+          <div class="feed">
+          <figure class="fcard fphoto"><img src="img-abchon/feed-01.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה לבנה, מכנסי פשתן קרם רחבים, חגורה וכפכפי עקב</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">שמתי לב שלא אמרתי 'אוף, איזה שמנה אני', 'אוף, אני נמוכה'. דברים שבעבר מאוד הייתי אומרת על עצמי.</p><p class="bub">ושמתי לב שלא עשיתי את זה.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-02.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>בלייזר שחור, סריג זהוב, מכנסיים ישרים ועקב שחור</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">לא פשוט לי להתרגל לשינויים בגוף, אבל בזכותך הרגשתי הרבה יותר בנוח עם עצמי ועם האני החדשה שלי.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-04.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה מכופתרת תכלת ארוכה, גופייה שחורה וג'ינס רחב. אימא בסוף חופשת לידה</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">מאז שהתחלנו את התהליך אני פשוט לא מפסיקה לקבל מחמאות על הלוק שלי, כמה הבגדים מחמיאים וכמה נשית אני נראית.</p><p class="bub">תודה שעזרת לי לצאת מהטרנינג ומכנסי ההריון ולהרגיש מדהים, והכי חשוב בנוח, גם בחופשת לידה.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-03.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>צעיף מודפס על מכנסי קורדרוי אדומים</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">אחד הדברים הכי חשובים שלימדת אותי זה לשלב ולעבוד עם מה שיש.</p><p class="bub">הלוק בתמונה הזאת בכלל בלי בגדים חדשים.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-05.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>ווסט שחור ארוך ומכנסיים רחבים שחורים</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">יש לי ביטחון באיך שאני מתהלכת, כי אני יודעת בוודאות שזה הכי מחמיא שיכול להיות.</p><p class="bub">אני לא הולכת עם סימני שאלה. מאוד מאוד ברור לי.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-06.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה אפורה, מכנסיים רחבים תואמים וכפכפי עקב</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">הבנתי כמה נכון מלתחה מדויקת ולא ארון מפוצץ.</p><p class="bub">הבנתי כמה חלק מהגזרות שלבשתי לא מתאימות לי.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-07.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>גופייה תכלת, ג'ינס כהה רחב, חגורה ותיק קוניאק</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">הרגשתי שיש לי שותפה אמיתית לתהליך.</p><p class="bub">הרגשתי שאני יכולה להשאיר את המוח בבית, ושיש על מי לסמוך.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-09.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה שחורה, מכנסיים לבנים רחבים ומגפונים</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">אני מסתכלת על הבדים יותר, על הרכב הבד, וכל זה מה שלימדת אותי. ועל הגזרות שאני יודעת שטוב לי.</p><p class="bub">ללכת לקניות זה אחרת עכשיו. אחרת, אחרת.</p></div><figcaption>לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-10.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>ווסט בז', מכנסי בז' רחבים וחגורה</figcaption></figure>
+          <figure class="fcard fmsgwrap"><div class="fmsg"><p class="bub">אני לא יודעת איזה קסם עשית, אבל הצלחת לגרום לאמא שלי לאהוב קניות.</p><p class="bub">דברים ששנים אני ואחיות שלי לא מצליחות לעשות. מעבר לזה, היא מתלבשת וואו, בזכותך.</p></div><figcaption>הבת של לקוחה, בסוף התהליך</figcaption></figure>
+          <figure class="fcard fphoto"><img src="img-abchon/feed-11.jpg" width="760" height="1140" loading="lazy" alt="לוק שנבנה בתהליך סטיילינג אישי"><figcaption>חולצה שמנת קשורה, חצאית מידי חומה וכפכפי עקב</figcaption></figure>
           </div>
         </div>
+
+        <p class="looks-note col-wide">הפנים מחוץ לפריים לבקשת הלקוחות, והתמונות מתפרסמות באישורן. ההודעות מצוטטות כלשונן, בלי שם ובלי פרט מזהה.</p>
       </div>
     </section>
   </div>
