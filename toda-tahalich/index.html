@@ -393,40 +393,35 @@ footer{border-top:1px solid var(--rule-strong);padding:52px 0 64px;text-align:ce
 {{CSS}}
 </style>
 <style>
-/* דף התודה הוא בלוק בורדו אחד שתופס את כל המסך, ולכן הוא
-   מוותר על הניגוד בין רצועות שיש בדף הנחיתה. */
-body{background:var(--accent);}
-.thanks{
-  min-height:100vh;display:flex;align-items:center;
-  padding-block:72px;
-}
+/* דף התודה בהיר, כמו דף הנחיתה, והבורדו נשאר לבלוק אחד
+   שסוגר את הדף. עד 10 באוקטובר 2026 כל המסך היה בורדו,
+   ועינת מצאה שזה כבד מדי. */
+body{background:var(--paper);display:flex;flex-direction:column;min-height:100vh;}
+
+/* מסטהד ממורכז, כמו שער של מגזין */
+.t-head{padding:30px 0 0;text-align:center;}
+.t-head .sig{font-size:1.1rem;color:var(--ink);}
+.t-head hr{margin-top:22px;}
+
+.thanks{flex:1;display:flex;align-items:center;padding-block:72px;}
 .thanks .wrap{width:100%;}
-.thanks h1{color:var(--on-accent);font-size:clamp(2.1rem,5.6vw,3.5rem);}
-.thanks .lede{color:rgba(251,245,236,.88);font-weight:300;}
-.thanks .small{color:rgba(251,245,236,.74);}
-.thanks .eyebrow{color:rgba(251,245,236,.62);}
-.thanks .rule-gold{background:rgba(251,245,236,.5);}
-.thanks .cta.ghost{color:var(--on-accent);border-color:rgba(251,245,236,.55);}
-.thanks .cta.ghost:hover{background:var(--on-accent);color:var(--accent);}
-.thanks .vid{background:rgba(251,245,236,.08);border-color:rgba(251,245,236,.3);}
-.thanks .vid .cap{color:rgba(251,245,236,.72);}
-.thanks .vid .play{border-inline-end-color:var(--on-accent);}
-/* המתנה. בלי זה הטקסט יורש את הדיו הכהה של הדף הראשי, ועל
-   בורדו הוא כמעט לא קריא. תוקן ב-10 באוקטובר 2026. */
+.thanks h1{font-size:clamp(2.1rem,5.6vw,3.5rem);}
+
+/* הקישור לוואטסאפ הוא מילה בתוך משפט ולא כפתור, כדי שכל
+   תשומת הלב תלך ליומן */
+.thanks .small a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
+
 .thanks .gift{
-  border-top:1px solid rgba(251,245,236,.3);
+  border-top:1px solid var(--rule);
   padding-top:24px;display:flex;flex-direction:column;gap:8px;
 }
-.thanks .gift .cap{
-  font-size:.68rem;font-weight:700;letter-spacing:.32em;
-  color:rgba(251,245,236,.62);
-}
-.thanks .gift h3{color:var(--on-accent);}
-.thanks .gift p{color:rgba(251,245,236,.82);line-height:1.72;}
-.sig-dark{
-  font-family:'Bellefair',serif;font-size:1.2rem;letter-spacing:.28em;
-  padding-left:.28em;color:rgba(251,245,236,.62);padding-top:12px;
-}
+.thanks .gift .cap{font-size:.68rem;font-weight:700;letter-spacing:.32em;color:var(--gold);}
+.thanks .gift p{color:var(--ink-soft);line-height:1.72;}
+
+/* בלוק הבורדו היחיד בדף */
+.t-foot{background:var(--accent);color:var(--on-accent);padding:44px 0;text-align:center;}
+.t-foot .sig{font-size:1.5rem;letter-spacing:.06em;padding-left:0;}
+.t-foot .sig-sub{color:rgba(251,245,236,.66);}
 @media (max-width:620px){
   body{padding-bottom:0;}
   .thanks{padding-block:52px;}
@@ -435,7 +430,14 @@ body{background:var(--accent);}
 </head>
 <body>
 
-<div class="thanks">
+<header class="t-head">
+  <div class="wrap">
+    <div class="sig">EINAT RAN ELKAYAM</div>
+    <hr class="hair">
+  </div>
+</header>
+
+<main class="thanks">
   <div class="wrap">
     <div class="col-wide stack">
       <div class="eyebrow">קיבלתי את השאלון שלך</div>
@@ -447,15 +449,20 @@ body{background:var(--accent);}
       </div>
       <hr class="rule-gold">
       <div class="cta-row">
-        <a class="cta on-dark" href="https://calendar.app.google/H5TA3uwtHeK3Ed6G8" target="_blank" rel="noopener">בחרי שעה ביומן שלי</a>
-        <a class="cta ghost" href="https://wa.me/972546443743?text=%D7%94%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA" target="_blank" rel="noopener">בואי נדבר בוואטסאפ</a>
+        <a class="cta " href="https://calendar.app.google/H5TA3uwtHeK3Ed6G8" target="_blank" rel="noopener">בחרי שעה ביומן שלי</a>
       </div>
       <p class="small">השיחה בזום, בלי עלות ובלי התחייבות. אחרי שתקבעי אני עוברת על השאלון שלך ושולחת לך הנחיה קצרה לכמה תמונות, כדי שאגיע עם אבחון מוכן ולא נתחיל מאפס.</p>
-      <p class="small">ואם לא מצאת מועד שמתאים לך, כתבי לי בוואטסאפ ונמצא.</p>
-      <div class="sig-dark">EINAT RAN ELKAYAM</div>
+      <p class="small">ואם לא מצאת מועד שמתאים לך, כתבי לי ב<a href="https://wa.me/972546443743?text=%D7%94%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA" target="_blank" rel="noopener">וואטסאפ</a> ונמצא.</p>
     </div>
   </div>
-</div>
+</main>
+
+<footer class="t-foot">
+  <div class="wrap">
+    <div class="sig">עינת רן אלקיים</div>
+    <div class="sig-sub">סטיילינג · תדמית · מסר חזותי</div>
+  </div>
+</footer>
 
 <script>
 /* הסרטון. מדביקים קישור יוטיוב רגיל, והוא מוטמע לבד. */
