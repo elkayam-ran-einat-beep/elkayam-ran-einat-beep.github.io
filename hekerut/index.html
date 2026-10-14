@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>שאלון היכרות | עינת רן אלקיים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bellefair&family=Assistant:wght@300;400;600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%236E1B2A'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='62' fill='%23FCFAF7' text-anchor='middle'%3E%D7%A2%3C/text%3E%3C/svg%3E">
+<style>
+/* פלטה וטיפוגרפיה זהות לדף "מלתחה בהלימה". הדף מקובע לבהיר בכוונה,
+   כי במצב כהה הבורדו הופך לוורוד. */
+:root{
+  --paper:#FCFAF7; --paper-2:#F5F0E8; --paper-3:#EDE5D9;
+  --ink:#14100E; --ink-soft:#5A4E45; --ink-faint:#7A6A5C;
+  --accent:#6E1B2A; --on-accent:#FBF5EC; --gold:#8A6B3A;
+  --rule:#E0D8CB; --rule-strong:#C4B8A6;
+  color-scheme:light;
+}
+*{box-sizing:border-box;}
+[hidden]{display:none !important;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  direction:rtl;background:var(--paper);color:var(--ink);
+  font-family:'Assistant','Segoe UI',system-ui,sans-serif;
+  font-size:18px;line-height:1.7;margin:0;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.wrap{max-width:760px;margin:0 auto;padding:0 34px;}
+h1,h2,.display{font-family:'Bellefair','Frank Ruhl Libre',Georgia,serif;font-weight:400;margin:0;text-wrap:balance;}
+h1{font-size:clamp(2.6rem,8vw,4.6rem);line-height:1.04;letter-spacing:-.015em;}
+h2{font-size:clamp(2rem,5.4vw,3.1rem);line-height:1.1;letter-spacing:-.012em;}
+p{margin:0;}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--gold);line-height:1.6;}
+.lede{font-size:1.18rem;line-height:1.66;color:var(--ink-soft);font-weight:300;}
+.tiny{font-size:.8rem;line-height:1.6;color:var(--ink-faint);}
+
+/* מסטהד */
+.masthead{padding:30px 0 24px;text-align:center;border-bottom:1px solid var(--rule-strong);}
+.masthead .name{
+  font-family:'Bellefair',serif;font-size:clamp(1.3rem,3.4vw,1.9rem);
+  letter-spacing:.42em;line-height:1.2;padding-left:.42em;
+}
+.masthead .sub{font-size:.7rem;letter-spacing:.16em;color:var(--ink-faint);font-weight:600;padding-top:9px;}
+
+/* פתיחה */
+.hero{padding-block:64px 46px;display:flex;flex-direction:column;gap:22px;}
+.rule-gold{width:54px;height:2px;background:var(--gold);border:0;margin:0;}
+.for{font-family:'Bellefair',serif;font-size:1.5rem;color:var(--accent);line-height:1.3;}
+.meta{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.86rem;color:var(--ink-faint);
+  border-top:1px solid var(--rule);padding-top:16px;}
+.meta span::before{content:"·";color:var(--gold);margin-inline-end:8px;}
+.meta span:first-child::before{content:none;}
+
+/* ניווט פרקים */
+.chapnav{
+  position:sticky;top:0;z-index:5;background:var(--paper);
+  border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+}
+.chapnav .row{display:flex;}
+.chapnav button{
+  flex:1 1 0;min-width:0;background:none;border:0;cursor:pointer;
+  padding:13px 6px 11px;font:inherit;color:var(--ink-faint);
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  border-bottom:2px solid transparent;
+}
+.chapnav button + button{border-inline-start:1px solid var(--rule);}
+.chapnav .n{font-family:'Bellefair',serif;font-size:1.35rem;line-height:1;}
+.chapnav .t{font-size:.72rem;font-weight:600;line-height:1.3;text-align:center;}
+.chapnav button[aria-current="step"]{color:var(--accent);border-bottom-color:var(--accent);}
+.chapnav button.done .n{color:var(--gold);}
+.chapnav button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.progress{height:2px;background:var(--rule);}
+.progress i{display:block;height:2px;background:var(--gold);width:0;transition:width .3s ease;}
+
+/* פרק */
+.chapter{padding:56px 0 30px;}
+.chapter[hidden]{display:none;}
+.chead{display:flex;flex-direction:column;gap:14px;padding-bottom:30px;}
+.chead .num{font-family:'Bellefair',serif;font-size:3.4rem;line-height:.9;color:var(--accent);}
+.group{padding-top:34px;}
+.group > .gt{
+  font-size:.74rem;font-weight:700;letter-spacing:.12em;color:var(--gold);
+  padding-bottom:12px;border-bottom:1px solid var(--rule-strong);
+}
+.group > .gintro{font-size:.92rem;color:var(--ink-soft);padding-top:12px;}
+
+.item{padding:26px 0;border-bottom:1px solid var(--rule);}
+.item:last-child{border-bottom:0;}
+.q{display:block;font-weight:600;font-size:1.06rem;line-height:1.45;color:var(--ink);}
+.hint{display:block;font-size:.88rem;color:var(--ink-faint);padding-top:4px;line-height:1.5;}
+
+textarea,input[type=text],input[type=tel],input[type=email],input[type=date]{
+  width:100%;font:inherit;font-size:1rem;color:var(--ink);
+  background:var(--paper-2);border:0;border-bottom:1px solid var(--rule-strong);
+  border-radius:0;padding:12px 14px;margin-top:12px;
+  -webkit-appearance:none;appearance:none;
+}
+textarea{min-height:96px;resize:none;line-height:1.6;overflow:hidden;display:block;}
+textarea:focus,input:focus{outline:0;border-bottom-color:var(--accent);background:#F1EADF;}
+textarea::placeholder,input::placeholder{color:#A39385;}
+
+/* פרטים אישיים */
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;}
+.field{display:flex;flex-direction:column;}
+.field.wide{grid-column:1 / -1;}
+.field label{font-size:.82rem;font-weight:600;color:var(--ink-soft);padding-top:14px;}
+.field input{margin-top:6px;}
+.field .req{color:var(--accent);}
+input[type=date]{min-height:48px;text-align:right;}
+
+/* קופסאות סימון. ריבוע חד, כמו כל שאר הדף. */
+.checks{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
+.chk{position:relative;}
+.chk input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer;}
+.chk span{
+  display:inline-flex;align-items:center;gap:10px;min-height:44px;
+  padding:9px 16px;border:1px solid var(--rule-strong);background:var(--paper);
+  font-size:.95rem;line-height:1.3;cursor:pointer;user-select:none;
+  transition:background .15s ease,border-color .15s ease,color .15s ease;
+}
+.chk span::before{
+  content:"";flex:0 0 auto;width:14px;height:14px;border:1px solid var(--ink-faint);
+  background:var(--paper);
+}
+.chk input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+.chk input:checked + span::before{
+  border-color:var(--on-accent);
+  background:var(--on-accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M3 7.4l2.6 2.6L11 4.4' fill='none' stroke='%236E1B2A' stroke-width='1.8'/%3E%3C/svg%3E") center/12px no-repeat;
+}
+.chk input:focus-visible + span{outline:2px solid var(--gold);outline-offset:2px;}
+.detail{min-height:52px !important;font-size:.94rem !important;}
+
+/* הערת מידע בלי שדה */
+.note{border-inline-start:2px solid var(--gold);padding:4px 18px 4px 0;
+  color:var(--ink-soft);font-size:.98rem;display:flex;flex-direction:column;gap:10px;}
+
+/* כפתורים */
+.nav{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
+  padding:30px 0 90px;border-top:1px solid var(--rule-strong);margin-top:20px;}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--accent);color:var(--on-accent);border:1px solid var(--accent);
+  font:inherit;font-size:.98rem;font-weight:600;letter-spacing:.06em;
+  padding:15px 40px;min-height:54px;border-radius:0;cursor:pointer;text-decoration:none;
+  transition:background .2s ease,color .2s ease;
+}
+.btn:hover{background:transparent;color:var(--accent);}
+.btn.ghost{background:transparent;color:var(--accent);}
+.btn.ghost:hover{background:var(--accent);color:var(--on-accent);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.btn[disabled]{opacity:.55;cursor:wait;}
+.saved{font-size:.78rem;color:var(--ink-faint);letter-spacing:.04em;min-height:1.2em;}
+
+/* מסך הסיום */
+.finish{padding-block:56px 100px;}
+.finish[hidden]{display:none;}
+.summary{border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);
+  padding:24px 0;margin:30px 0;display:flex;gap:36px;flex-wrap:wrap;}
+.summary .n{font-family:'Bellefair',serif;font-size:2.6rem;line-height:1;color:var(--accent);}
+.summary .t{font-size:.86rem;color:var(--ink-soft);}
+.missing{font-size:.92rem;color:var(--ink-soft);}
+.missing a{color:var(--accent);}
+.actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+.status{font-size:.98rem;line-height:1.6;padding:16px 18px;background:var(--paper-2);
+  border-inline-start:2px solid var(--gold);width:100%;}
+.status[hidden]{display:none;}
+.status.ok{border-inline-start-color:var(--accent);}
+.linkish{background:none;border:0;padding:0 0 3px;font:inherit;font-size:.92rem;color:var(--ink-soft);
+  border-bottom:1px solid var(--rule-strong);cursor:pointer;}
+.linkish:hover{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* בלוק הסגירה, בלוק צבע מלא אחד כמו בדף הנחיתה */
+.closing{background:var(--accent);color:var(--on-accent);text-align:center;padding:60px 0;}
+.closing .display{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.3;}
+.closing .sig{font-size:.72rem;letter-spacing:.12em;font-weight:600;padding-top:18px;opacity:.85;}
+
+@media (max-width:640px){
+  body{font-size:17px;}
+  .wrap{padding:0 16px;}
+  .hero{padding-block:44px 34px;}
+  .chapnav .t{display:none;}
+  .chapnav button{padding:12px 4px;}
+  .fields{grid-template-columns:1fr;}
+  .nav .btn{flex:1 1 100%;}
+  .nav .btn.ghost{order:2;}
+  .chk span{font-size:.92rem;padding:9px 13px;}
+  .actions .btn{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="name">EINAT RAN ELKAYAM</div>
+  <div class="sub">סטיילינג · תדמית · מסר חזותי</div>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div class="eyebrow">שאלון לפגישת סטיילינג ראשונה</div>
+    <h1>שאלון היכרות<br>וסטיילינג אישי</h1>
+    <p class="for" id="forName" hidden></p>
+    <hr class="rule-gold">
+    <p class="lede">השאלון יעזור לנו להבין את החיים שלך, את ההעדפות שלך ואת מה שהמלתחה צריכה לתת לך. אפשר למלא מראש או יחד בפגישה, ולהרחיב בשיחה היכן שצריך.</p>
+    <div class="meta">
+      <span id="metaCount"></span>
+      <span>אפשר לדלג על כל שאלה</span>
+      <span>התשובות נשמרות אצלך תוך כדי</span>
+    </div>
+  </section>
+
+  <nav class="chapnav" aria-label="פרקי השאלון">
+    <div class="wrap" style="padding:0"><div class="row" id="chapnav"></div></div>
+    <div class="progress"><i id="bar"></i></div>
+  </nav>
+
+  <div class="wrap" id="chapters"></div>
+
+  <section class="wrap finish" id="finish" hidden>
+    <div class="eyebrow">סיום</div>
+    <h2 style="padding-top:12px">כמעט סיימנו</h2>
+    <p class="lede" style="padding-top:18px">לחיצה אחת, והשאלון מגיע אליי כקובץ וורד מסודר. אני קוראת אותו לפני הפגישה, כך שנתחיל ממה שכבר סיפרת ולא מאפס.</p>
+    <div class="summary">
+      <div><div class="n" id="sumDone">0</div><div class="t">שאלות שענית</div></div>
+      <div><div class="n" id="sumAll">0</div><div class="t">שאלות בשאלון</div></div>
+    </div>
+    <p class="missing" id="missing" hidden></p>
+    <div class="actions" style="padding-top:22px">
+      <button class="btn" id="send" type="button">שליחה לעינת</button>
+      <div class="status" id="status" hidden role="status" aria-live="polite"></div>
+      <button class="btn ghost" id="wa" type="button" hidden>שליחה בוואטסאפ</button>
+      <button class="linkish" id="copy" type="button">שמירת עותק של התשובות אצלי</button>
+      <button class="linkish" id="back" type="button">חזרה לשאלון</button>
+    </div>
+  </section>
+</main>
+
+<footer class="closing">
+  <div class="wrap">
+    <p class="display">אנחנו עובדות עם מה שיש, ועם זה ננצח.</p>
+    <p class="sig">עינת רן אלקיים | סטיילינג · תדמית · מסר חזותי</p>
+  </div>
+</footer>
+
+<script src="questions.js"></script>
+<script>
+/* ═══════════════ הגדרות ═══════════════
+   SCRIPT_URL: כתובת סקריפט הגוגל ששולח לעינת את הוורד למייל.
+   כשהיא ריקה, השליחה עוברת ישר לוואטסאפ. */
+var SCRIPT_URL = "";
+var WA_NUMBER = "972546443743";
+
+/* ═══════════════ קריאת הקישור האישי ═══════════════
+   ?n=שם הלקוחה  ‏&h=מזהים מוסתרים מופרדים בפסיק */
+var params = new URLSearchParams(location.search);
+var clientName = (params.get("n") || "").trim();
+var hidden = new Set((params.get("h") || "").split(",").filter(Boolean));
+var STORE = "einat-hekerut:" + (params.get("n") || "") + "|" + (params.get("h") || "");
+
+function isHidden(id) { return hidden.has(id); }
+
+/* ═══════════════ שמירה מקומית ═══════════════ */
+var answers = {};
+try { answers = JSON.parse(localStorage.getItem(STORE) || "{}") || {}; } catch (e) { answers = {}; }
+var sent = !!answers.__sent;
+var saveTimer;
+function save() {
+  try { localStorage.setItem(STORE, JSON.stringify(answers)); } catch (e) {}
+  var s = document.querySelectorAll(".saved");
+  s.forEach(function (el) { el.textContent = "נשמר"; });
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(function () { s.forEach(function (el) { el.textContent = ""; }); }, 1600);
+}
+
+/* ═══════════════ בניית הדף ═══════════════ */
+function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+function visibleItems(group) {
+  return group.items.filter(function (it) {
+    if (isHidden(it.id)) return false;
+    if (it.type === "fields") return it.fields.some(function (f) { return !isHidden("f-" + f.id); });
+    return true;
+  });
+}
+function visibleGroups(ch) { return ch.groups.filter(function (g) { return visibleItems(g).length; }); }
+var chapters = QUESTIONNAIRE.filter(function (ch) { return visibleGroups(ch).length; });
+
+function renderItem(it) {
+  var h = '<div class="item" data-item="' + it.id + '">';
+  if (it.type === "text") {
+    h += '<label class="q" for="q-' + it.id + '">' + esc(it.q) + '</label>';
+    if (it.hint) h += '<span class="hint">' + esc(it.hint) + '</span>';
+    h += '<textarea id="q-' + it.id + '" data-k="' + it.id + '" rows="3"></textarea>';
+  } else if (it.type === "checks") {
+    h += '<span class="q" id="l-' + it.id + '">' + esc(it.q) + '</span>';
+    h += '<div class="checks" role="group" aria-labelledby="l-' + it.id + '">';
+    it.options.forEach(function (o, i) {
+      h += '<label class="chk"><input type="checkbox" data-k="' + it.id + '" value="' + esc(o) + '"><span>' + esc(o) + '</span></label>';
+    });
+    h += '</div>';
+    if (!it.noDetail) h += '<textarea class="detail" data-k="' + it.id + '__d" rows="1" placeholder="משהו להוסיף? (לא חובה)" aria-label="פירוט: ' + esc(it.q) + '"></textarea>';
+  } else if (it.type === "fields") {
+    h += '<div class="fields">';
+    it.fields.forEach(function (f) {
+      if (isHidden("f-" + f.id)) return;
+      h += '<div class="field' + (f.wide ? " wide" : "") + '"><label for="f-' + f.id + '">' + esc(f.label) +
+        (f.required ? ' <span class="req">*</span>' : '') + '</label>' +
+        '<input id="f-' + f.id + '" type="' + (f.input || "text") + '" data-k="f-' + f.id + '"' +
+        (f.auto ? ' autocomplete="' + f.auto + '"' : '') + (f.input === "tel" ? ' inputmode="tel" dir="ltr"' : '') +
+        (f.input === "email" ? ' dir="ltr"' : '') + '></div>';
+    });
+    h += '</div>';
+  } else if (it.type === "note") {
+    var paras = it.paras || [it.text];
+    h += '<div class="note">' + paras.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join("") + '</div>';
+  }
+  return h + '</div>';
+}
+
+var nums = ["01", "02", "03", "04", "05", "06"];
+var navHtml = "", chHtml = "";
+chapters.forEach(function (ch, ci) {
+  navHtml += '<button type="button" data-go="' + ci + '"><span class="n">' + nums[ci] + '</span><span class="t">' + esc(ch.title) + '</span></button>';
+  chHtml += '<section class="chapter" data-ch="' + ci + '" hidden aria-labelledby="ct-' + ci + '">';
+  chHtml += '<div class="chead"><div class="num">' + nums[ci] + '</div><h2 id="ct-' + ci + '" tabindex="-1">' + esc(ch.title) + '</h2>';
+  if (ch.intro && ci > 0) chHtml += '<p class="lede">' + esc(ch.intro) + '</p>';
+  chHtml += '</div>';
+  visibleGroups(ch).forEach(function (g) {
+    chHtml += '<div class="group">';
+    if (g.title) chHtml += '<div class="gt">' + esc(g.title) + '</div>';
+    if (g.intro) chHtml += '<p class="gintro">' + esc(g.intro) + '</p>';
+    visibleItems(g).forEach(function (it) { chHtml += renderItem(it); });
+    chHtml += '</div>';
+  });
+  var last = ci === chapters.length - 1;
+  chHtml += '<div class="nav">' +
+    (ci > 0 ? '<button class="btn ghost" type="button" data-go="' + (ci - 1) + '">לפרק הקודם</button>' : '<span class="saved"></span>') +
+    '<button class="btn" type="button" data-go="' + (last ? "end" : ci + 1) + '">' + (last ? "לסיום ושליחה" : "לפרק הבא") + '</button>' +
+    '</div>';
+  chHtml += '</section>';
+});
+document.getElementById("chapnav").innerHTML = navHtml;
+document.getElementById("chapters").innerHTML = chHtml;
+
+if (clientName) {
+  var fn = document.getElementById("forName");
+  fn.textContent = "הוכן במיוחד עבור " + clientName;
+  fn.hidden = false;
+}
+
+/* ═══════════════ מילוי חוזר מהשמירה, והאזנה לשינויים ═══════════════ */
+function grow(t) { t.style.height = "auto"; t.style.height = (t.scrollHeight + 2) + "px"; }
+
+document.querySelectorAll("[data-k]").forEach(function (el) {
+  var k = el.dataset.k;
+  if (el.type === "checkbox") {
+    el.checked = (answers[k] || []).indexOf(el.value) > -1;
+  } else if (answers[k] != null) {
+    el.value = answers[k];
+  }
+});
+if (clientName && !answers["f-name"]) {
+  var nm = document.getElementById("f-name");
+  if (nm) { nm.value = clientName; answers["f-name"] = clientName; }
+}
+
+document.getElementById("chapters").addEventListener("input", function (e) {
+  var el = e.target, k = el.dataset && el.dataset.k;
+  if (!k) return;
+  if (el.type === "checkbox") {
+    answers[k] = Array.prototype.map.call(
+      document.querySelectorAll('input[type=checkbox][data-k="' + k + '"]:checked'), function (c) { return c.value; });
+  } else {
+    answers[k] = el.value;
+    if (el.tagName === "TEXTAREA") grow(el);
+  }
+  answers.__sent = false; sent = false;
+  save(); updateProgress();
+});
+
+/* ═══════════════ ספירה והתקדמות ═══════════════ */
+function answerable() {
+  var list = [];
+  chapters.forEach(function (ch, ci) {
+    visibleGroups(ch).forEach(function (g) {
+      visibleItems(g).forEach(function (it) {
+        if (it.type !== "note") list.push({ it: it, ci: ci });
+      });
+    });
+  });
+  return list;
+}
+function isAnswered(it) {
+  if (it.type === "text") return !!(answers[it.id] || "").trim();
+  if (it.type === "checks") return (answers[it.id] || []).length > 0 || !!(answers[it.id + "__d"] || "").trim();
+  if (it.type === "fields") return it.fields.some(function (f) { return !isHidden("f-" + f.id) && (answers["f-" + f.id] || "").trim(); });
+  return false;
+}
+function updateProgress() {
+  var all = answerable(), done = all.filter(function (a) { return isAnswered(a.it); });
+  document.getElementById("bar").style.width = (all.length ? done.length / all.length * 100 : 0) + "%";
+  document.getElementById("sumDone").textContent = done.length;
+  document.getElementById("sumAll").textContent = all.length;
+  document.querySelectorAll("#chapnav button").forEach(function (b, ci) {
+    var mine = all.filter(function (a) { return a.ci === ci; });
+    b.classList.toggle("done", mine.length > 0 && mine.every(function (a) { return isAnswered(a.it); }));
+  });
+}
+var totalQ = answerable().length;
+document.getElementById("metaCount").textContent = chapters.length + " פרקים, " + totalQ + " שאלות";
+
+/* ═══════════════ מעבר בין פרקים ═══════════════ */
+var current = 0;
+function go(to) {
+  var finish = document.getElementById("finish");
+  document.querySelectorAll(".chapter").forEach(function (s) { s.hidden = true; });
+  finish.hidden = true;
+  document.querySelectorAll("#chapnav button").forEach(function (b) { b.removeAttribute("aria-current"); });
+  if (to === "end") {
+    current = "end";
+    finish.hidden = false;
+    renderMissing();
+  } else {
+    current = +to;
+    var sec = document.querySelector('.chapter[data-ch="' + current + '"]');
+    sec.hidden = false;
+    sec.querySelectorAll("textarea").forEach(grow);
+    document.querySelector('#chapnav button[data-go="' + current + '"]').setAttribute("aria-current", "step");
+  }
+  var top = document.querySelector(".chapnav").offsetTop;
+  if (window.scrollY > top) window.scrollTo({ top: top, behavior: "auto" });
+}
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-go]");
+  if (!b) return;
+  go(b.dataset.go);
+  if (b.dataset.go !== "end") {
+    var h = document.getElementById("ct-" + b.dataset.go);
+    if (h && b.closest(".nav")) h.focus({ preventScroll: true });
+  }
+});
+document.getElementById("back").addEventListener("click", function () { go(0); });
+
+function renderMissing() {
+  updateProgress();
+  var el = document.getElementById("missing");
+  var nameOk = isHidden("f-name") || (answers["f-name"] || "").trim();
+  if (!nameOk) {
+    el.innerHTML = 'רק דבר אחד לפני השליחה: <a href="#" id="toName">כתבי את השם שלך</a> בתחילת השאלון, כדי שאדע ממי הוא הגיע.';
+    el.hidden = false;
+    document.getElementById("toName").onclick = function (ev) { ev.preventDefault(); go(0); document.getElementById("f-name").focus(); };
+  } else {
+    el.hidden = true;
+  }
+}
+
+/* ═══════════════ קובץ הוורד ═══════════════ */
+function loadDocx() {
+  if (window.docx) return Promise.resolve(window.docx);
+  return new Promise(function (res, rej) {
+    var s = document.createElement("script");
+    s.src = "docx.min.js";
+    s.onload = function () { res(window.docx); };
+    s.onerror = rej;
+    document.head.appendChild(s);
+  });
+}
+
+function fileName() {
+  var n = (answers["f-name"] || clientName || "לקוחה").trim().replace(/[\\\/:*?"<>|]/g, "");
+  return "שאלון היכרות - " + n + ".docx";
+}
+
+function buildDocx() {
+  return loadDocx().then(function (D) {
+    var INK = "14100E", SOFT = "5A4E45", FAINT = "7A6A5C", ACC = "6E1B2A", GOLD = "8A6B3A";
+    function run(text, o) {
+      o = o || {};
+      var size = o.size || 22;
+      return new D.TextRun({
+        text: text, rightToLeft: true, font: "Arial",
+        size: size, sizeComplexScript: size,
+        bold: !!o.bold, boldComplexScript: !!o.bold,
+        italics: !!o.italic, italicsComplexScript: !!o.italic,
+        color: o.color || INK, break: o.br ? 1 : undefined
+      });
+    }
+    function para(runs, o) {
+      o = o || {};
+      return new D.Paragraph({
+        bidirectional: true, children: runs,
+        alignment: o.center ? D.AlignmentType.CENTER : undefined,
+        spacing: { before: o.before || 0, after: o.after == null ? 80 : o.after, line: 300 },
+        border: o.rule ? { bottom: { style: D.BorderStyle.SINGLE, size: 6, color: "C4B8A6", space: 4 } } : undefined,
+        shading: o.shade ? { type: D.ShadingType.CLEAR, color: "auto", fill: "F5F0E8" } : undefined,
+        indent: o.shade ? { left: 120, right: 120 } : undefined,
+        keepNext: !!o.keepNext
+      });
+    }
+    function answerParas(text) {
+      text = (text || "").trim();
+      if (!text) return [para([run("לא נענה", { color: FAINT, italic: true, size: 20 })], { after: 200 })];
+      var lines = text.split(/\r?\n/);
+      return [para(lines.map(function (l, i) { return run(l, { br: i > 0 }); }), { shade: true, after: 220 })];
+    }
+
+    var dt = new Date();
+    var dateStr = dt.getDate() + "." + (dt.getMonth() + 1) + "." + dt.getFullYear();
+    var who = (answers["f-name"] || clientName || "").trim();
+    var kids = [
+      para([run("EINAT RAN ELKAYAM", { size: 18, color: SOFT })], { center: true, after: 0 }),
+      para([run("סטיילינג · תדמית · מסר חזותי", { size: 16, color: FAINT })], { center: true, after: 360, rule: true }),
+      para([run("שאלון היכרות וסטיילינג אישי", { size: 40, color: ACC })], { center: true, after: 60 }),
+      para([run((who ? who + " · " : "") + "תאריך מילוי: " + dateStr, { size: 22, color: SOFT })], { center: true, after: 400 })
+    ];
+
+    chapters.forEach(function (ch, ci) {
+      kids.push(para([run(nums[ci] + "  " + ch.title, { size: 32, color: ACC })], { before: ci ? 360 : 0, after: 160, rule: true, keepNext: true }));
+      visibleGroups(ch).forEach(function (g) {
+        if (g.title) kids.push(para([run(g.title, { size: 22, bold: true, color: GOLD })], { before: 200, after: 120, keepNext: true }));
+        visibleItems(g).forEach(function (it) {
+          if (it.type === "note") return;
+          if (it.type === "fields") {
+            it.fields.forEach(function (f) {
+              if (isHidden("f-" + f.id)) return;
+              var v = (answers["f-" + f.id] || "").trim();
+              if (f.input === "date" && /^\d{4}-\d{2}-\d{2}$/.test(v)) { var p = v.split("-"); v = +p[2] + "." + +p[1] + "." + p[0]; }
+              kids.push(para([run(f.label + ": ", { bold: true }), run(v || "לא נענה", { color: v ? INK : FAINT, italic: !v })], { after: 60 }));
+            });
+            kids.push(para([], { after: 120 }));
+            return;
+          }
+          kids.push(para([run(it.q, { bold: true })], { after: 60, keepNext: true }));
+          if (it.type === "text") {
+            kids = kids.concat(answerParas(answers[it.id]));
+          } else if (it.type === "checks") {
+            var picked = answers[it.id] || [];
+            var detail = (answers[it.id + "__d"] || "").trim();
+            if (!picked.length && !detail) { kids = kids.concat(answerParas("")); return; }
+            var runs = [];
+            it.options.forEach(function (o) {
+              var on = picked.indexOf(o) > -1;
+              runs.push(run((on ? "☑ " : "☐ ") + o + "     ", { color: on ? INK : FAINT, bold: on }));
+            });
+            kids.push(para(runs, { after: detail ? 60 : 220 }));
+            if (detail) kids.push(para([run("פירוט: ", { bold: true, color: SOFT }), run(detail)], { shade: true, after: 220 }));
+          }
+        });
+      });
+    });
+
+    var doc = new D.Document({
+      creator: "עינת רן אלקיים",
+      title: "שאלון היכרות" + (who ? " - " + who : ""),
+      styles: { default: { document: { run: { font: "Arial", size: 22, rightToLeft: true } } } },
+      sections: [{
+        properties: { page: { margin: { top: 1100, bottom: 1100, left: 1200, right: 1200 } } },
+        footers: { default: new D.Footer({ children: [
+          para([run("עינת רן אלקיים | סטיילינג · תדמית · מסר חזותי", { size: 16, color: FAINT })], { center: true, after: 0 })
+        ]})},
+        children: kids
+      }]
+    });
+    return D.Packer.toBlob(doc);
+  });
+}
+
+/* ═══════════════ שליחה ═══════════════ */
+var statusEl = document.getElementById("status");
+var waBtn = document.getElementById("wa");
+function setStatus(html, ok) { statusEl.innerHTML = html; statusEl.hidden = false; statusEl.classList.toggle("ok", !!ok); }
+
+function blobToBase64(blob) {
+  return new Promise(function (res, rej) {
+    var r = new FileReader();
+    r.onload = function () { res(String(r.result).split(",")[1]); };
+    r.onerror = rej;
+    r.readAsDataURL(blob);
+  });
+}
+function download(blob, name) {
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+}
+function markSent() { answers.__sent = true; sent = true; save(); }
+
+function sendByMail(blob) {
+  if (!SCRIPT_URL) return Promise.reject(new Error("no script"));
+  return blobToBase64(blob).then(function (b64) {
+    return fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({ name: (answers["f-name"] || clientName || "").trim(), filename: fileName(), file: b64 })
+    });
+  }).then(function (r) { return r.json(); }).then(function (j) {
+    if (!j || !j.ok) throw new Error("bad response");
+  });
+}
+
+function sendByWhatsApp(blob) {
+  var name = fileName();
+  var file;
+  try { file = new File([blob], name, { type: blob.type }); } catch (e) { file = null; }
+  if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+    return navigator.share({ files: [file], title: "שאלון היכרות" }).then(function () {
+      markSent();
+      setStatus("מעולה. אם בחרת בוואטסאפ ובצ׳אט שלי, הקובץ אצלי. תודה ששיתפת, ונתראה בפגישה.", true);
+    }).catch(function () {});
+  }
+  // במחשב: הקובץ יורד, והצ׳אט איתי נפתח כדי לצרף אותו
+  download(blob, name);
+  window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent("היי עינת, מצרפת את שאלון ההיכרות שמילאתי 🙂"), "_blank");
+  markSent();
+  setStatus("הקובץ <strong>" + esc(name) + "</strong> ירד למחשב שלך, והצ׳אט איתי נפתח בוואטסאפ. נשאר רק לצרף אליו את הקובץ ולשלוח.", true);
+  return Promise.resolve();
+}
+
+document.getElementById("send").addEventListener("click", function () {
+  renderMissing();
+  if (!document.getElementById("missing").hidden) return;
+  var btn = this;
+  btn.disabled = true; btn.textContent = "שולחת...";
+  buildDocx().then(function (blob) {
+    return sendByMail(blob).then(function () {
+      markSent();
+      setStatus("השאלון הגיע אליי. תודה על הזמן ועל הכנות, אני קוראת אותו לפני הפגישה. נתראה בקרוב.", true);
+      btn.hidden = true;
+      waBtn.hidden = true;
+    }).catch(function () {
+      // המייל לא זמין, ולכן וואטסאפ
+      btn.hidden = true;
+      waBtn.hidden = false;
+      waBtn.className = "btn";
+      setStatus("עוד צעד קטן: הכפתור למטה שולח לי את הקובץ בוואטסאפ.");
+      waBtn.onclick = function () { sendByWhatsApp(blob); };
+    });
+  }).catch(function () {
+    setStatus("משהו השתבש ביצירת הקובץ. נסי שוב בעוד רגע, ואם זה חוזר, כתבי לי בוואטסאפ ואסדר את זה.");
+  }).then(function () { btn.disabled = false; if (!btn.hidden) btn.textContent = "שליחה לעינת"; });
+});
+
+document.getElementById("copy").addEventListener("click", function () {
+  buildDocx().then(function (blob) { download(blob, fileName()); });
+});
+
+/* מי שמילאה ולא שלחה, מקבלת תזכורת לפני שהיא יוצאת */
+window.addEventListener("beforeunload", function (e) {
+  if (sent) return;
+  var any = answerable().some(function (a) { return a.it.type !== "fields" && isAnswered(a.it); });
+  if (any) { e.preventDefault(); e.returnValue = ""; }
+});
+
+updateProgress();
+go(0);
+</script>
+</body>
+</html>
