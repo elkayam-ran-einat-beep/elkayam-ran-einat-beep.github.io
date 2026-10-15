@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שאלון סטייל אישי · עינת רן אלקיים</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7D1631">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bellefair&family=Assistant:wght@300;400;600;700&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%237D1631'/%3E%3Ctext x='50' y='72' font-family='Georgia,serif' font-size='62' fill='%23FCF4EC' text-anchor='middle'%3E%D7%A2%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css">
+<style>
+/* ═══ השאלון: שאלה אחת בכל מסך ═══ */
+body{background:linear-gradient(180deg,var(--blush) 0%,var(--paper) 46%);min-height:100vh;padding-bottom:0;}
+.qwrap{max-width:720px;margin:0 auto;padding:40px 24px 80px;}
+.sig-top{text-align:center;font-family:'Bellefair',serif;font-size:1.05rem;letter-spacing:.3em;padding-left:.3em;color:var(--accent);margin-bottom:34px;}
+
+.progress{display:flex;flex-direction:column;gap:10px;margin-bottom:34px;}
+.progress .count{font-size:.95rem;font-weight:700;color:var(--ink-soft);}
+.bar{height:6px;background:var(--rule);overflow:hidden;}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .35s ease;}
+
+.intro{font-size:1.02rem;line-height:1.7;color:var(--ink-soft);margin-bottom:22px;}
+.qtitle{font-family:'Bellefair',serif;font-size:clamp(1.8rem,5vw,2.6rem);line-height:1.2;margin:0 0 26px;}
+
+.opts{display:flex;flex-direction:column;gap:12px;}
+.opt{
+  display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;text-align:right;
+  font-family:'Assistant',sans-serif;font-size:1.02rem;line-height:1.65;color:var(--ink);
+  background:rgba(255,255,255,.75);border:1px solid var(--rule-strong);border-radius:0;
+  padding:18px 18px;cursor:pointer;transition:border-color .18s ease,background .18s ease;
+}
+.opt:hover{border-color:var(--accent);background:#fff;}
+.opt .ltr{
+  font-family:'Bellefair',serif;font-size:1.3rem;line-height:1.25;color:var(--gold-text);
+  width:34px;height:34px;border:1px solid var(--rule-strong);
+  display:flex;align-items:center;justify-content:center;
+}
+.opt[aria-checked="true"]{border-color:var(--accent);background:#fff;box-shadow:inset 0 0 0 1px var(--accent);}
+.opt[aria-checked="true"] .ltr{background:var(--accent);border-color:var(--accent);color:var(--on-accent);}
+
+.more{margin-top:22px;display:flex;flex-direction:column;gap:8px;}
+.more label{font-size:.92rem;font-weight:700;color:var(--ink-soft);}
+.more textarea{
+  font-family:'Assistant',sans-serif;font-size:1rem;line-height:1.6;color:var(--ink);
+  background:rgba(255,255,255,.75);border:1px solid var(--rule-strong);border-radius:0;
+  padding:12px 14px;min-height:76px;resize:vertical;
+}
+.more textarea:focus{outline:0;border-color:var(--accent);background:#fff;}
+
+.nav{display:flex;gap:12px;align-items:center;margin-top:28px;}
+.nav .cta{flex:1;}
+.back{
+  background:none;border:0;font-family:'Assistant',sans-serif;font-size:.98rem;font-weight:700;
+  color:var(--ink-soft);cursor:pointer;padding:14px 6px;text-decoration:underline;text-underline-offset:4px;
+}
+.hidden{display:none !important;}
+
+/* ═══ מסכי התוצאה ═══ */
+.result-screen{display:flex;flex-direction:column;gap:22px;}
+.result-screen h1{font-size:clamp(2.2rem,6vw,3.5rem);}
+.result-screen .punch{color:var(--accent);}
+.result-screen .cta{width:100%;}
+.result-screen a.link{color:var(--accent);font-weight:700;}
+.gift{border-top:3px solid var(--accent);background:#FFFBF7;padding:26px 24px;display:flex;flex-direction:column;gap:12px;}
+.gift .name{font-family:'Bellefair',serif;font-size:1.7rem;line-height:1.25;}
+.sign{font-family:'Bellefair',serif;font-size:1.4rem;color:var(--ink-soft);}
+@media (max-width:620px){
+  .qwrap{padding:26px 18px 60px;}
+  .opt{padding:15px 14px;gap:12px;font-size:.98rem;}
+}
+</style>
+</head>
+<body>
+<main class="qwrap">
+  <div class="sig-top">EINAT RAN ELKAYAM</div>
+
+  <!-- ══════ שאלה אחת בכל פעם ══════ -->
+  <div id="quiz">
+    <div class="progress">
+      <div class="count" id="count">שאלה 1 מתוך 6</div>
+      <div class="bar" aria-hidden="true"><span id="bar"></span></div>
+    </div>
+    <p class="intro" id="intro">שש שאלות קצרות. אין כאן תשובות נכונות: בחרי את המשפט שהכי קרוב למה שקורה אצלך היום, ואם בא לך, הוסיפי כמה מילים משלך. אני קוראת כל שאלון בעצמי.</p>
+    <h1 class="qtitle" id="qtitle" tabindex="-1"></h1>
+    <div class="opts" id="opts" role="radiogroup" aria-labelledby="qtitle"></div>
+    <div class="more">
+      <label for="free">רוצה להוסיף משהו? (לא חובה)</label>
+      <textarea id="free" placeholder="כמה מילים משלך, אם בא לך"></textarea>
+    </div>
+    <div class="nav">
+      <button class="back hidden" type="button" id="back">חזרה</button>
+      <button class="cta" type="button" id="next" disabled>לשאלה הבאה</button>
+    </div>
+  </div>
+
+  <!-- ══════ פרטים, רק למי שהגיעה לשאלון בלי לעבור בדף ══════ -->
+  <form class="lead hidden" id="details" novalidate>
+    <h1 class="qtitle">ואיך אחזור אלייך?</h1>
+    <div class="fields" style="grid-template-columns:1fr;">
+      <div class="field" data-f="name"><label for="d-name">שם מלא</label><input id="d-name" name="name" type="text" autocomplete="name" placeholder="שם פרטי ומשפחה"></div>
+      <div class="field" data-f="phone"><label for="d-phone">טלפון</label><input id="d-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="050-0000000"></div>
+      <div class="field" data-f="email"><label for="d-email">מייל</label><input id="d-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@example.com"></div>
+    </div>
+    <p class="err">משהו חסר או לא תקין בפרטים למעלה</p>
+    <button class="cta" type="submit">לתוצאה שלי</button>
+    <p class="lead-note">הפרטים נשארים אצלי בלבד.</p>
+  </form>
+
+  <!-- ══════ מסלול א: ליווי אישי מלא ══════ -->
+  <div class="result-screen hidden" id="res-a">
+    <h1>איזה כיף. אנחנו הולכות לשדרג אותך.</h1>
+    <p class="lede">תתכונני להרגיש מעולה, להיראות מצוין ולסובב ראשים בכל חדר שאת נכנסת אליו, עם הגוף שיש לך היום.</p>
+    <p>הצעד הראשון הוא שיחה בסטייל: 30 דקות בזום, בלי עלות, שבהן נבין יחד מה את רוצה לשדר ומה הדרך המדויקת לשם. בחרי מועד שנוח לך:</p>
+    <a class="cta" href="https://calendar.app.google/H5TA3uwtHeK3Ed6G8" target="_blank" rel="noopener">לקביעת שיחה ביומן</a>
+    <p class="small">אחרי שתקבעי, אשלח לך הנחיה קצרה לכמה תמונות, כדי שאגיע לשיחה עם אבחון מוכן. לא מצאת מועד? <a class="link" href="https://wa.me/972546443743" target="_blank" rel="noopener">כתבי לי בוואטסאפ</a> ונמצא.</p>
+    <p class="sign">נתראה בקרוב, עינת</p>
+  </div>
+
+  <!-- ══════ מסלול ב: עזרה ממוקדת ══════ -->
+  <div class="result-screen hidden" id="res-b">
+    <h1>תודה, השאלון אצלי.</h1>
+    <p class="lede">מהתשובות שלך עולה שאת מחפשת עכשיו משהו ממוקד. בואי נקבע זמן לדבר, ונבין יחד מה הכי נכון לך.</p>
+    <a class="cta" href="https://calendar.app.google/H5TA3uwtHeK3Ed6G8" target="_blank" rel="noopener">לקביעת שיחה ביומן</a>
+    <p class="small">ייתכן שאחזור אלייך קודם בוואטסאפ, עם הצעה שמדויקת יותר למה שתיארת.</p>
+    <p class="sign">מחכה לך באהבה, עינת</p>
+  </div>
+
+  <!-- ══════ מסלול ג: תוכן ומתנה ══════ -->
+  <div class="result-screen hidden" id="res-c">
+    <h1>תודה שמילאת.</h1>
+    <p class="lede">כרגע נראה שהדרכים שלנו עוד לא נפגשות, ובינתיים אני מפנקת אותך במתנה.</p>
+    <div class="gift">
+      <div class="name">המדריך לאריזת המזוודה המושלמת</div>
+      <p class="small">לוקבוק "שבוע באירופה": איך לארוז מעט ולהיראות מעולה בכל יום של הטיול.</p>
+      <a class="cta" href="../../matana/lookbook-shavua-be-eropa.pdf" target="_blank" rel="noopener">להורדת המתנה</a>
+    </div>
+    <p>באינסטגרם אני מעלה כל הזמן רעיונות על גזרות, על שילובים ועל מה שמחמיא. <a class="link" href="https://www.instagram.com/einat_ran_elkayam" target="_blank" rel="noopener">בואי לעקוב</a>.</p>
+    <p>וכשתרגישי שהגיע הזמן לשדרוג אמיתי, אני כאן.</p>
+    <p class="sign">מחכה לך באהבה, עינת</p>
+  </div>
+</main>
+
+<script>
+/* השאלות נכנסות כאן מתוך "שאלון.py", כלשונן של עינת */
+var QUESTIONS = [["מה הכי מתאר את המקום שלך היום?", ["אני בעלת עסק, עצמאית, מנהלת בכירה או אשת מקצוע, והנראות שלי משפיעה על הדרך שבה תופסים אותי, מקשיבים לי ובוחרים בי.", "אני רוצה להיראות טוב ומדויק יותר, אבל כרגע הצורך שלי ממוקד: קניות, שילובים מהבגדים שכבר יש לי, או פתרון לסיטואציה מסוימת.", "אני אוהבת את התחום ורוצה לקבל השראה, אבל כרגע זה בעיקר ברמת רעיונות וטיפים שאוכל לנסות לבד."]], ["מה הפער שהכי מפריע לך כרגע?", ["אני מרגישה שיש פער בין מי שאני, הערך שאני מביאה והאישה שאני היום, לבין מה שהנראות שלי משדרת בפועל.", "יש לי כמה נקודות שמפריעות לי: חסרים לי פריטים, קשה לי לשלב בגדים, או שאני לא מצליחה להוציא מספיק מהארון הקיים.", "אין פער שממש מפריע לי כרגע. הייתי שמחה לקבל כיוון כללי, השראה או רעיונות קטנים לרענון."]], ["איזו תוצאה את רוצה לקבל?", ["אני רוצה לעבור שדרוג מסודר: להבין מה נכון לי, מה אני רוצה לשדר, איך לבנות מלתחה שמייצגת אותי ואיך להטמיע את זה ביום יום.", "אני רוצה פתרון פרקטי ומהיר יחסית: יום קניות מדויק, או פגישה בבית שתעזור לי לבנות לוקים ולהשתמש טוב יותר במה שכבר יש לי.", "אני רוצה ללמוד קצת, לקבל השראה וליישם בקצב שלי, בלי להיכנס כרגע לתהליך אישי."]], ["כמה את פנויה להשקיע בזה עכשיו?", ["אני מוכנה לפנות לזה זמן, אנרגיה ותשומת לב, כי ברור לי שזה תהליך שיכול להשפיע גם על הביטחון שלי וגם על הנוכחות המקצועית שלי.", "אני יכולה לפנות יום אחד או פגישה אחת ממוקדת, כל עוד זה פרקטי וברור ונותן לי תוצאה מיידית יחסית.", "כרגע אין לי הרבה זמן או אנרגיה לזה, ואני מעדיפה דברים קצרים שאפשר לצרוך כשמתאים לי."]], ["איך את מתייחסת להשקעה בתהליך סטיילינג?", ["אני רואה בזה השקעה בעצמי, בעסק שלי ובדרך שבה אני מופיעה בעולם, ואני מוכנה להשקיע בהתאם אם זה מדויק לי.", "אני רוצה להשקיע, אבל בצורה נקודתית ומוגבלת: לקבל עין מקצועית, החלטות ברורות וקניות או לוקים שיעבדו לי עכשיו.", "כרגע אני מעדיפה להימנע מהשקעה משמעותית ולבחור בתכנים חינמיים או במוצר דיגיטלי נגיש יותר בעתיד."]], ["איזה סוג ליווי הכי נכון לך?", ["ליווי אישי ומעמיק, עם אפיון, אבחון, בניית שפה אישית, ספר סטיילינג אישי וליווי וואטסאפ להטמעת השדרוג בחיים האמיתיים.", "מפגש ממוקד עם סטייליסטית: או יום קניות שבו נקנה פריטים מדויקים, או פגישת סטיילינג בבית שבה נבנה לוקים ונעשה סדר במה שכבר יש.", "כרגע מתאים לי להמשיך לעקוב, לקבל רעיונות בסושיאל, ואולי בעתיד להצטרף לקורס דיגיטלי או מוצר קליל יותר."]]];
+var LETTERS = ['א','ב','ג'];
+
+var CFG = {
+  formId: '1FAIpQLSfQWEXdnD5E5ed91B2oP_Ip_o8KIqPyq8UKM8_Cu24jsE8o_A',
+  entries: {
+    q1:'1722275419', q2:'1539006508', q3:'2010081830',
+    q4:'1782711739', q5:'263902215', q6:'381148084',
+    name:'795200672', phone:'182817178', email:'1210131272', result:'2001430475'
+  },
+  /* המסלול נקבע לפי תשובה 6 בלבד. השמות זהים לאלה של הדף הראשי,
+     כי לפיהם סקריפט ההתראות בוחר איזה מייל לשלוח לה */
+  routes: {'א':'תהליך מלא', 'ב':'עזרה ממוקדת', 'ג':'תוכן ומתנה'},
+  screens: {'א':'res-a', 'ב':'res-b', 'ג':'res-c'}
+};
+
+(function(){
+  'use strict';
+  var $ = function(id){ return document.getElementById(id); };
+  var i = 0;
+  var picked = [], notes = [];
+  var lead = null;
+  try { lead = JSON.parse(sessionStorage.getItem('halom-lead') || 'null'); } catch(e) {}
+
+  function render(){
+    var q = QUESTIONS[i];
+    $('count').textContent = 'שאלה ' + (i + 1) + ' מתוך ' + QUESTIONS.length;
+    $('bar').style.width = ((i) / QUESTIONS.length * 100) + '%';
+    $('intro').classList.toggle('hidden', i > 0);
+    $('qtitle').textContent = q[0];
+    var box = $('opts');
+    box.innerHTML = '';
+    q[1].forEach(function(text, j){
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'opt';
+      b.setAttribute('role', 'radio');
+      b.setAttribute('aria-checked', picked[i] === LETTERS[j] ? 'true' : 'false');
+      b.innerHTML = '<span class="ltr">' + LETTERS[j] + '</span><span></span>';
+      b.lastChild.textContent = text;
+      b.addEventListener('click', function(){
+        picked[i] = LETTERS[j];
+        box.querySelectorAll('.opt').forEach(function(o){ o.setAttribute('aria-checked', o === b ? 'true' : 'false'); });
+        $('next').disabled = false;
+      });
+      box.appendChild(b);
+    });
+    $('free').value = notes[i] || '';
+    $('back').classList.toggle('hidden', i === 0);
+    $('next').disabled = !picked[i];
+    $('next').textContent = (i === QUESTIONS.length - 1) ? 'לתוצאה שלי' : 'לשאלה הבאה';
+  }
+
+  $('next').addEventListener('click', function(){
+    notes[i] = $('free').value.trim();
+    if(i < QUESTIONS.length - 1){
+      i++; render(); window.scrollTo(0, 0); $('qtitle').focus({preventScroll:true});
+      return;
+    }
+    $('bar').style.width = '100%';
+    if(lead) finish(); else showDetails();
+  });
+  $('back').addEventListener('click', function(){
+    notes[i] = $('free').value.trim();
+    if(i > 0){ i--; render(); window.scrollTo(0, 0); }
+  });
+
+  /* מי שהגיעה לשאלון ישירות, בלי לעבור בטופס שבדף, ממלאת פרטים כאן */
+  function showDetails(){
+    $('quiz').classList.add('hidden');
+    var f = $('details');
+    f.classList.remove('hidden');
+    window.scrollTo(0, 0);
+    f.addEventListener('submit', function(e){
+      e.preventDefault();
+      var d = { name:f.elements.name.value.trim(), phone:f.elements.phone.value.trim(), email:f.elements.email.value.trim() };
+      var ok = {
+        name: d.name.length >= 2,
+        phone: (function(v){ var x = v.replace(/[^0-9]/g,''); return x.length >= 9 && x.length <= 15; })(d.phone),
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email)
+      };
+      var bad = false;
+      ['name','phone','email'].forEach(function(k){
+        f.querySelector('[data-f="' + k + '"]').classList.toggle('bad', !ok[k]);
+        if(!ok[k]) bad = true;
+      });
+      f.querySelector('.err').classList.toggle('on', bad);
+      if(bad) return;
+      lead = d; f.classList.add('hidden'); finish();
+    });
+  }
+
+  function finish(){
+    var route = picked[5];
+    var data = {name:lead.name, phone:lead.phone, email:lead.email, result:CFG.routes[route]};
+    picked.forEach(function(l, k){
+      /* התשובה החופשית נכנסת לאותה עמודה, אחרי האות */
+      data['q' + (k + 1)] = l + (notes[k] ? ' · ' + notes[k] : '');
+    });
+    var body = new URLSearchParams();
+    Object.keys(data).forEach(function(k){ body.append('entry.' + CFG.entries[k], data[k]); });
+    try {
+      fetch('https://docs.google.com/forms/d/e/' + CFG.formId + '/formResponse',
+            {method:'POST', mode:'no-cors', keepalive:true, body:body});
+    } catch(e) {}
+    try { sessionStorage.removeItem('halom-lead'); } catch(e) {}
+
+    $('quiz').classList.add('hidden');
+    $(CFG.screens[route]).classList.remove('hidden');
+    window.scrollTo(0, 0);
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
