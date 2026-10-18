@@ -101,7 +101,9 @@ section{padding:110px 0;}
 .on-dark .err{color:#FFD9CF;}
 
 /* ═══════════════ 01 פתיחה ═══════════════ */
-.hero{background:linear-gradient(180deg,var(--blush) 0%,var(--paper) 100%);padding:56px 0 84px;}
+/* המעבר מוורוד ללבן נמדד בפיקסלים ולא באחוזים, כדי שייראה אותו דבר
+   בטלפון, שבו הפתיחה גבוהה פי שניים בגלל הטופס והתמונה */
+.hero{background:linear-gradient(180deg,var(--blush) 0,var(--blush) 80px,var(--paper) 760px);padding:56px 0 84px;}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px;align-items:center;}
 .hero h1 em{font-style:normal;color:var(--accent);}
 .hero-img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;}
