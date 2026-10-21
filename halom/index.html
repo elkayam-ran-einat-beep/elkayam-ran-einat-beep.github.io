@@ -41,8 +41,11 @@
         <p class="lead-note">אחר כך שש שאלות קצרות, פחות משתי דקות. הפרטים נשארים אצלי בלבד.</p>
       </form>
     </div>
+    <!-- הסרטון מתחיל בלי קול, כי כך דפדפנים מרשים ניגון אוטומטי. הכתוביות צרובות בו,
+         והכפתור מתחיל אותו מההתחלה עם קול -->
     <div class="hero-img-wrap">
-      <img class="hero-img" src="../img-abchon/abchon-hero.jpg" width="1100" height="1467" alt="עינת רן אלקיים, סטייליסטית אישית ויועצת תדמית">
+      <video class="hero-img hero-video" src="../img-abchon/halom-hero.mp4" poster="../img-abchon/halom-hero-poster.jpg" width="720" height="720" autoplay muted loop playsinline preload="metadata" aria-label="עינת רן אלקיים מסבירה על תהליך הסטיילינג האישי"></video>
+      <button class="sound-btn" type="button" aria-label="לצפות בסרטון עם קול">להפעלה עם קול</button>
     </div>
   </div>
 </div>
@@ -322,6 +325,17 @@ var CFG = {
   var hero = document.getElementById('top');
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(en){ sticky.classList.toggle('on', !en[0].isIntersecting); }).observe(hero);
+  }
+
+  /* הסרטון בפתיחה: לחיצה מתחילה אותו מההתחלה עם קול, פעם אחת ובלי לולאה */
+  var vid = document.querySelector('.hero-video');
+  var snd = document.querySelector('.sound-btn');
+  if(vid && snd){
+    snd.addEventListener('click', function(){
+      vid.currentTime = 0; vid.muted = false; vid.loop = false; vid.controls = true;
+      var p = vid.play(); if(p && p.catch) p.catch(function(){});
+      snd.hidden = true;
+    });
   }
 
   function send(data, done){
