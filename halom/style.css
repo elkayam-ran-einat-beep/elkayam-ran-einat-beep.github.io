@@ -272,3 +272,4 @@ footer{padding:48px 0 60px;text-align:center;}
   *{transition:none !important;}
   html{scroll-behavior:auto;}
 }
+#quiz{scroll-margin-top:24px;}
