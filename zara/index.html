@@ -52,6 +52,9 @@ footer .site{direction:ltr}
 .play span{width:88px;height:88px;border-radius:50%;background:var(--bordo);box-shadow:0 10px 30px rgba(30,10,14,.35);display:flex;align-items:center;justify-content:center}
 .play svg{width:30px;height:30px;margin-left:6px;fill:var(--on-bordo)}
 .film.on .play{display:none}
+.film.sq{aspect-ratio:1/1;width:min(100%,440px);margin:0 auto 30px}
+.film.sq .play span{width:72px;height:72px;background:var(--on-bordo)}
+.film.sq .play svg{fill:var(--bordo);width:26px;height:26px}
 </style>
 </head>
 <body>
@@ -61,9 +64,9 @@ footer .site{direction:ltr}
     <div class="hair"></div><div class="hair"></div>
     <h1>המק״טים מזארה</h1>
     <p class="lead">כל הפריטים מהסקירה בזארה, <b>חלק 2</b>. אפשר לצפות כאן בסקירה, ומתחת ללחוץ על כל תמונה כדי להיכנס לפריט באתר של זארה, או להעתיק את המק״ט ולחפש אותו באפליקציה.</p>
-    <div class="film" id="film">
-      <video id="vid" src="video/zara-part2.mp4" poster="video/poster.jpg" playsinline preload="metadata"></video>
-      <button class="play" id="play" type="button" aria-label="לצפייה בסקירה"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+    <div class="film">
+      <video src="video/zara-part2.mp4" poster="video/poster.jpg" playsinline preload="metadata"></video>
+      <button class="play" type="button" aria-label="לצפייה בסקירה"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
     </div>
   </header>
   <main class="grid">
@@ -217,14 +220,22 @@ footer .site{direction:ltr}
 <section class="close">
   <h3>רוצה לדעת מה מכל זה נכון לך?</h3>
   <p>פריט שווה הוא פריט שמחמיא לך ומשתלב עם מה שכבר יש לך. בשאלון הסטייל האישי נבין יחד מה מתאים לך, ונקבע שיחה בסטייל במתנה.</p>
+  <div class="film sq">
+    <video src="/img-abchon/halom-hero-paris.mp4" poster="/img-abchon/halom-hero-paris-poster.jpg" playsinline preload="none"></video>
+    <button class="play" type="button" aria-label="עינת מסבירה על תהליך הסטיילינג האישי"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+  </div>
   <a class="btn" href="https://www.einatran.com/#quiz">לשאלון הסטייל האישי</a>
 </section>
 <footer><span>עינת רן אלקיים | סטיילינג · תדמית · מסר חזותי</span><a class="site" href="https://www.einatran.com">Einatran.com</a></footer>
 <script>
-(function () {
-  var f = document.getElementById('film'), v = document.getElementById('vid');
-  document.getElementById('play').addEventListener('click', function () { f.classList.add('on'); v.controls = true; v.play(); });
-})();
+// one video plays at a time
+var vids = [];
+document.querySelectorAll('.film').forEach(function (f) {
+  var v = f.querySelector('video');
+  vids.push(v);
+  f.querySelector('.play').addEventListener('click', function () { f.classList.add('on'); v.controls = true; v.play(); });
+  v.addEventListener('play', function () { vids.forEach(function (o) { if (o !== v) o.pause(); }); });
+});
 document.querySelectorAll('.sku').forEach(function (b) {
   b.addEventListener('click', function () {
     var t = b.getAttribute('data-sku'), cp = b.querySelector('.cp');
