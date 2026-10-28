@@ -45,6 +45,13 @@ h2 a{text-decoration:none}
 .btn:hover{background:#fff}
 footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:20px 16px 28px;font-size:13px;color:var(--soft);max-width:1180px;margin:0 auto}
 footer .site{direction:ltr}
+.film{position:relative;margin:34px auto 0;width:min(100%,calc(78vh * 9 / 16));aspect-ratio:9/16;background:#1E1714;overflow:hidden}
+.film video{width:100%;height:100%;object-fit:cover;display:block}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(30,23,20,.12);border:0;padding:0;cursor:pointer;transition:background .3s}
+.play:hover{background:rgba(30,23,20,.22)}
+.play span{width:88px;height:88px;border-radius:50%;background:var(--bordo);box-shadow:0 10px 30px rgba(30,10,14,.35);display:flex;align-items:center;justify-content:center}
+.play svg{width:30px;height:30px;margin-left:6px;fill:var(--on-bordo)}
+.film.on .play{display:none}
 </style>
 </head>
 <body>
@@ -53,7 +60,11 @@ footer .site{direction:ltr}
     <div class="mast">EINAT RAN ELKAYAM</div>
     <div class="hair"></div><div class="hair"></div>
     <h1>המק״טים מזארה</h1>
-    <p class="lead">כל הפריטים מהסקירה בזארה, <b>חלק 2</b>. לוחצים על התמונה ונכנסים לפריט באתר של זארה, או מעתיקים את המק״ט ומחפשים אותו באפליקציה.</p>
+    <p class="lead">כל הפריטים מהסקירה בזארה, <b>חלק 2</b>. אפשר לצפות כאן בסקירה, ומתחת ללחוץ על כל תמונה כדי להיכנס לפריט באתר של זארה, או להעתיק את המק״ט ולחפש אותו באפליקציה.</p>
+    <div class="film" id="film">
+      <video id="vid" src="video/zara-part2.mp4" poster="video/poster.jpg" playsinline preload="metadata"></video>
+      <button class="play" id="play" type="button" aria-label="לצפייה בסקירה"><span><svg viewBox="0 0 24 24"><path d="M6 4l15 8-15 8z"/></svg></span></button>
+    </div>
   </header>
   <main class="grid">
     <article class="item">
@@ -210,6 +221,10 @@ footer .site{direction:ltr}
 </section>
 <footer><span>עינת רן אלקיים | סטיילינג · תדמית · מסר חזותי</span><a class="site" href="https://www.einatran.com">Einatran.com</a></footer>
 <script>
+(function () {
+  var f = document.getElementById('film'), v = document.getElementById('vid');
+  document.getElementById('play').addEventListener('click', function () { f.classList.add('on'); v.controls = true; v.play(); });
+})();
 document.querySelectorAll('.sku').forEach(function (b) {
   b.addEventListener('click', function () {
     var t = b.getAttribute('data-sku'), cp = b.querySelector('.cp');
