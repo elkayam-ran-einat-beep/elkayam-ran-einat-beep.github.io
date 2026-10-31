@@ -109,6 +109,7 @@ section{padding:110px 0;}
 .hero-img-wrap{grid-area:media;}
 .hero-form{grid-area:form;align-self:start;}
 .hero h1 em{font-style:normal;color:var(--accent);}
+.hero h1 .ln{display:block;}
 .hero-img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center top;}
 .hero-img-wrap{position:relative;}
 .hero-img-wrap::before{
