@@ -188,12 +188,18 @@ section{padding:110px 0;}
 .looks img{display:block;width:100%;height:auto;aspect-ratio:2/3;object-fit:cover;object-position:center top;}
 @media (max-width:980px){.looks{grid-template-columns:repeat(3,1fr);}}
 .looks-note{font-size:.86rem;line-height:1.7;color:var(--ink-faint);}
-.ba-list{display:flex;flex-direction:column;gap:28px;}
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.ba figure{position:relative;margin:0;}
-.ba img{display:block;width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;object-position:center top;}
-.ba-tag{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.86);color:var(--ink);font-size:.95rem;font-weight:600;padding:5px 14px;}
-.ba-name{position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.86);color:var(--ink);font-size:.95rem;font-weight:600;padding:5px 14px;}
+.bs-list{display:flex;flex-direction:column;gap:44px;}
+.bs-item{margin:0;display:flex;flex-direction:column;gap:10px;max-width:460px;width:100%;margin-inline:auto;}
+.bs-lab{display:grid;grid-template-columns:1fr 1fr;font-size:.9rem;font-weight:600;letter-spacing:.04em;color:var(--ink-soft);text-align:center;}
+.bs{position:relative;aspect-ratio:9/16;background:#fff;border:1px solid var(--rule-strong);padding:4px;touch-action:pan-y;-webkit-user-select:none;user-select:none;--p:50%;}
+.bs-in{position:relative;width:100%;height:100%;overflow:hidden;}
+.bs-in img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+.bs-before{clip-path:inset(0 0 0 var(--p));}
+.bs-line{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 0 .5px rgba(0,0,0,.18);pointer-events:none;}
+.bs-knob{position:absolute;top:50%;left:var(--p);width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#fff;border:1px solid var(--rule-strong);display:flex;align-items:center;justify-content:center;pointer-events:none;box-shadow:0 2px 10px rgba(0,0,0,.18);}
+.bs-knob svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.bs input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;direction:ltr;margin:0;}
+.bs-name{font-size:1rem;font-weight:600;color:var(--ink);text-align:center;}
 
 /* ═══════════════ 05 שלוש נקודות פתיחה ═══════════════ */
 .doors{display:flex;flex-direction:column;border-top:1px solid var(--rule-strong);}
