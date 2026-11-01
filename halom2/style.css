@@ -299,3 +299,8 @@ footer{padding:48px 0 60px;text-align:center;}
   html{scroll-behavior:auto;}
 }
 #quiz{scroll-margin-top:24px;}
+.qpair{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin-top:6px;}
+.qpair blockquote{margin:0;padding:26px 0;border-top:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);display:flex;flex-direction:column;gap:14px;}
+.qpair p{font-family:'Bellefair',serif;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.4;color:var(--accent-deep);}
+.qpair cite{font-style:normal;font-size:.86rem;color:var(--ink-soft);}
+@media (max-width:760px){.qpair{grid-template-columns:1fr;gap:22px;}}
