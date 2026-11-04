@@ -15,7 +15,7 @@ for a in sys.argv[1:]:
                 if href in seen or not t or len(t)>40: continue
                 seen.add(href); print("  ",href,"|",html.unescape(t))
         elif mode=="grep":
-            pat=os.environ.get("PAT","product-item")
+            pat=os.environ.get("PAT","product-item-info|toolbar-number|\"@type\":\"Product|impressions|dataLayer")
             for m in list(re.finditer(pat,b))[:3]: print("   ...",b[max(0,m.start()-300):m.start()+1500].replace("\n"," "))
         else:
             print(b[:800])
