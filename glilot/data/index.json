@@ -9,6 +9,28 @@
    "name": "גולף",
    "count": 981,
    "updated": "2026-11-04T17:00Z"
+  },
+  "factory54": {
+   "name": "פקטורי 54",
+   "count": 7615,
+   "updated": "2026-11-04T21:32Z"
+  },
+  "crazyline": {
+   "name": "קרייזי ליין",
+   "count": 84,
+   "updated": "2026-11-04T21:45Z"
   }
+ },
+ "names": {
+  "zara": "זארה",
+  "golf": "גולף",
+  "castro": "קסטרו",
+  "crazyline": "קרייזי ליין",
+  "massimodutti": "מסימו דוטי",
+  "factory54": "פקטורי 54",
+  "tommy": "טומי הילפיגר",
+  "ralph": "ראלף לורן",
+  "ck": "קלווין קליין",
+  "lacoste": "לקוסט"
  }
 }
