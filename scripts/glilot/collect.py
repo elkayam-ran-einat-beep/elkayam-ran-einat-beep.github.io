@@ -3,7 +3,7 @@ Usage: python collect.py [store ...]   (default: every store)"""
 import json, os, sys, collections, datetime, importlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 OUT = os.path.join(HERE, "..", "..", "glilot", "data")
-STORES = {"zara": "זארה"}
+STORES = {"zara": "זארה", "golf": "גולף"}
 
 def log(m): print(m, flush=True)
 

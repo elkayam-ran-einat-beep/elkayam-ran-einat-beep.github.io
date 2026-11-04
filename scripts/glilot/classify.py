@@ -37,7 +37,7 @@ def length(name, mini="mini", midi="midi", maxi="maxi"):
     return None
 
 def pants_cut(name, g):
-    order = [("wide",["WIDE-LEG","WIDE LEG","PALAZZO","CULOTTES?","VOLUME","ווייד","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
+    order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
              ("skinny",["SKINNY","סקיני"]),
              ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט"]),
              ("cargo",["CARGO","קרגו"]),
@@ -100,6 +100,7 @@ def classify(name, g, family=""):
     if has(COAT, n) and not has(_rx(["COAT HANGER"]), n):
         return ["coat"]
     if has(JACKET, n):
+        if has(_rx(["GILET","WAISTCOAT","וסט"]), n) and not has(_rx(["PUFFER","PADDED","QUILTED","DOWN","פוך","מרופד"]), n): return ["top","vest"]
         if has(_rx(["DENIM","ג'ינס"]), n): return ["jacket","jdenim"]
         if has(_rx(["BLAZER","בלייזר","SUIT JACKET"]), n): return ["jacket","blazer"]
         if has(_rx(["LEATHER","SUEDE","עור"]), n): return ["jacket","jleather"]
@@ -130,7 +131,7 @@ COLORS = [
   ("brown","חום","#6e4b35",["brown","chocolate","tan","cognac","coffee","mocha","chestnut","caramel","toffee","קרמל","טופי","חום","שוקולד","קוניאק"]),
   ("grey","אפור","#9a9893","grey gray charcoal anthracite marl silver-grey אפור אנתרציט פחם מלאנג'".split()),
   ("navy","כחול נייבי","#23304a",["navy","נייבי","כחול כהה"]),
-  ("blue","כחול","#5f7fa6",["blue","indigo","denim","sky","cobalt","azure","turquoise","כחול","תכלת","טורקיז","ג'ינס"]),
+  ("blue","כחול","#5f7fa6",["blue","indigo","denim","sky","cobalt","azure","turquoise","כחול","תכלת","טורקיז","ג'ינס","גינס","אינדיגו"]),
   ("green","ירוק","#6b6a3f",["green","khaki","olive","mint","sage","bottle","emerald","ירוק","זית","חאקי","מנטה"]),
   ("red","אדום","#a3252a",["red","scarlet","אדום"]),
   ("burgundy","בורדו","#5e1a26",["burgundy","maroon","wine","bordeaux","oxblood","marsala","מרסלה","בורדו","יין"]),
@@ -148,7 +149,8 @@ _HEX = {"black":(27,27,27),"white":(250,250,248),"ecru":(236,228,212),"beige":(2
 def color_families(name, hexcode=None):
     s = (name or "").lower(); out = []
     for cid, _, _, words in COLORS:
-        if any(w.lower() in s for w in words): out.append(cid)
+        # Hebrew colour words must start a word ("כחול" must not count as "חול")
+        if any((w.lower() in s) if w.isascii() else re.search(r"(?<![\u05d0-\u05ea])" + re.escape(w), s) for w in words): out.append(cid)
     if "navy" in out and "blue" in out and "light" not in s: out.remove("blue")
     if "grey" in out and "silver-grey" in s and "metal" in out: out.remove("metal")
     if not out and hexcode and re.match(r"#?[0-9a-f]{6}$", hexcode, re.I):
