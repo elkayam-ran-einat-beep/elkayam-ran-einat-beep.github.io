@@ -10,9 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
+      - env:
+          ARGS: ${{ github.event.inputs.args }}
+        run: |
           mkdir -p out; i=0
-          for u in ${{ github.event.inputs.args }}; do i=$((i+1))
+          for u in $ARGS; do i=$((i+1))
             curl -sSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36" \
               -H "Accept-Language: he-IL,he;q=0.9,en;q=0.8" -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8" \
               -H "sec-ch-ua: \"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\"" -H "sec-ch-ua-mobile: ?0" -H "sec-ch-ua-platform: \"Windows\"" \
