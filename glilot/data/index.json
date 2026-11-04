@@ -24,6 +24,11 @@
    "name": "קסטרו",
    "count": 1710,
    "updated": "2026-11-04T22:02Z"
+  },
+  "massimodutti": {
+   "name": "מסימו דוטי",
+   "count": 6434,
+   "updated": "2026-11-04T22:24Z"
   }
  },
  "names": {
@@ -33,9 +38,13 @@
   "crazyline": "קרייזי ליין",
   "massimodutti": "מסימו דוטי",
   "factory54": "פקטורי 54",
+  "interfashion": "אינטרפאשן",
   "tommy": "טומי הילפיגר",
   "ralph": "ראלף לורן",
   "ck": "קלווין קליין",
-  "lacoste": "לקוסט"
+  "lacoste": "לקוסט",
+  "tezenis": "טזניס",
+  "calzedonia": "קלצדוניה",
+  "intimissimi": "אינטימיסימי"
  }
 }
