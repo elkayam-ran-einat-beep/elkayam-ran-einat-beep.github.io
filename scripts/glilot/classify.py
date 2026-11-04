@@ -45,7 +45,7 @@ def pants_cut(name, g):
              ("legging",["LEGGINGS","טייץ"]),
              ("straight",["STRAIGHT","STRAIGHT-LEG","REGULAR","ישר","ישרה","ישרים","סטרייט"]),
              ("slim",["SLIM","סלים"]),
-             ("tapered",["TAPERED","CARROT","טייפרד","גזר"]),
+             ("tapered",["TAPERED","CARROT","טייפרד"]),
              ("baggy",["BAGGY","BALLOON","BARREL","RELAXED","LOOSE","MOM","בגי","בלון","בוי פרנד","BOYFRIEND","מום","משוחרר","משוחררים"]),
              ("chino",["CHINOS?","צ'ינו"]),
              ("tailored",["TAILORED","SUIT TROUSERS","PLEATED","מחויט","מחויטים","עם קפלים"])]
