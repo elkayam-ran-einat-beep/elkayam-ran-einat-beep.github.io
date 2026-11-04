@@ -1,0 +1,11 @@
+name: probe
+on:
+  workflow_dispatch:
+    inputs:
+      args: {description: urls, required: true}
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/glilot/probe.py ${{ github.event.inputs.args }}
