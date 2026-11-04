@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>פורטל אופנה ביג גלילות</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: Zara-style minimal catalogue. Top bar with gender tabs, category rail (drawer on phones), chips for sub-cuts, filter row, product grid. Single light theme by choice. */
+:root{
+  --paper:#ffffff;
+  --ink:#111111;
+  --muted:#77736e;
+  --line:#e4e1dc;
+  --soft:#f4f2ee;
+  --accent:#111111;
+  --font-display:"Bodoni Moda","Didot",Georgia,serif;
+  --font-body:"Heebo","Arial Hebrew","Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-weight:300;font-size:14px;line-height:1.5}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible,select:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.notice{background:var(--soft);border-bottom:1px solid var(--line);padding:8px 16px;font-size:12px;color:var(--muted);text-align:center}
+
+header{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:16px;padding:14px 16px}
+.menu-btn{display:none;width:28px;height:20px;position:relative}
+.menu-btn span{position:absolute;right:0;left:0;height:1.5px;background:var(--ink)}
+.menu-btn span:nth-child(1){top:2px}.menu-btn span:nth-child(2){top:9px}.menu-btn span:nth-child(3){top:16px}
+.logo{font-family:var(--font-display);font-size:30px;letter-spacing:.14em;line-height:1;direction:ltr}
+.logo small{display:block;font-family:var(--font-body);font-size:9px;letter-spacing:.35em;font-weight:500;margin-top:4px;text-align:center}
+.genders{display:flex;gap:20px;margin-inline-start:auto}
+.genders button{font-size:13px;font-weight:500;letter-spacing:.08em;padding-bottom:3px;border-bottom:1.5px solid transparent}
+.genders button[aria-pressed="true"]{border-color:var(--ink)}
+
+.shell{display:grid;grid-template-columns:230px 1fr;gap:32px;padding:24px 16px 48px;max-width:1400px;margin:0 auto}
+nav.rail{position:sticky;top:90px;align-self:start;max-height:calc(100vh - 110px);overflow:auto}
+.rail h3{font-size:11px;font-weight:500;letter-spacing:.15em;color:var(--muted);margin:0 0 10px}
+.tree{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.tree .tree{padding-inline-start:14px;margin:2px 0 6px}
+.tree button{display:block;width:100%;text-align:right;padding:4px 0;font-size:13px}
+.tree button.top{font-weight:500;letter-spacing:.04em}
+.tree button[aria-current="true"]{font-weight:700;text-decoration:underline;text-underline-offset:4px}
+
+main{min-width:0}
+.crumbs{font-size:12px;color:var(--muted);margin-bottom:6px;display:flex;flex-wrap:wrap;gap:6px}
+.crumbs button{color:var(--muted)}
+.crumbs button:hover{color:var(--ink)}
+h1{font-size:22px;font-weight:500;letter-spacing:.06em;margin:0 0 14px;text-wrap:balance}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.chip{border:1px solid var(--line);padding:6px 14px;font-size:12px;letter-spacing:.04em}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+.filters{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:20px}
+.filters .label{font-size:11px;font-weight:500;letter-spacing:.12em;color:var(--muted)}
+.swatches{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sw{width:22px;height:22px;border-radius:50%;border:1px solid var(--line);position:relative}
+.sw[aria-pressed="true"]{outline:1.5px solid var(--ink);outline-offset:2px}
+.group{display:flex;align-items:center;gap:10px}
+select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);padding:5px 8px;color:var(--ink)}
+.count{margin-inline-start:auto;font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.clear{font-size:12px;text-decoration:underline;text-underline-offset:3px}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px 14px}
+.card{display:flex;flex-direction:column;gap:8px}
+.img{aspect-ratio:3/4;position:relative;display:flex;align-items:flex-end;justify-content:flex-start;padding:10px;overflow:hidden}
+.img.light{box-shadow:inset 0 0 0 1px var(--line)}
+.img svg{position:absolute;inset:0;margin:auto;width:46%;height:46%;opacity:.28}
+.tag{position:relative;font-size:10px;letter-spacing:.12em;background:rgba(255,255,255,.85);color:var(--ink);padding:2px 6px}
+.brand{font-size:11px;font-weight:500;letter-spacing:.12em}
+.name{font-size:13px}
+.meta{display:flex;justify-content:space-between;font-size:13px;font-variant-numeric:tabular-nums}
+.meta .c{color:var(--muted);font-size:12px}
+.empty{padding:60px 0;text-align:center;color:var(--muted)}
+
+.scrim{display:none}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){
+  .shell{grid-template-columns:1fr;padding-top:16px}
+  .menu-btn{display:block}
+  .logo{font-size:24px}
+  nav.rail{position:fixed;top:0;right:0;bottom:0;width:min(82vw,320px);max-height:none;background:var(--paper);z-index:40;padding:24px 20px;transform:translateX(100%);transition:transform .25s ease;border-left:1px solid var(--line)}
+  nav.rail.open{transform:none}
+  .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.25);z-index:30}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}
+  .count{margin-inline-start:0;width:100%}
+}
+@media (prefers-reduced-motion:reduce){nav.rail{transition:none}}
+</style>
+</head>
+<body>
+<div class="notice">גרסת אב-טיפוס: המבנה והסינונים אמיתיים, הפריטים הם דוגמאות בלבד ועדיין לא נמשכו מאתרי החנויות.</div>
+<header>
+  <div class="bar">
+    <button class="menu-btn" id="menuBtn" aria-label="פתיחת תפריט הקטגוריות"><span></span><span></span><span></span></button>
+    <div class="logo">GLILOT<small>BIG FASHION</small></div>
+    <div class="genders" role="group" aria-label="מחלקה">
+      <button id="g-women" data-g="women" aria-pressed="true">נשים</button>
+      <button id="g-men" data-g="men" aria-pressed="false">גברים</button>
+    </div>
+  </div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+  <nav class="rail" id="rail" aria-label="קטגוריות">
+    <h3>קטגוריות</h3>
+    <ul class="tree" id="tree"></ul>
+  </nav>
+  <main>
+    <div class="crumbs" id="crumbs"></div>
+    <h1 id="title"></h1>
+    <div class="chips" id="chips"></div>
+    <div class="filters">
+      <div class="group"><span class="label">צבע</span><div class="swatches" id="swatches"></div></div>
+      <div class="group"><label class="label" for="brandSel">מותג</label><select id="brandSel"></select></div>
+      <div class="group"><label class="label" for="sortSel">מיון</label>
+        <select id="sortSel"><option value="new">חדש</option><option value="low">מחיר: מהנמוך</option><option value="high">מחיר: מהגבוה</option></select></div>
+      <button class="clear" id="clearBtn">ניקוי סינונים</button>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+</div>
+
+<script>
+const COLORS = [
+  {id:"black",n:"שחור",h:"#1b1b1b"},{id:"white",n:"לבן",h:"#fbfbf9",light:1},{id:"ecru",n:"שמנת",h:"#ece4d4",light:1},
+  {id:"beige",n:"בז'",h:"#cfb99a"},{id:"brown",n:"חום",h:"#6e4b35"},{id:"grey",n:"אפור",h:"#9a9893"},
+  {id:"navy",n:"כחול נייבי",h:"#23304a"},{id:"denim",n:"ג'ינס",h:"#5f7fa6"},{id:"olive",n:"ירוק זית",h:"#6b6a3f"},
+  {id:"red",n:"אדום",h:"#a3252a"},{id:"pink",n:"ורוד",h:"#e3b5b8",light:1}
+];
+
+const BRANDS = {
+  women:["זארה","H&M","COS","& Other Stories","פול אנד בר","סטרדיווריוס","מסימו דוטי","קסטרו","רנואר","פוקס","הודיס","גולף","טוונטי פור סבן","פקטורי 54","OYSHO","לולולמון","אלו יוגה"],
+  men:["זארה","H&M","COS","פול אנד בר","מסימו דוטי","קסטרו","רנואר","פוקס","הודיס","גולף","טוונטי פור סבן","פקטורי 54","לולולמון"],
+  shoes:["אדידס","פוט לוקר"]
+};
+
+// Category tree. item = noun used for example names; mat = example descriptors; price = [min,max]
+const TREE = {
+  women:[
+    {id:"top",n:"חלק עליון",price:[60,320],mat:["כותנה","פשתן","סאטן","ריב","קרופ","אוברסייז"],kids:[
+      {id:"tee",n:"טישירטים",item:"טישירט"},{id:"tank",n:"גופיות",item:"גופייה"},{id:"blouse",n:"חולצות",item:"חולצה"},
+      {id:"shirt",n:"חולצות מכופתרות",item:"חולצה מכופתרת"},{id:"knit",n:"סריגים",item:"סריג"},{id:"body",n:"בגדי גוף",item:"בגד גוף"}]},
+    {id:"bottom",n:"חלק תחתון",price:[90,420],mat:["ג'ינס","פשתן","מחויט","קורדרוי","סאטן","כותנה"],kids:[
+      {id:"long",n:"מכנס ארוך",kids:[
+        {id:"wide",n:"ווייד לג",item:"מכנס ווייד לג"},{id:"skinny",n:"סקיני",item:"מכנס סקיני"},{id:"straight",n:"סטרייט",item:"מכנס סטרייט"},
+        {id:"flare",n:"מתרחב",item:"מכנס מתרחב"},{id:"baggy",n:"בגי",item:"מכנס בגי"},{id:"cargo",n:"קרגו",item:"מכנס קרגו"}]},
+      {id:"short",n:"מכנס קצר",kids:[
+        {id:"sdenim",n:"ג'ינס קצר",item:"ג'ינס קצר"},{id:"stail",n:"מחויט",item:"מכנס קצר מחויט"},{id:"berm",n:"ברמודה",item:"ברמודה"}]},
+      {id:"skirt",n:"חצאית",kids:[
+        {id:"mini",n:"מיני",item:"חצאית מיני"},{id:"midi",n:"מידי",item:"חצאית מידי"},{id:"maxi",n:"מקסי",item:"חצאית מקסי"}]}]},
+    {id:"dress",n:"שמלות",price:[140,520],mat:["סאטן","פשתן","סריג","פרחונית","כותנה"],kids:[
+      {id:"dmini",n:"מיני",item:"שמלת מיני"},{id:"dmidi",n:"מידי",item:"שמלת מידי"},{id:"dmaxi",n:"מקסי",item:"שמלת מקסי"}]},
+    {id:"coat",n:"מעילים",price:[350,1200],mat:["צמר","טרנץ'","פוך","קשמיר"],item:"מעיל"},
+    {id:"jacket",n:"ג'קטים",price:[220,900],mat:["אוברסייז","קרופ","קלאסי"],kids:[
+      {id:"jdenim",n:"ג'ינס",item:"ג'קט ג'ינס"},{id:"jleather",n:"עור",item:"ג'קט עור"},{id:"blazer",n:"בלייזר",item:"בלייזר"},{id:"bomber",n:"בומבר",item:"ג'קט בומבר"}]},
+    {id:"shoes",n:"נעליים",price:[150,700],mat:["עור","זמש","סטרץ'","פלטפורמה"],shoes:1,kids:[
+      {id:"sneak",n:"סניקרס",item:"סניקרס"},{id:"boots",n:"מגפיים",item:"מגפיים"},{id:"heels",n:"עקבים",item:"נעלי עקב"},
+      {id:"flats",n:"נעליים שטוחות",item:"נעליים שטוחות"},{id:"sandal",n:"סנדלים",item:"סנדלים"}]},
+    {id:"acc",n:"אביזרים",price:[50,450],mat:["עור","קלוע","מתכת","בד"],kids:[
+      {id:"belt",n:"חגורות",item:"חגורה"},{id:"bag",n:"תיקים",item:"תיק"}]}
+  ],
+  men:[
+    {id:"top",n:"חלק עליון",price:[60,340],mat:["כותנה","פשתן","פיקה","אוברסייז","ריב"],kids:[
+      {id:"tee",n:"טישירטים",item:"טישירט"},{id:"polo",n:"פולו",item:"חולצת פולו"},{id:"shirt",n:"חולצות מכופתרות",item:"חולצה מכופתרת"},
+      {id:"knit",n:"סריגים",item:"סריג"},{id:"hood",n:"קפוצ'ונים",item:"קפוצ'ון"}]},
+    {id:"bottom",n:"חלק תחתון",price:[100,420],mat:["ג'ינס","צ'ינו","פשתן","מחויט","כותנה"],kids:[
+      {id:"long",n:"מכנס ארוך",kids:[
+        {id:"skinny",n:"סקיני",item:"מכנס סקיני"},{id:"slim",n:"סלים",item:"מכנס סלים"},{id:"straight",n:"סטרייט",item:"מכנס סטרייט"},
+        {id:"relaxed",n:"רחב",item:"מכנס רחב"},{id:"cargo",n:"קרגו",item:"מכנס קרגו"}]},
+      {id:"short",n:"מכנס קצר",kids:[
+        {id:"berm",n:"ברמודה",item:"ברמודה"},{id:"sdenim",n:"ג'ינס קצר",item:"ג'ינס קצר"},{id:"sport",n:"ספורט",item:"מכנס ספורט קצר"}]}]},
+    {id:"coat",n:"מעילים",price:[380,1300],mat:["צמר","פוך","טרנץ'"],item:"מעיל"},
+    {id:"jacket",n:"ג'קטים",price:[240,950],mat:["קלאסי","אוברסייז","מרופד"],kids:[
+      {id:"jdenim",n:"ג'ינס",item:"ג'קט ג'ינס"},{id:"jleather",n:"עור",item:"ג'קט עור"},{id:"blazer",n:"בלייזר",item:"בלייזר"},{id:"bomber",n:"בומבר",item:"ג'קט בומבר"}]},
+    {id:"shoes",n:"נעליים",price:[180,750],mat:["עור","זמש","ריצה","קנבס"],shoes:1,kids:[
+      {id:"sneak",n:"סניקרס",item:"סניקרס"},{id:"dress",n:"נעליים אלגנטיות",item:"נעליים אלגנטיות"},{id:"boots",n:"מגפיים",item:"מגפיים"},{id:"sandal",n:"סנדלים",item:"סנדלים"}]},
+    {id:"acc",n:"אביזרים",price:[60,480],mat:["עור","קלוע","בד"],kids:[
+      {id:"belt",n:"חגורות",item:"חגורה"},{id:"bag",n:"תיקים",item:"תיק"}]}
+  ]
+};
+
+// Simple silhouettes by top category
+const ICON = {
+  top:'<path d="M30 10 L42 4 Q50 12 58 4 L70 10 L84 26 L74 34 L68 28 L68 92 L32 92 L32 28 L26 34 L16 26 Z"/>',
+  bottom:'<path d="M28 6 L72 6 L80 94 L58 94 L50 34 L42 94 L20 94 Z"/>',
+  dress:'<path d="M38 4 L62 4 L60 30 L82 94 L18 94 L40 30 Z"/>',
+  coat:'<path d="M32 6 L44 4 L50 30 L56 4 L68 6 L86 24 L80 96 L20 96 L14 24 Z"/>',
+  jacket:'<path d="M32 10 L44 6 L50 26 L56 6 L68 10 L86 28 L80 78 L20 78 L14 28 Z"/>',
+  shoes:'<path d="M10 70 L10 46 Q20 44 30 52 Q50 64 72 62 Q90 62 90 76 L90 82 L10 82 Z"/>',
+  acc:'<path d="M28 34 Q28 12 50 12 Q72 12 72 34 L64 34 Q64 20 50 20 Q36 20 36 34 Z M18 34 L82 34 L76 90 L24 90 Z"/>'
+};
+
+// Seeded random so the example catalogue is stable
+let seed = 7;
+function rnd(){ seed = (seed*16807) % 2147483647; return (seed-1)/2147483646; }
+function pick(a){ return a[Math.floor(rnd()*a.length)]; }
+
+const PRODUCTS = [];
+for (const g of ["women","men"]) {
+  for (const top of TREE[g]) {
+    const leaves = [];
+    (function walk(node, path){
+      if (!node.kids) { leaves.push({node, path}); return; }
+      for (const k of node.kids) walk(k, path.concat(k.id));
+    })(top, [top.id]);
+    for (const {node, path} of leaves) {
+      const per = node === top ? 12 : 6;
+      for (let i = 0; i < per; i++) {
+        const brands = top.shoes ? BRANDS[g].concat(BRANDS.shoes) : BRANDS[g];
+        const col = pick(COLORS);
+        const [lo, hi] = top.price;
+        const price = Math.round((lo + rnd()*(hi-lo)) / 10) * 10 - 0.1;
+        PRODUCTS.push({g, path, top: top.id, item: node.item, mat: pick(top.mat), brand: pick(brands), color: col, price, order: rnd()});
+      }
+    }
+  }
+}
+
+const state = { g:"women", path:["bottom","long"], colors:new Set(), brand:"", sort:"new" };
+const $ = id => document.getElementById(id);
+
+function nodeAt(g, path){
+  let list = TREE[g], node = null, trail = [];
+  for (const id of path) { node = list.find(n => n.id === id); if (!node) break; trail.push(node); list = node.kids || []; }
+  return trail;
+}
+
+function renderTree(){
+  const ul = $("tree"); ul.innerHTML = "";
+  const build = (nodes, parentPath, depth, container) => {
+    for (const n of nodes) {
+      const p = parentPath.concat(n.id);
+      const li = document.createElement("li");
+      const b = document.createElement("button");
+      b.textContent = n.n; if (depth === 0) b.className = "top";
+      const cur = state.path.join("/") === p.join("/");
+      b.setAttribute("aria-current", cur ? "true" : "false");
+      b.onclick = () => { state.path = p; closeMenu(); render(); };
+      li.appendChild(b);
+      const open = state.path.slice(0, p.length).join("/") === p.join("/");
+      if (n.kids && open) { const sub = document.createElement("ul"); sub.className = "tree"; build(n.kids, p, depth+1, sub); li.appendChild(sub); }
+      container.appendChild(li);
+    }
+  };
+  build(TREE[state.g], [], 0, ul);
+}
+
+function render(){
+  document.querySelectorAll(".genders button").forEach(b => b.setAttribute("aria-pressed", b.dataset.g === state.g));
+  const trail = nodeAt(state.g, state.path);
+  const node = trail[trail.length-1];
+
+  // crumbs
+  const cr = $("crumbs"); cr.innerHTML = "";
+  const home = document.createElement("button"); home.textContent = state.g === "women" ? "נשים" : "גברים";
+  home.onclick = () => { state.path = [TREE[state.g][0].id]; render(); }; cr.appendChild(home);
+  trail.slice(0,-1).forEach((t,i) => {
+    cr.appendChild(document.createTextNode("/"));
+    const b = document.createElement("button"); b.textContent = t.n;
+    b.onclick = () => { state.path = state.path.slice(0,i+1); render(); }; cr.appendChild(b);
+  });
+  $("title").textContent = node.n;
+
+  // chips: siblings at deepest level that has children
+  const chips = $("chips"); chips.innerHTML = "";
+  let parentPath, options;
+  if (node.kids) { parentPath = state.path; options = node.kids; }
+  else if (trail.length > 1) { parentPath = state.path.slice(0,-1); options = trail[trail.length-2].kids; }
+  if (options) {
+    const all = document.createElement("button"); all.className = "chip"; all.textContent = "הכל";
+    all.setAttribute("aria-pressed", node.kids ? "true" : "false");
+    all.onclick = () => { state.path = parentPath; render(); }; chips.appendChild(all);
+    for (const o of options) {
+      const b = document.createElement("button"); b.className = "chip"; b.textContent = o.n;
+      const p = parentPath.concat(o.id);
+      b.setAttribute("aria-pressed", state.path.join("/") === p.join("/") ? "true" : "false");
+      b.onclick = () => { state.path = p; render(); }; chips.appendChild(b);
+    }
+  }
+
+  // products in this node
+  const key = state.path.join("/");
+  let items = PRODUCTS.filter(p => p.g === state.g && (p.path.join("/") === key || p.path.join("/").startsWith(key + "/")));
+
+  // brand options from current set
+  const bs = [...new Set(items.map(p => p.brand))].sort((a,b)=>a.localeCompare(b,"he"));
+  if (state.brand && !bs.includes(state.brand)) state.brand = "";
+  $("brandSel").innerHTML = '<option value="">כל המותגים</option>' + bs.map(b => `<option${b===state.brand?" selected":""}>${b}</option>`).join("");
+
+  if (state.colors.size) items = items.filter(p => state.colors.has(p.color.id));
+  if (state.brand) items = items.filter(p => p.brand === state.brand);
+  items.sort(state.sort === "low" ? (a,b)=>a.price-b.price : state.sort === "high" ? (a,b)=>b.price-a.price : (a,b)=>a.order-b.order);
+
+  $("count").textContent = items.length + " פריטים";
+  $("clearBtn").style.visibility = (state.colors.size || state.brand) ? "visible" : "hidden";
+  document.querySelectorAll(".sw").forEach(s => s.setAttribute("aria-pressed", state.colors.has(s.dataset.c)));
+
+  const grid = $("grid");
+  if (!items.length) { grid.innerHTML = '<div class="empty" style="grid-column:1/-1">אין פריטים שמתאימים לסינון הזה. נסי להסיר צבע או מותג.</div>'; }
+  else grid.innerHTML = items.map(p => `
+    <article class="card">
+      <div class="img${p.color.light?" light":""}" style="background:${p.color.h}">
+        <svg viewBox="0 0 100 100" fill="${p.color.light?"#000":"#fff"}">${ICON[p.top]}</svg>
+        <span class="tag">דוגמה</span>
+      </div>
+      <div class="brand">${p.brand}</div>
+      <div class="name">${p.item} ${p.mat}</div>
+      <div class="meta"><span>₪${p.price.toFixed(2)}</span><span class="c">${p.color.n}</span></div>
+    </article>`).join("");
+
+  renderTree();
+}
+
+// swatches
+$("swatches").innerHTML = COLORS.map(c => `<button class="sw" data-c="${c.id}" style="background:${c.h}" aria-label="${c.n}" title="${c.n}" aria-pressed="false"></button>`).join("");
+$("swatches").addEventListener("click", e => {
+  const b = e.target.closest(".sw"); if (!b) return;
+  state.colors.has(b.dataset.c) ? state.colors.delete(b.dataset.c) : state.colors.add(b.dataset.c); render();
+});
+$("brandSel").onchange = e => { state.brand = e.target.value; render(); };
+$("sortSel").onchange = e => { state.sort = e.target.value; render(); };
+$("clearBtn").onclick = () => { state.colors.clear(); state.brand = ""; render(); };
+document.querySelectorAll(".genders button").forEach(b => b.onclick = () => {
+  state.g = b.dataset.g; state.path = ["bottom","long"]; state.colors.clear(); state.brand = ""; render();
+});
+function closeMenu(){ $("rail").classList.remove("open"); $("scrim").classList.remove("open"); }
+$("menuBtn").onclick = () => { $("rail").classList.add("open"); $("scrim").classList.add("open"); };
+$("scrim").onclick = closeMenu;
+
+render();
+</script>
+</body>
+</html>
