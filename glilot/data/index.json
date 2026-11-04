@@ -2,18 +2,18 @@
  "stores": {
   "zara": {
    "name": "זארה",
-   "count": 11408,
-   "updated": "2026-11-04T16:52Z"
+   "count": 11347,
+   "updated": "2026-11-04T22:29Z"
   },
   "golf": {
    "name": "גולף",
-   "count": 981,
-   "updated": "2026-11-04T17:00Z"
+   "count": 941,
+   "updated": "2026-11-04T22:31Z"
   },
   "factory54": {
    "name": "פקטורי 54",
    "count": 7615,
-   "updated": "2026-11-04T21:32Z"
+   "updated": "2026-11-04T22:32Z"
   },
   "crazyline": {
    "name": "קרייזי ליין",
@@ -28,6 +28,11 @@
   "massimodutti": {
    "name": "מסימו דוטי",
    "count": 6434,
+   "updated": "2026-11-04T22:24Z"
+  },
+  "interfashion": {
+   "name": "אינטרפאשן",
+   "count": 914,
    "updated": "2026-11-04T22:24Z"
   }
  },
