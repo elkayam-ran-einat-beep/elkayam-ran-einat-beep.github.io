@@ -1,0 +1,34 @@
+"""Collect items from each store into glilot/data/<store>.json.
+Usage: python collect.py [store ...]   (default: every store)"""
+import json, os, sys, collections, datetime, importlib
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+OUT = os.path.join(HERE, "..", "..", "glilot", "data")
+STORES = {"zara": "זארה"}
+
+def log(m): print(m, flush=True)
+
+def main(names):
+    os.makedirs(OUT, exist_ok=True)
+    idx_path = os.path.join(OUT, "index.json")
+    index = json.load(open(idx_path)) if os.path.exists(idx_path) else {"stores": {}}
+    for s in names:
+        try:
+            items = importlib.import_module(s).collect(log)
+        except Exception as ex:
+            log(f"!! {s} failed: {ex}"); continue
+        path = os.path.join(OUT, f"{s}.json")
+        prev = index["stores"].get(s, {}).get("count", 0)
+        if len(items) < max(20, prev * 0.5):
+            log(f"!! {s}: only {len(items)} items (previously {prev}), keeping old file"); continue
+        with open(path, "w", encoding="utf-8") as f: json.dump(items, f, ensure_ascii=False, separators=(",",":"))
+        index["stores"][s] = {"name": STORES[s], "count": len(items),
+                              "updated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")}
+        cnt = collections.Counter((i["g"], i["p"]) for i in items)
+        log(f"== {s}: {len(items)} items")
+        for k, v in sorted(cnt.items()): log(f"   {k[0]:6} {k[1]:24} {v}")
+        nocol = [i for i in items if not i["c"]]
+        log(f"   no colour: {len(nocol)} e.g. {[i['cn'] for i in nocol[:8]]}")
+    json.dump(index, open(idx_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+if __name__ == "__main__":
+    main(sys.argv[1:] or list(STORES))
