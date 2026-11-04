@@ -18,5 +18,7 @@ for a in sys.argv[1:]:
             pat=os.environ.get("PAT","product-item-info|toolbar-number|\"@type\":\"Product|impressions|dataLayer")
             for m in list(re.finditer(pat,b))[:3]: print("   ...",b[max(0,m.start()-300):m.start()+1500].replace("\n"," "))
         else:
-            print(b[:800])
+            hints=[h for h in ["Shopify","Magento","mage/","woocommerce","wp-content","__NEXT_DATA__","_nuxt","demandware","dwanalytics","vtex","konimbo","algolia","graphql","cdn.shopify","static/version","itxrest","salesforce","Wix","bigcommerce","sfcc","/on/demandware.store"] if h.lower() in b.lower()]
+            t=re.search(r"<title[^>]*>(.*?)</title>",b,re.S)
+            print("    hints:",hints,"| title:",html.unescape(t.group(1).strip())[:90] if t else "")
     except Exception as e: print("ERR",u,e)
