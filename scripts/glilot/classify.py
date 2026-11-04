@@ -11,6 +11,7 @@ SKIP = _rx(["SOCKS?","LUGGAGE","SUITCASE","CARRY-ON","TAG","PASSPORT","TOILETRY"
             "NECKLACE","EARRINGS?","BRACELET","RING","PERFUME","EAU DE","BEANIE","CAP","HAT","GLOVES","MITTENS","SCARF","BANDANA","EARMUFFS",
             "SUIT CARRIER","KEYRING","BRIEFS","BOXERS?","BRA","LINGERIE","PYJAMA","PAJAMA","WALLET","CARD HOLDER","CARDHOLDER","PHONE",
             "גרביים","גרב","מטרייה","משקפ","שיער","שרשרת","עגיל","צמיד","טבעת","בושם","כובע","כפפות","צעיף","תחתונ","חזיי","פיג'מ","ארנק","מחזיק"])
+HARD_SKIP = _rx(["SOCKS?","SLIPPERS","TOILETRY","MAKE-UP BAG","גרבי","גרביים","גרביון","גרביונים","נעלי בית","תיק איפור","תיק רחצה","נרתיק איפור"])
 SKIP_FAM = re.compile(r"^(HAT|SOCKS|GLOVES|SCARF|SHAWL/FOULARD|GLASSES|UMBRELLA|IMIT JEWELLER|PERFUME|UNDERWEAR|LINGERIE)", re.I)
 
 SHOE_FAM = re.compile(r"SHOE|SANDAL|BOOT|TRAINER|HIGH TOPS|WEDGE|FOOTWEAR|SNEAKER", re.I)
@@ -39,7 +40,7 @@ def length(name, mini="mini", midi="midi", maxi="maxi"):
     return None
 
 def pants_cut(name, g):
-    order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
+    order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","פאלאצו","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
              ("skinny",["SKINNY","סקיני"]),
              ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט"]),
              ("cargo",["CARGO","קרגו"]),
@@ -69,6 +70,7 @@ def classify(name, g, family=""):
     n = name or ""; fam = family or ""
     he = n.split(" | ")[-1]
     upper = bool(HEAD_UPPER.match(he))   # Hebrew names start with the garment noun
+    if has(HARD_SKIP, n): return None
     if SKIP_FAM.search(fam) or (has(SKIP, n) and not has(BAG, n) and not BAG_FAM.search(fam)):
         if not (SHOE_FAM.search(fam) or has(SHOE, n)): return None
     # shoes

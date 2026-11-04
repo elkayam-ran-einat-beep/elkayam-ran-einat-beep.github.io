@@ -4,9 +4,10 @@ import json, os, sys, collections, datetime, importlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 OUT = os.path.join(HERE, "..", "..", "glilot", "data")
 STORES = {"zara": "זארה", "golf": "גולף", "castro": "קסטרו", "crazyline": "קרייזי ליין", "massimodutti": "מסימו דוטי",
-          "factory54": "פקטורי 54"}
+          "factory54": "פקטורי 54", "interfashion": "אינטרפאשן"}
 # labels for store ids that a module emits besides its own (Factory 54 carries brands that have their own Glilot store)
-NAMES = {"tommy": "טומי הילפיגר", "ralph": "ראלף לורן", "ck": "קלווין קליין", "lacoste": "לקוסט"}
+NAMES = {"tommy": "טומי הילפיגר", "ralph": "ראלף לורן", "ck": "קלווין קליין", "lacoste": "לקוסט",
+         "tezenis": "טזניס", "calzedonia": "קלצדוניה", "intimissimi": "אינטימיסימי"}
 
 def log(m): print(m, flush=True)
 
