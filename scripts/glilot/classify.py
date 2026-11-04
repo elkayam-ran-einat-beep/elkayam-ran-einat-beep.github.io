@@ -37,16 +37,18 @@ def length(name, mini="mini", midi="midi", maxi="maxi"):
     return None
 
 def pants_cut(name, g):
-    order = [("wide",["WIDE-LEG","WIDE LEG","PALAZZO","CULOTTES?","ווייד","רחב","רחבים","רגל רחבה","פלאצו"]),
+    order = [("wide",["WIDE-LEG","WIDE LEG","PALAZZO","CULOTTES?","VOLUME","ווייד","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
              ("skinny",["SKINNY","סקיני"]),
              ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט"]),
              ("cargo",["CARGO","קרגו"]),
-             ("jogger",["JOGGERS?","JOGGING","SWEATPANTS","TRACKSUIT","ג'וגר","טרנינג"]),
+             ("jogger",["JOGGERS?","JOGGING","SWEATPANTS","TRACKSUIT","DRAWSTRING","ג'וגר","טרנינג","פוטר"]),
              ("legging",["LEGGINGS","טייץ"]),
-             ("straight",["STRAIGHT","STRAIGHT-LEG","ישר","ישרים","סטרייט"]),
+             ("straight",["STRAIGHT","STRAIGHT-LEG","REGULAR","ישר","ישרה","ישרים","סטרייט"]),
              ("slim",["SLIM","סלים"]),
              ("tapered",["TAPERED","CARROT","טייפרד","גזר"]),
-             ("baggy",["BAGGY","BALLOON","BARREL","RELAXED","LOOSE","MOM","בגי","בלון","בוי פרנד","BOYFRIEND","מום"])]
+             ("baggy",["BAGGY","BALLOON","BARREL","RELAXED","LOOSE","MOM","בגי","בלון","בוי פרנד","BOYFRIEND","מום","משוחרר","משוחררים"]),
+             ("chino",["CHINOS?","צ'ינו"]),
+             ("tailored",["TAILORED","SUIT TROUSERS","PLEATED","מחויט","מחויטים","עם קפלים"])]
     for cut, words in order:
         if has(_rx(words), name):
             if g == "men":
@@ -54,6 +56,7 @@ def pants_cut(name, g):
                 if cut in ("legging","tapered","flare"): return None
             else:
                 if cut == "slim": return "skinny"
+                if cut == "chino": return "straight"
             return cut
     return None
 
@@ -120,17 +123,17 @@ COLORS = [
   ("white","לבן","#fbfbf9",["white","optic white","לבן"]),
   ("ecru","שמנת","#ece4d4",["ecru","cream","off-white","off white","oyster","vanilla","ivory","bone","oatmeal","שמנת","אוף וויט","אקרו","קרם"]),
   ("beige","בז'","#cfb99a",["beige","sand","stone","camel","taupe","mink","nude","biscuit","khaki beige","בז'","בז","חול","קאמל","טאופ","ניוד"]),
-  ("brown","חום","#6e4b35",["brown","chocolate","tan","cognac","coffee","mocha","chestnut","חום","שוקולד","קוניאק"]),
+  ("brown","חום","#6e4b35",["brown","chocolate","tan","cognac","coffee","mocha","chestnut","caramel","toffee","קרמל","טופי","חום","שוקולד","קוניאק"]),
   ("grey","אפור","#9a9893","grey gray charcoal anthracite marl silver-grey אפור אנתרציט פחם מלאנג'".split()),
   ("navy","כחול נייבי","#23304a",["navy","נייבי","כחול כהה"]),
   ("blue","כחול","#5f7fa6",["blue","indigo","denim","sky","cobalt","azure","turquoise","כחול","תכלת","טורקיז","ג'ינס"]),
   ("green","ירוק","#6b6a3f",["green","khaki","olive","mint","sage","bottle","emerald","ירוק","זית","חאקי","מנטה"]),
   ("red","אדום","#a3252a",["red","scarlet","אדום"]),
-  ("burgundy","בורדו","#5e1a26",["burgundy","maroon","wine","bordeaux","oxblood","בורדו","יין"]),
-  ("pink","ורוד","#e3b5b8",["pink","fuchsia","rose","blush","ורוד","פוקסיה"]),
+  ("burgundy","בורדו","#5e1a26",["burgundy","maroon","wine","bordeaux","oxblood","marsala","מרסלה","בורדו","יין"]),
+  ("pink","ורוד","#e3b5b8",["pink","fuchsia","rose","blush","raspberry","magenta","פטל","ורוד","פוקסיה"]),
   ("yellow","צהוב","#e2c443",["yellow","mustard","lemon","צהוב","חרדל"]),
   ("orange","כתום","#d07a3a",["orange","rust","coral","terracotta","כתום","חמרה","קורל","טרקוטה"]),
-  ("purple","סגול","#7d5a8c",["purple","lilac","mauve","violet","plum","lavender","סגול","לילך","לבנדר"]),
+  ("purple","סגול","#7d5a8c",["purple","lilac","mauve","violet","plum","lavender","aubergine","חציל","סגול","לילך","לבנדר"]),
   ("metal","מטאלי","#c0b283",["silver","gold","metallic","bronze","pewter","כסף","כסוף","זהב","מטאלי"]),
   ("print","הדפס","linear-gradient(135deg,#1b1b1b 0 33%,#e3b5b8 33% 66%,#5f7fa6 66%)",["print","multicolour","multicolor","stripe","striped","check","floral","animal","leopard","zebra","הדפס","צבעוני","פסים","משבצות","פרחוני","מנומר"]),
 ]

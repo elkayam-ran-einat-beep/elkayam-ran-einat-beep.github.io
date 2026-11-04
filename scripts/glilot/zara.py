@@ -13,6 +13,13 @@ WANT = {
           "SHOES","TRAINERS","BAGS | BACKPACKS","ACCESSORIES"],
 }
 GENDER = {"WOMAN": "women", "MAN": "men"}
+# Zara's own fit sub-categories under JEANS / TROUSERS -> portal cut
+FITS = {"BARREL":"baggy","WIDE-LEG":"wide","MOM FIT":"baggy","STRAIGHT-LEG":"straight","BAGGY":"baggy","CARGO":"cargo",
+        "TAILORED":"tailored","JOGGERS":"jogger","LEGGINGS":"legging","STRAIGHT":"straight","SLIM":"slim","LOOSE":"relaxed",
+        "REGULAR":"straight","FLARE":"flare","BALLOON | BARREL":"baggy","SKINNY FIT":"skinny","CHINOS":"chino",
+        "SWEATPANTS":"jogger","WIDE LEG | BALLOON":"relaxed","PLEATED":"tailored"}
+MEN_FIX = {"baggy":"relaxed","wide":"relaxed","flare":None,"legging":None}
+WOMEN_FIX = {"slim":"skinny","relaxed":"baggy","chino":"straight"}
 
 def components(cid, lang):
     d = get_json(f"{BASE}/{lang}/category/{cid}/products?ajax=true")
@@ -41,6 +48,21 @@ def collect(log):
                     found[c["name"]] = c.get("redirectCategoryId") or c["id"]
                 walk(c.get("subcategories", []))
         walk(sec.get("subcategories", []))
+        cutmap = {}
+        def fits(cs, under):
+            for c in cs:
+                if under and c.get("name") in FITS:
+                    cut = FITS[c["name"]]
+                    cut = (MEN_FIX if g == "men" else WOMEN_FIX).get(cut, cut)
+                    if cut:
+                        found.setdefault(f"{under} / {c['name']}", c["id"])
+                        try:
+                            for x in components(c["id"], "en"): cutmap.setdefault(x["id"], cut)
+                            time.sleep(0.5)
+                        except Exception as ex: log(f"zara fit {c['name']}: {ex}")
+                fits(c.get("subcategories", []), c["name"] if c.get("name") in ("JEANS","TROUSERS") else under)
+        fits(sec.get("subcategories", []), None)
+        log(f"zara {g}: fit labels for {len(cutmap)} items")
         for cname, cid in found.items():
             try:
                 en = list(components(cid, "en")); time.sleep(0.7)
@@ -52,15 +74,17 @@ def collect(log):
                 if c["id"] in seen: continue
                 seen.add(c["id"])
                 if c.get("sectionName") and GENDER.get(c["sectionName"]) != g: continue
-                path = classify(c.get("name",""), g, c.get("familyName",""))
+                h = he.get(c["id"], {})
+                path = classify(c.get("name","") + " | " + (h.get("name") or ""), g, c.get("familyName",""))
                 if not path: continue
+                if path[:2] == ["bottom","long"] and len(path) == 2 and c["id"] in cutmap: path.append(cutmap[c["id"]])
                 cols = (c.get("detail") or {}).get("colors") or []
                 col = cols[0] if cols else {}
                 if col.get("availability") == "out_of_stock": continue
-                h = he.get(c["id"], {})
                 hcol = (((h.get("detail") or {}).get("colors")) or [{}])[0]
                 seo = c.get("seo") or {}
-                hexc = ((c.get("colorInfo") or {}).get("mainColorHexCode"))
+                hexc = next((a.get("hexColor") for a in c.get("availableColors") or [] if a.get("colorName") == col.get("name")), None) \
+                       or ((c.get("colorInfo") or {}).get("mainColorHexCode"))
                 img = pick_image(col, seo.get("seoProductId",""))
                 price = (col.get("price") or c.get("price") or 0) / 100
                 old = col.get("oldPrice") or c.get("oldPrice")
