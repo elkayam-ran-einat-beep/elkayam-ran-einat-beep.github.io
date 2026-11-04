@@ -15,6 +15,7 @@ def main(names):
     os.makedirs(OUT, exist_ok=True)
     idx_path = os.path.join(OUT, "index.json")
     index = json.load(open(idx_path)) if os.path.exists(idx_path) else {"stores": {}}
+    index["produced"] = []
     for s in names:
         try:
             items = importlib.import_module(s).collect(log)
@@ -27,6 +28,7 @@ def main(names):
         with open(path, "w", encoding="utf-8") as f: json.dump(items, f, ensure_ascii=False, separators=(",",":"))
         index["stores"][s] = {"name": STORES[s], "count": len(items),
                               "updated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")}
+        index["produced"].append(s)
         flat = sum(1 for i in items if i.get("img2"))
         log(f"   white-background images: {flat} of {len(items)}; by store label: {dict(collections.Counter(i['s'] for i in items))}")
         cnt = collections.Counter((i["g"], i["p"]) for i in items)

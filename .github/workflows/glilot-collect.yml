@@ -21,7 +21,14 @@ jobs:
         run: |
           git config user.name "glilot-bot"
           git config user.email "glilot-bot@users.noreply.github.com"
-          git add glilot/data
-          git diff --cached --quiet && exit 0
-          git commit -m "פורטל גלילות: עדכון פריטים"
-          git pull --rebase -q && git push
+          cp -r glilot/data /tmp/newdata
+          for i in 1 2 3 4 5; do
+            git fetch -q origin main && git reset -q --hard origin/main
+            python3 scripts/glilot/save.py /tmp/newdata
+            git add glilot/data
+            git diff --cached --quiet && exit 0
+            git commit -qm "פורטל גלילות: עדכון פריטים"
+            git push -q origin HEAD:main && exit 0
+            sleep $((i * 7))
+          done
+          exit 1
