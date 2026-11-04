@@ -1,4 +1,6 @@
 name: probe
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
@@ -14,5 +16,7 @@ jobs:
             curl -sSL -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36" \
               -H "Accept-Language: he-IL,he;q=0.9" -o out/$i.html -w "$i %{http_code} %{size_download} $u\n" "$u" || true
           done
-      - uses: actions/upload-artifact@v4
-        with: {name: pages, path: out, retention-days: 1}
+      - run: |
+          cd out && git init -q && git checkout -q -b probe-data && git add -A
+          git -c user.name=probe -c user.email=probe@users.noreply.github.com commit -qm probe
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-data
