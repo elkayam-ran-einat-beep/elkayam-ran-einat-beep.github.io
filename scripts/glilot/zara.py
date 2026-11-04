@@ -29,12 +29,17 @@ def components(cid, lang):
                 if c.get("type") == "Product": yield c
 
 def pick_image(col, seo_id):
-    media = col.get("xmedia") or []
-    for m in media:
-        if seo_id and m.get("name","").startswith(seo_id) and m.get("url"): return m["url"]
-    for m in media:
-        if m.get("url"): return m["url"]
-    return None
+    """Model shot (-p, else -a1/-a2) for the main view, the item on white (-f1, else -e1) for the product view."""
+    media = [m for m in col.get("xmedia") or [] if m.get("url")]
+    own = [m for m in media if m.get("name","").startswith(seo_id)] or media
+    def find(*suffixes):
+        for suf in suffixes:
+            for m in own:
+                if m.get("name","").endswith("-" + suf): return m["url"]
+        return None
+    main = find("p", "a1", "a2", "a3") or (own[0]["url"] if own else None)
+    flat = find("f1", "e1")
+    return main, (flat if flat != main else None)
 
 def collect(log):
     cats = get_json(f"{BASE}/en/categories?ajax=true")["categories"]
@@ -85,7 +90,7 @@ def collect(log):
                 seo = c.get("seo") or {}
                 hexc = next((a.get("hexColor") for a in c.get("availableColors") or [] if a.get("colorName") == col.get("name")), None) \
                        or ((c.get("colorInfo") or {}).get("mainColorHexCode"))
-                img = pick_image(col, seo.get("seoProductId",""))
+                img, flat = pick_image(col, seo.get("seoProductId",""))
                 price = (col.get("price") or c.get("price") or 0) / 100
                 old = col.get("oldPrice") or c.get("oldPrice")
                 it = {"s":"zara","g":g,"p":"/".join(path),
@@ -96,6 +101,7 @@ def collect(log):
                       "cn": hcol.get("name") or col.get("name",""),
                       "img": img.replace("{width}","563") if img else None,
                       "u": f"https://www.zara.com/il/he/{seo.get('keyword','p')}-p{seo.get('seoProductId','')}.html?v1={seo.get('discernProductId', c['id'])}"}
+                if flat: it["img2"] = flat.replace("{width}","563")
                 if old: it["old"] = round(old/100, 2)
                 if "NEW" in (c.get("productTag") or []): it["new"] = 1
                 items.append(it); kept += 1

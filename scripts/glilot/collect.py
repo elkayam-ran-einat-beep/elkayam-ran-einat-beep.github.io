@@ -3,7 +3,10 @@ Usage: python collect.py [store ...]   (default: every store)"""
 import json, os, sys, collections, datetime, importlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 OUT = os.path.join(HERE, "..", "..", "glilot", "data")
-STORES = {"zara": "זארה", "golf": "גולף"}
+STORES = {"zara": "זארה", "golf": "גולף", "castro": "קסטרו", "crazyline": "קרייזי ליין", "massimodutti": "מסימו דוטי",
+          "factory54": "פקטורי 54"}
+# labels for store ids that a module emits besides its own (Factory 54 carries brands that have their own Glilot store)
+NAMES = {"tommy": "טומי הילפיגר", "ralph": "ראלף לורן", "ck": "קלווין קליין", "lacoste": "לקוסט"}
 
 def log(m): print(m, flush=True)
 
@@ -23,11 +26,14 @@ def main(names):
         with open(path, "w", encoding="utf-8") as f: json.dump(items, f, ensure_ascii=False, separators=(",",":"))
         index["stores"][s] = {"name": STORES[s], "count": len(items),
                               "updated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ")}
+        flat = sum(1 for i in items if i.get("img2"))
+        log(f"   white-background images: {flat} of {len(items)}; by store label: {dict(collections.Counter(i['s'] for i in items))}")
         cnt = collections.Counter((i["g"], i["p"]) for i in items)
         log(f"== {s}: {len(items)} items")
         for k, v in sorted(cnt.items()): log(f"   {k[0]:6} {k[1]:24} {v}")
         nocol = [i for i in items if not i["c"]]
         log(f"   no colour: {len(nocol)} e.g. {[i['cn'] for i in nocol[:8]]}")
+    index["names"] = {**{k: v for k, v in STORES.items()}, **NAMES}
     json.dump(index, open(idx_path, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 if __name__ == "__main__":

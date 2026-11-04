@@ -3,7 +3,9 @@ Works on English names (Zara, H&M) and Hebrew names (Israeli chains)."""
 import re
 
 def _rx(words):
-    return re.compile("|".join(r"(?<![A-Zא-ת])" + w + r"(?![A-Zא-ת])" if w.isascii() else w for w in words), re.I)
+    # English: whole words. Hebrew: must start a word (one or two attached prefix letters ו ב ה ל מ ש כ are fine); endings are free.
+    return re.compile("|".join(r"(?<![A-Zא-ת])" + w + r"(?![A-Zא-ת])" if w.isascii()
+                               else r"(?<![א-ת])[ובהלמשכ]{0,2}" + w for w in words), re.I)
 
 SKIP = _rx(["SOCKS?","LUGGAGE","SUITCASE","CARRY-ON","TAG","PASSPORT","TOILETRY","UMBRELLA","SUNGLASSES","GLASSES","HAIR","SCRUNCHIE",
             "NECKLACE","EARRINGS?","BRACELET","RING","PERFUME","EAU DE","BEANIE","CAP","HAT","GLOVES","MITTENS","SCARF","BANDANA","EARMUFFS",
@@ -96,7 +98,9 @@ def classify(name, g, family=""):
         else: sub = "stail" if g == "women" else None
         return ["bottom","short", sub] if sub else ["bottom","short"]
     if not upper and (has(PANTS, n) or re.match(r"TROUSERS|LEGGINGS", fam, re.I)):
-        c = pants_cut(n, g); return ["bottom","long", c] if c else ["bottom","long"]
+        # with "English | Hebrew" names the English cut wins (shop translations are looser)
+        c = (pants_cut(n.split(" | ")[0], g) if " | " in n else None) or pants_cut(n, g)
+        return ["bottom","long", c] if c else ["bottom","long"]
     if has(COAT, n) and not has(_rx(["COAT HANGER"]), n):
         return ["coat"]
     if has(JACKET, n):
@@ -124,19 +128,19 @@ def classify(name, g, family=""):
 
 # colour families: id, Hebrew name, swatch hex, keywords (English + Hebrew)
 COLORS = [
-  ("black","שחור","#1b1b1b",["black","jet","שחור"]),
-  ("white","לבן","#fbfbf9",["white","optic white","לבן"]),
-  ("ecru","שמנת","#ece4d4",["ecru","cream","off-white","off white","oyster","vanilla","ivory","bone","oatmeal","שמנת","אוף וויט","אקרו","קרם"]),
-  ("beige","בז'","#cfb99a",["beige","sand","stone","camel","taupe","mink","nude","biscuit","khaki beige","בז'","בז","חול","קאמל","טאופ","ניוד"]),
+  ("black","שחור","#1b1b1b",["black","jet","שחור","בלאק"]),
+  ("white","לבן","#fbfbf9",["white","optic white","לבן","וייט","ווייט"]),
+  ("ecru","שמנת","#ece4d4",["ecru","cream","off-white","off white","oyster","vanilla","ivory","bone","oatmeal","שמנת","אוף וויט","אוף-וויט","אקרו","קרם","ניוטרל"]),
+  ("beige","בז'","#cfb99a",["beige","sand","stone","camel","taupe","mink","nude","biscuit","khaki beige","בז'","בז","חול","קאמל","טאופ","ניוד","אבן","שמפניה","מוקה"]),
   ("brown","חום","#6e4b35",["brown","chocolate","tan","cognac","coffee","mocha","chestnut","caramel","toffee","קרמל","טופי","חום","שוקולד","קוניאק"]),
-  ("grey","אפור","#9a9893","grey gray charcoal anthracite marl silver-grey אפור אנתרציט פחם מלאנג'".split()),
+  ("grey","אפור","#9a9893","grey gray charcoal anthracite marl silver-grey אפור אנתרציט פחם מלאנג' גריי".split()),
   ("navy","כחול נייבי","#23304a",["navy","נייבי","כחול כהה"]),
-  ("blue","כחול","#5f7fa6",["blue","indigo","denim","sky","cobalt","azure","turquoise","כחול","תכלת","טורקיז","ג'ינס","גינס","אינדיגו"]),
-  ("green","ירוק","#6b6a3f",["green","khaki","olive","mint","sage","bottle","emerald","ירוק","זית","חאקי","מנטה"]),
+  ("blue","כחול","#5f7fa6",["blue","indigo","denim","sky","cobalt","azure","turquoise","כחול","תכלת","טורקיז","ג'ינס","גינס","אינדיגו","בלו","דנים"]),
+  ("green","ירוק","#6b6a3f",["green","khaki","olive","mint","sage","bottle","emerald","ירוק","זית","חאקי","מנטה","ליים","פיסטוק"]),
   ("red","אדום","#a3252a",["red","scarlet","אדום"]),
   ("burgundy","בורדו","#5e1a26",["burgundy","maroon","wine","bordeaux","oxblood","marsala","מרסלה","בורדו","יין"]),
   ("pink","ורוד","#e3b5b8",["pink","fuchsia","rose","blush","raspberry","magenta","פטל","ורוד","פוקסיה"]),
-  ("yellow","צהוב","#e2c443",["yellow","mustard","lemon","צהוב","חרדל"]),
+  ("yellow","צהוב","#e2c443",["yellow","mustard","lemon","צהוב","חרדל","בננה","לימון"]),
   ("orange","כתום","#d07a3a",["orange","rust","coral","terracotta","כתום","חמרה","קורל","טרקוטה"]),
   ("purple","סגול","#7d5a8c",["purple","lilac","mauve","violet","plum","lavender","aubergine","חציל","סגול","לילך","לבנדר"]),
   ("metal","מטאלי","#c0b283",["silver","gold","metallic","bronze","pewter","כסף","כסוף","זהב","מטאלי"]),
