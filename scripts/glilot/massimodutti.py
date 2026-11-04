@@ -49,6 +49,28 @@ def media(colors_xmedia, color_id):
     main = model or flat
     return (url(main) if main else None), (url(flat) if flat and flat is not main else None)
 
+def product_items(b, owner):
+    out = []
+    g, fb = owner.get(b.get("id"), ("women", None))
+    p = (b.get("bundleProductSummaries") or [b])[0]
+    det = p.get("detail") or {}
+    path = merge(classify((b.get("nameEn") or "") + " | " + (b.get("name") or ""), g), fb)
+    if not path: return out
+    for col in det.get("colors") or []:
+        sizes = [x for x in col.get("sizes") or [] if x.get("isBuyable")]
+        if not sizes or not sizes[0].get("price"): continue
+        price = int(sizes[0]["price"]) / 100
+        old = int(sizes[0]["oldPrice"]) / 100 if sizes[0].get("oldPrice") else None
+        main, flat = media(det.get("xmedia"), col.get("id"))
+        url = b.get("productUrl") or p.get("productUrl") or ""
+        it = {"s": "massimodutti", "g": g, "p": "/".join(path), "n": b.get("name"), "en": b.get("nameEn"),
+              "pr": price, "c": color_families(col.get("name","")), "cn": col.get("name",""), "img": main,
+              "u": f"https://www.massimodutti.com/il/{url}?pelement={b.get('id')}&colorId={col.get('id')}"}
+        if flat: it["img2"] = flat
+        if old and old > price: it["old"] = old
+        out.append(it)
+    return out
+
 def collect(log):
     tree = get_json(f"{API}/2/catalog/store/{STORE}/{CATALOG}/category?languageId={LANG}&typeCatalog=1&appId=1")["categories"]
     targets = []   # (gender, category id, fallback, order)
@@ -77,22 +99,7 @@ def collect(log):
         try: d = get_json(f"{API}/3/catalog/store/{STORE}/{CATALOG}/productsArray?productIds={','.join(map(str,batch))}&languageId={LANG}&appId=1")
         except Exception as ex: log(f"massimodutti batch {i}: {ex}"); continue
         for b in d.get("products", []):
-            g, fb = owner.get(b["id"], ("women", None))
-            p = (b.get("bundleProductSummaries") or [b])[0]
-            det = p.get("detail") or {}
-            path = merge(classify((b.get("nameEn") or "") + " | " + (b.get("name") or ""), g), fb)
-            if not path: continue
-            for col in det.get("colors") or []:
-                sizes = [s for s in col.get("sizes") or [] if s.get("isBuyable")]
-                if not sizes: continue
-                price = int(sizes[0]["price"]) / 100
-                old = int(sizes[0]["oldPrice"]) / 100 if sizes[0].get("oldPrice") else None
-                main, flat = media(det.get("xmedia"), col["id"])
-                it = {"s": "massimodutti", "g": g, "p": "/".join(path), "n": b.get("name"), "en": b.get("nameEn"),
-                      "pr": price, "c": color_families(col.get("name","")), "cn": col.get("name",""), "img": main,
-                      "u": f"https://www.massimodutti.com/il/{b.get('productUrl') or p.get('productUrl')}?pelement={b['id']}&colorId={col['id']}"}
-                if flat: it["img2"] = flat
-                if old and old > price: it["old"] = old
-                items.append(it)
+            try: items.extend(product_items(b, owner))
+            except Exception as ex: log(f"massimodutti product {b.get('id')}: {type(ex).__name__} {ex}")
         time.sleep(0.4)
     return items
