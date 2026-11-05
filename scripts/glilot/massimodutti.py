@@ -68,6 +68,7 @@ def product_items(b, owner):
               "u": f"https://www.massimodutti.com/il/{url}?pelement={b.get('id')}&colorId={col.get('id')}"}
         if flat: it["img2"] = flat
         if old and old > price: it["old"] = old
+        if len(path) == 2 and path[:2] == ["bottom","long"]: it["_d"] = (det.get("longDescription") or "") + " " + (det.get("description") or "")
         out.append(it)
     return out
 

@@ -41,6 +41,13 @@ def pick_image(col, seo_id):
     flat = find("f1", "e1")
     return main, (flat if flat != main else None)
 
+def describe(it):
+    """Zara answers the product address with a pointer to the Hebrew page, which holds the description."""
+    d = get_json(it["u"] + "&ajax=true")
+    if d.get("location"): d = get_json(d["location"])
+    det = (d.get("product") or {}).get("detail") or {}
+    return (det.get("description") or "") + " " + (det.get("rawDescription") or "")
+
 def collect(log):
     cats = get_json(f"{BASE}/en/categories?ajax=true")["categories"]
     items, seen = [], set()

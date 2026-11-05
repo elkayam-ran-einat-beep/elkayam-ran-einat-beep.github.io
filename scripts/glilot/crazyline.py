@@ -1,5 +1,5 @@
 """Crazy Line (crazyline.com), women only."""
-from idus import run
+from idus import run, describe
 BASE = "https://www.crazyline.com"
 W = "women"
 CATS = {

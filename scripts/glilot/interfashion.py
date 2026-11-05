@@ -32,6 +32,7 @@ def collect(log):
                   "pr": price, "c": color_families(title), "cn": "", "img": imgs[0] if imgs else None,
                   "u": f"{BASE}/products/{p['handle']}"}
             if old > price + 0.01: it["old"] = old
+            if path == ["bottom","long"]: it["_d"] = p.get("body_html") or ""
             items.append(it)
         time.sleep(0.4)
     log(f"interfashion: {len(seen)} listed, {len(items)} kept")

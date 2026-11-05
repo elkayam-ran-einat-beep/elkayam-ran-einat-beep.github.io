@@ -28,7 +28,7 @@ SHORTS = _rx(["SHORTS","BERMUDAS?","מכנס קצר","מכנסיים קצרים"
 PANTS = _rx(["TROUSERS","JEANS","PANTS","LEGGINGS","JOGGERS?","JOGGING","CULOTTES?","CHINOS?","SWEATPANTS","TRACKSUIT BOTTOMS",
              "מכנס","מכנסי","מכנסיים","ג'ינס","טייץ","ג'וגר","טרנינג"])
 COAT = _rx(["COAT","OVERCOAT","TRENCH","PARKA","CAPE","מעיל","טרנץ'","פרקה"])
-JACKET = _rx(["JACKET","BLAZER","BOMBER","ANORAK","PUFFER","WINDBREAKER","GILET","ג'קט","בלייזר","בומבר","פוך","מעילון","וסט"])
+JACKET = _rx(["גקט","JACKET","BLAZER","BOMBER","ANORAK","PUFFER","WINDBREAKER","GILET","ג'קט","בלייזר","בומבר","פוך","מעילון","וסט"])
 TOP_FAM = re.compile(r"T-SHIRT|TOP|SHIRT|BLOUSE|BODYSUIT|POLO|SWEATER|CARDIGAN|SWEATSHIRT|WAISTCOAT|KNIT", re.I)
 
 def has(rx, s): return bool(rx.search(s))
@@ -41,29 +41,30 @@ def length(name, mini="mini", midi="midi", maxi="maxi"):
 
 def pants_cut(name, g):
     order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","פאלאצו","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
-             ("skinny",["SKINNY","סקיני"]),
+             ("skinny",["SKINNY","סקיני","צרים"]),
              ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט"]),
-             ("cargo",["CARGO","קרגו"]),
+             ("cargo",["CARGO","קרגו","דגמ''ח","דגמ'ח",'דגמ"ח']),
              ("jogger",["JOGGERS?","JOGGING","SWEATPANTS","TRACKSUIT","DRAWSTRING","ג'וגר","טרנינג","פוטר"]),
              ("legging",["LEGGINGS","טייץ"]),
-             ("straight",["STRAIGHT","STRAIGHT-LEG","REGULAR","ישר","ישרה","ישרים","סטרייט"]),
+             ("straight",["STRAIGHT","STRAIGHT-LEG","REGULAR","ישר","ישרה","ישרים","סטרייט","רגולר"]),
              ("slim",["SLIM","סלים"]),
-             ("tapered",["TAPERED","CARROT","טייפרד"]),
-             ("baggy",["BAGGY","BALLOON","BARREL","RELAXED","LOOSE","MOM","בגי","בלון","בוי פרנד","BOYFRIEND","מום","משוחרר","משוחררים"]),
+             ("tapered",["TAPERED","CARROT","טייפרד","מחודד","מתחדד"]),
+             ("baggy",["BAGGY","BALLOON","BARREL","RELAXED","LOOSE","MOM","בגי","באגי","רלוקסד","רלקסד","בארל","מאם","בלון","בוי פרנד","BOYFRIEND","מום","משוחרר","משוחררים"]),
              ("chino",["CHINOS?","צ'ינו"]),
-             ("tailored",["TAILORED","SUIT TROUSERS","PLEATED","מחויט","מחויטים","עם קפלים"])]
+             ("tailored",["TAILORED","SUIT TROUSERS","PLEATED","מחויט","מחויטים","מחוייט","מחוייטים","עם קפלים"])]
     for cut, words in order:
         if has(_rx(words), name):
             if g == "men":
                 if cut in ("wide","baggy"): return "relaxed"
-                if cut in ("legging","tapered","flare"): return None
+                if cut in ("legging","flare"): return None
             else:
                 if cut == "slim": return "skinny"
                 if cut == "chino": return "straight"
             return cut
     return None
 
-HEAD_UPPER = re.compile(r"^\s*(חולצ|טי.?שירט|טופ|גופי|בגד גוף|בודי|סריג|סוודר|קרדיגן|סווטשירט|קפוצ'ון|פולו|וסט|ג'קט|ז'קט|בלייזר|מעיל|קימונו)")
+HEAD_BAG = re.compile(r"^\s*(תיק|ארנק)")
+HEAD_UPPER = re.compile(r"^\s*(עליונית|גקט|חולצ|טי.?שירט|טופ|גופי|בגד גוף|בודי|סריג|סוודר|קרדיגן|סווטשירט|קפוצ'ון|פולו|וסט|ג'קט|ז'קט|בלייזר|מעיל|קימונו)")
 
 def classify(name, g, family=""):
     """Return a path list, or None to leave the item out."""
@@ -71,6 +72,7 @@ def classify(name, g, family=""):
     he = n.split(" | ")[-1]
     upper = bool(HEAD_UPPER.match(he))   # Hebrew names start with the garment noun
     if has(HARD_SKIP, n): return None
+    if HEAD_BAG.match(he): return ["acc","bag"]
     if SKIP_FAM.search(fam) or (has(SKIP, n) and not has(BAG, n) and not BAG_FAM.search(fam)):
         if not (SHOE_FAM.search(fam) or has(SHOE, n)): return None
     # shoes
@@ -86,7 +88,7 @@ def classify(name, g, family=""):
         return ["acc","belt"]
     if not upper and (has(JUMP, n) or fam.upper().startswith("OVERALL")):
         return ["dress","jump"] if g == "women" else None
-    if not upper and (has(DRESS, n) and not has(_rx(["DRESS SHIRT","DRESS TROUSERS"]), n)):
+    if not upper and (has(DRESS, n) and not has(_rx(["DRESS SHIRT","DRESS TROUSERS","DRESS PANTS"]), n)):
         if g == "men": return None
         l = length(n, "dmini","dmidi","dmaxi"); return ["dress", l] if l else ["dress"]
     if not upper and (has(SKIRT, n)):
@@ -99,6 +101,8 @@ def classify(name, g, family=""):
         elif g == "men" and has(_rx(["SPORT","TRAINING","RUNNING","SWIM","ספורט","בגד ים"]), n): sub = "sport"
         else: sub = "stail" if g == "women" else None
         return ["bottom","short", sub] if sub else ["bottom","short"]
+    if not upper and has(_rx(["בגד ים","בגדי ים"]), n) and has(PANTS, n):
+        return ["bottom","short","sport"] if g == "men" else None
     if not upper and (has(PANTS, n) or re.match(r"TROUSERS|LEGGINGS", fam, re.I)):
         # with "English | Hebrew" names the English cut wins (shop translations are looser)
         c = (pants_cut(n.split(" | ")[0], g) if " | " in n else None) or pants_cut(n, g)

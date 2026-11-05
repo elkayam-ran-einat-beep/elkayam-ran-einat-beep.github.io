@@ -46,6 +46,7 @@ def collect(log):
                       "v": vendor, "pr": price, "c": color_families(cn), "cn": cn or "", "img": main,
                       "u": f"{BASE}/products/{p['handle']}"}
                 if flat: it["img2"] = flat
+                if path == ["bottom","long"]: it["_d"] = p.get("body_html") or ""
                 if old > price + 0.01: it["old"] = old
                 items.append(it)
             time.sleep(0.4)

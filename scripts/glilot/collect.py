@@ -2,6 +2,7 @@
 Usage: python collect.py [store ...]   (default: every store)"""
 import json, os, sys, collections, datetime, importlib
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
+from cuts import refine
 OUT = os.path.join(HERE, "..", "..", "glilot", "data")
 STORES = {"zara": "זארה", "golf": "גולף", "castro": "קסטרו", "crazyline": "קרייזי ליין", "massimodutti": "מסימו דוטי",
           "factory54": "פקטורי 54", "interfashion": "אינטרפאשן"}
@@ -14,11 +15,13 @@ def log(m): print(m, flush=True)
 def main(names):
     os.makedirs(OUT, exist_ok=True)
     idx_path = os.path.join(OUT, "index.json")
-    index = json.load(open(idx_path)) if os.path.exists(idx_path) else {"stores": {}}
+    index = json.load(open(idx_path, encoding="utf-8")) if os.path.exists(idx_path) else {"stores": {}}
     index["produced"] = []
     for s in names:
         try:
-            items = importlib.import_module(s).collect(log)
+            module = importlib.import_module(s)
+            items = module.collect(log)
+            refine(items, module, s, OUT, log)
         except Exception as ex:
             log(f"!! {s} failed: {ex}"); continue
         path = os.path.join(OUT, f"{s}.json")

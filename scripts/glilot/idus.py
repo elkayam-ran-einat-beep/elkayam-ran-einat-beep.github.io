@@ -35,6 +35,12 @@ def parse(page, base):
                     "oos": 'product_outofstock="true"' in body})
     return out
 
+def describe(it):
+    """The shop's description of one item, for items whose name does not give the cut."""
+    page = get(it["u"], accept="text/html").decode("utf-8", "replace")
+    m = re.search(r'<meta name="description" content="([^"]*)"', page)
+    return m.group(1) if m else ""
+
 def merge(name_path, cat_path):
     """The shop's own sub-category wins when it is more specific and agrees with the name."""
     if not name_path: return cat_path

@@ -1,5 +1,5 @@
 """Castro (castro.com). Fit sub-categories come first so their cut sticks."""
-from idus import run
+from idus import run, describe
 BASE = "https://www.castro.com"
 W, M = "women", "men"
 L = ["bottom","long"]

@@ -1,5 +1,5 @@
 """Golf (golf-il.co.il)."""
-from idus import run
+from idus import run, describe
 BASE = "https://www.golf-il.co.il"
 CATS = {
   "women/shirts-and-tops": ("women", ["top"]), "women/jeans": ("women", ["bottom","long"]),

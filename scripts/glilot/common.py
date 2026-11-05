@@ -1,4 +1,4 @@
-import json, urllib.request, urllib.error, urllib.parse, subprocess, time
+import gzip, json, urllib.request, urllib.error, urllib.parse, subprocess, time
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 
 def _curl(url, accept):
@@ -18,7 +18,8 @@ def get(url, accept="application/json", tries=3, headers=None):
     h.update(headers or {})
     for i in range(tries):
         try:
-            return urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=40).read()
+            body = urllib.request.urlopen(urllib.request.Request(url, headers=h), timeout=40).read()
+            return gzip.decompress(body) if body[:2] == b"\x1f\x8b" else body   # some shops compress without being asked
         except urllib.error.HTTPError as e:
             if e.code in (403, 429):
                 try: return _curl(url, accept)
