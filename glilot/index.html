@@ -344,7 +344,17 @@ window.addEventListener("hashchange", () => { readHash(); render(); });
     const idx = await (await fetch("data/index.json" + v)).json();
     STORES = idx.stores || {}; NAMES = idx.names || {};
     const lists = await Promise.all(Object.keys(STORES).map(s => fetch(`data/${s}.json` + v).then(r => r.ok ? r.json() : []).catch(() => [])));
-    ALL = lists.flat();
+    const seen = new Set(), groups = {};
+    for (const p of lists.flat()) {
+      const img = (p.img || "").split("?")[0];
+      const k1 = p.s + "|" + (img || p.u), k2 = p.s + "|" + p.n + "|" + (p.cn || "") + "|" + p.pr;
+      if (seen.has(k1) || seen.has(k2)) continue;
+      seen.add(k1); seen.add(k2);
+      (groups[p.s] = groups[p.s] || []).push(p);
+    }
+    const order = Object.keys(groups), longest = Math.max(0, ...order.map(s => groups[s].length));
+    ALL = [];
+    for (let i = 0; i < longest; i++) for (const s of order) if (i < groups[s].length) ALL.push(groups[s][i]);
     const dates = Object.values(STORES).map(s => s.updated).filter(Boolean).sort();
     if (dates.length) $("updated").textContent = "עודכן לאחרונה: " + new Date(dates[0].replace("Z", ":00Z")).toLocaleString("he-IL", {dateStyle:"short", timeStyle:"short"}) +
       " · " + Object.values(STORES).map(s => `${s.name} ${s.count.toLocaleString("he-IL")}`).join(" · ") + " · בתצוגת פריט, חנות שאין לה תמונה על רקע לבן מוצגת עם התמונה הרגילה";
