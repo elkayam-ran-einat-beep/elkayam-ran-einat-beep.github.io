@@ -40,9 +40,9 @@ def length(name, mini="mini", midi="midi", maxi="maxi"):
     return None
 
 def pants_cut(name, g):
-    order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","פאלאצו","רחב","רחבה","רחבים","רגל רחבה","פלאצו"]),
+    order = [("wide",["WIDE-LEG","WIDE LEG","WIDELEG","PALAZZO","CULOTTES?","VOLUME","ווייד","פאלאצו","רחב","רחבה","רחבים","רגל רחבה","פלאצו","קולוט"]),
              ("skinny",["SKINNY","סקיני","צרים"]),
-             ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט"]),
+             ("flare",["FLARE","FLARED","BOOTCUT","BELL","מתרחב","מתרחבים","פלייר","בוטקאט","פדלפון"]),
              ("cargo",["CARGO","קרגו","דגמ''ח","דגמ'ח",'דגמ"ח']),
              ("jogger",["JOGGERS?","JOGGING","SWEATPANTS","TRACKSUIT","DRAWSTRING","ג'וגר","טרנינג","פוטר"]),
              ("legging",["LEGGINGS","טייץ"]),

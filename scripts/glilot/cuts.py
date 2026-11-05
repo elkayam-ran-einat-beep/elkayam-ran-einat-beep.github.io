@@ -8,9 +8,9 @@ FIT = r"ג[י]?זר[הת]\s+"                     # "גזרה" / "גזרת" / "�
 PANTS = r"מכנס\S*\s+"
 LEG = r"רגל(?:יים)?\s+"
 CUTS = [
-    ("wide", r"wide[ -]?leg|palazzo|culottes?|" + HE + r"(?:" + LEG + "|" + FIT + "|" + PANTS + r")רחב|" + HE + r"(?:ווייד|וייד|פלאצו|פאלאצו)"),
+    ("wide", r"wide[ -]?leg|palazzo|culottes?|" + HE + r"(?:" + LEG + "|" + FIT + "|" + PANTS + r")רחב|" + HE + r"(?:ווייד|וייד|פלאצו|פאלאצו|קולוט)"),
     ("skinny", r"\bskinny\b|" + HE + r"סקיני|" + HE + r"(?:" + LEG + "|" + FIT + "|" + PANTS + r")צר(?:ה|ים)?(?![א-ת])"),
-    ("flare", r"\bflared?\b|boot ?cut|" + HE + r"(?:מתרחב|פלייר|בוטקאט)"),
+    ("flare", r"\bflared?\b|boot ?cut|" + HE + r"(?:מתרחב|פלייר|בוטקאט|פדלפון)"),
     ("cargo", r"\bcargo\b|" + HE + r"(?:קרגו|דגמ\W{0,2}ח)"),
     ("jogger", r"\bjoggers?\b|sweatpants|" + HE + r"(?:ג'וגר|טרנינג)"),
     ("legging", r"\bleggings?\b|" + HE + r"טייץ"),

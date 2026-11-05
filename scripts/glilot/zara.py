@@ -45,8 +45,9 @@ def describe(it):
     """Zara answers the product address with a pointer to the Hebrew page, which holds the description."""
     d = get_json(it["u"] + "&ajax=true")
     if d.get("location"): d = get_json(d["location"])
-    det = (d.get("product") or {}).get("detail") or {}
-    return (det.get("description") or "") + " " + (det.get("rawDescription") or "")
+    p = d.get("product") or {}
+    cols = (p.get("detail") or {}).get("colors") or []
+    return " ".join(x for x in [(p.get("seo") or {}).get("description")] + [c.get("description") or c.get("rawDescription") for c in cols[:1]] if x)
 
 def collect(log):
     cats = get_json(f"{BASE}/en/categories?ajax=true")["categories"]
