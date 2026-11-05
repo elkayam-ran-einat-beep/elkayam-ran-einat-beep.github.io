@@ -90,7 +90,8 @@ select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(-
 .price-old{color:var(--muted);text-decoration:line-through;margin-inline-start:6px;font-size:12px}
 .price-sale{color:#a3252a}
 .badge{position:absolute;top:8px;right:8px;font-size:10px;letter-spacing:.12em;background:var(--paper);padding:2px 6px}
-.more{display:block;margin:32px auto 0;border:1px solid var(--ink);padding:10px 28px;font-size:12px;letter-spacing:.12em}
+.shown{text-align:center;font-size:12px;color:var(--muted);margin-top:28px;font-variant-numeric:tabular-nums}
+.more{overflow-anchor:none;display:block;margin:12px auto 0;border:1px solid var(--ink);padding:10px 28px;font-size:12px;letter-spacing:.12em}
 .more:hover{background:var(--ink);color:var(--paper)}
 .loading{padding:80px 0;text-align:center;color:var(--muted)}
 .views{display:flex;border:1px solid var(--line)}
@@ -148,6 +149,7 @@ select{font:inherit;font-size:13px;border:1px solid var(--line);background:var(-
       <span class="count" id="count"></span>
     </div>
     <div class="grid" id="grid"><div class="loading" style="grid-column:1/-1">טוען פריטים…</div></div>
+    <p class="shown" id="shownNote"></p>
     <button class="more" id="moreBtn" hidden>עוד פריטים</button>
     <p class="updated" id="updated"></p>
   </main>
@@ -193,7 +195,7 @@ const PAGE = 48;
 let ALL = [], STORES = {};
 let savedView = "model"; try { savedView = localStorage.getItem("glilot-view") || "model"; } catch (e) {}
 const state = { g:"women", path:["bottom","long"], colors:new Set(), store:"", sort:"new", q:"", shown:PAGE, view:savedView };
-let NAMES = {};
+let NAMES = {}, CURRENT = [];
 const storeName = s => NAMES[s] || STORES[s]?.name || s;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -301,7 +303,8 @@ function render(){
   if (!ALL.length) grid.innerHTML = '<div class="empty" style="grid-column:1/-1">עדיין אין פריטים. האיסוף רץ פעם בלילה.</div>';
   else if (!items.length) grid.innerHTML = '<div class="empty" style="grid-column:1/-1">אין פריטים שמתאימים לסינון הזה. נסי להסיר צבע, חנות או חיפוש.</div>';
   else grid.innerHTML = items.slice(0, state.shown).map(card).join("");
-  $("moreBtn").hidden = items.length <= state.shown;
+  CURRENT = items;
+  updateMore();
   renderTree();
 }
 
@@ -314,7 +317,17 @@ $("brandSel").onchange = e => { state.store = e.target.value; state.shown = PAGE
 $("sortSel").onchange = e => { state.sort = e.target.value; render(); };
 let qt; $("search").oninput = e => { clearTimeout(qt); qt = setTimeout(() => { state.q = e.target.value.trim(); state.shown = PAGE; render(); }, 200); };
 $("clearBtn").onclick = () => { state.colors.clear(); state.store = ""; state.q = ""; $("search").value = ""; render(); };
-$("moreBtn").onclick = () => { state.shown += PAGE * 2; render(); };
+// "more" only appends cards; rebuilding the grid made phones keep the button in place and jump past the new items
+function updateMore(){
+  const n = Math.min(state.shown, CURRENT.length);
+  $("moreBtn").hidden = CURRENT.length <= state.shown;
+  $("shownNote").textContent = CURRENT.length ? `מוצגים ${n.toLocaleString("he-IL")} מתוך ${CURRENT.length.toLocaleString("he-IL")}` : "";
+}
+$("moreBtn").onclick = () => {
+  const from = state.shown; state.shown += PAGE * 2;
+  $("grid").insertAdjacentHTML("beforeend", CURRENT.slice(from, state.shown).map(card).join(""));
+  updateMore();
+};
 document.querySelectorAll(".views button").forEach(b => b.onclick = () => {
   state.view = b.dataset.v; try { localStorage.setItem("glilot-view", state.view); } catch (e) {} render();
 });
