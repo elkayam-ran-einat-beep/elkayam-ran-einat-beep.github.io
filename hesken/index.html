@@ -133,7 +133,7 @@ canvas{display:block;width:100%;height:180px;touch-action:none}
 <p>הגישה לקבצים תוגבל למורשות גישה לצורך השירות. ניתן לפנות בבקשות לעיון ולתיקון לפי דין, וכן בבקשות למחיקה או להפסקת שימוש. הבקשות ייבחנו בהתאם לדין, לצורך בשמירה ולחובות התיעוד. שימוש לפרסום ייעשה רק לפי ההסכמה הנפרדת להלן.</p>
 <h2><span class="n">10</span>הסכמה נפרדת לפרסום תמונות</h2>
 <p>הבחירה בעניין פרסום היא רשות ואינה תנאי לקבלת השירות או למחירו. יש לסמן אפשרות אחת, או לציין את הבחירה במפורש בהודעה דיגיטלית מתועדת. ללא בחירה ואישור נפרד לא יפורסמו תמונות. <span class="req">(חובה לבחור אחת)</span></p>
-<label class="opt"><input type="radio" name="photo"><span>אני מאשרת שימוש בתמונות שלי, כולל הפנים, באתר ובחשבונות הרשתות החברתיות של עינת רן אלקיים, להצגת עבודת הסטיילינג ולשיווק השירותים.</span></label>
+<label class="opt"><input type="radio" name="photo" checked><span>אני מאשרת שימוש בתמונות שלי, כולל הפנים, באתר ובחשבונות הרשתות החברתיות של עינת רן אלקיים, להצגת עבודת הסטיילינג ולשיווק השירותים.</span></label>
 <label class="opt"><input type="radio" name="photo"><span>אני מאשרת שימוש כאמור רק לאחר הסתרת הפנים והסרת שם, תיוג ופרטים מזהים גלויים. ידוע לי שגם תמונה ללא פנים עשויה להיות מוכרת למי שמכירה אותי.</span></label>
 <label class="opt"><input type="radio" name="photo"><span>איני מאשרת שימוש בתמונותיי לצורכי פרסום.</span></label>
 <p>ההרשאה חלה על תמונות מהשירות שהוזמן, ללא מועד סיום קבוע, גם לאחר סיום התהליך ותקופת הליווי, כל עוד ההסכמה בתוקף. התמונות המאושרות יכולות להישמר לצורך זה. פרסום שם, תיוג, עדות אישית, סרטון או שימוש בקמפיין ממומן דורשים אישור נפרד.</p>
@@ -141,8 +141,8 @@ canvas{display:block;width:100%;height:180px;touch-action:none}
 <h2><span class="n">11</span>אישור ההזמנה והתנאים</h2>
 <p>ההסכם וסיכום ההזמנה יאושרו בחתימה או בהודעה דיגיטלית מתועדת בוואטסאפ או בדוא״ל, הכוללת את שם הלקוחה והתייחסות מפורשת למסמכים. סיכום ההזמנה יפרט את השירות, המועדים, המקום והמחיר הכולל.</p>
 <p>יש לסמן בנפרד את ההסכמות לצילום ולעיבוד לצורכי השירות, או לציין במפורש בהודעה דיגיטלית את ההסכמה לכל אחת מהפעולות:</p>
-<label class="opt"><input type="checkbox"><span>אני מסכימה לצילום ולשמירת התמונות לצורכי השירות בהתאם לסעיף 9.</span></label>
-<label class="opt"><input type="checkbox"><span>אני מסכימה להעברת התמונות ולעיבודן באמצעות הכלים המפורטים בסעיף 9 לצורך הכנת התוצרים.</span></label>
+<label class="opt"><input type="checkbox" checked><span>אני מסכימה לצילום ולשמירת התמונות לצורכי השירות בהתאם לסעיף 9.</span></label>
+<label class="opt"><input type="checkbox" checked><span>אני מסכימה להעברת התמונות ולעיבודן באמצעות הכלים המפורטים בסעיף 9 לצורך הכנת התוצרים.</span></label>
 <p>אם לא ניתנה הסכמה לאחת הפעולות, יתואמו מראש ההתאמות הדרושות לשירות.</p>
     </div>
 
@@ -171,29 +171,37 @@ canvas{display:block;width:100%;height:180px;touch-action:none}
 </div>
 
 <script>
-const CONFIG = {"scriptUrl": "https://script.google.com/macros/s/AKfycbwQ63o7DQkxrdrJDszLmwzNi2keoVHgT8m_zqBEIu7CUYIh7GqoJZdCC1ZUp4OmsMYJcg/exec", "token": "24214ca6d6b619c8abdfd04c", "version": "83a6a0e6"};
+const CONFIG = {"scriptUrl": "https://script.google.com/macros/s/AKfycbwQ63o7DQkxrdrJDszLmwzNi2keoVHgT8m_zqBEIu7CUYIh7GqoJZdCC1ZUp4OmsMYJcg/exec", "version": "83a6a0e6"};
 const $ = id => document.getElementById(id);
 
-function b64urlDecode(s){
-  s = s.replace(/-/g,"+").replace(/_/g,"/"); while (s.length % 4) s += "=";
-  const bin = atob(s); const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
-  return new TextDecoder().decode(bytes);
+const MESSAGES = {
+  order: "הקישור לא אישי או שלא נפתח במלואו. תבקשי מעינת קישור חדש.",
+  signed: "ההסכם בקישור הזה כבר נחתם. אם צריך לחתום שוב, תבקשי מעינת קישור חדש.",
+  version: "נוסח ההסכם התעדכן מאז שהקישור נשלח. תבקשי מעינת קישור חדש.",
+  load: "לא הצלחתי לטעון את פרטי ההזמנה. נסי לרענן את הדף, ואם זה חוזר, כתבי לעינת בוואטסאפ."
+};
+const orderId = new URLSearchParams(location.search).get("o");
+function blockSigning(text){
+  const warn = $("warn"); warn.style.display = "block"; warn.textContent = text; $("send").disabled = true;
 }
-let order = null;
-(function(){
-  const q = new URLSearchParams(location.search).get("d");
-  const warn = $("warn");
-  if (q) { try { order = JSON.parse(b64urlDecode(q)); } catch (e) { order = null; } }
-  if (!order || !order.n) {
-    warn.style.display = "block"; warn.textContent = "הקישור לא אישי או שלא נפתח במלואו. תבקשי מעינת קישור חדש.";
-    $("send").disabled = true; return;
-  }
+// החתימה נפתחת רק אחרי שפרטי ההזמנה נטענו מהדרייב של עינת
+$("send").disabled = true;
+(async function(){
+  if (!orderId) { blockSigning(MESSAGES.order); return; }
+  let out;
+  try {
+    const res = await fetch(CONFIG.scriptUrl + "?order=" + encodeURIComponent(orderId));
+    out = await res.json();
+  } catch (e) { blockSigning(MESSAGES.load); return; }
+  if (!out.ok) { blockSigning(MESSAGES[out.error] || MESSAGES.load); return; }
+  const order = out.order;
+  if (order.version !== CONFIG.version) { blockSigning(MESSAGES.version); return; }
   const rows = [["שם הלקוחה", order.n], ["התהליך", "תהליך סטיילינג מלא"], ["מועדי המפגשים", order.dates], ["מקום המפגשים", order.place], ["מחיר כולל", order.price], ["תוספת נסיעות", order.travel]];
   $("sumlist").innerHTML = rows.filter(r => r[1]).map(r => "<dt></dt><dd></dd>").join("");
   const dts = $("sumlist").querySelectorAll("dt"), dds = $("sumlist").querySelectorAll("dd");
   rows.filter(r => r[1]).forEach((r, i) => { dts[i].textContent = r[0]; dds[i].textContent = r[1]; });
   $("summary").style.display = "block";
-  if (!CONFIG.scriptUrl) { warn.style.display = "block"; warn.textContent = "החתימה הדיגיטלית עוד לא פעילה. עינת תעדכן כשהיא מוכנה."; $("send").disabled = true; }
+  $("send").disabled = false;
 })();
 
 // signature pad
@@ -206,11 +214,20 @@ function sizeCanvas(){
   strokes = 0; $("hint").style.display = "flex";
 }
 sizeCanvas();
+// סיבוב הטלפון משנה את הרוחב, ואז צריך לחתום מחדש. גלילה בטלפון משנה רק את הגובה ולא מוחקת.
+let padWidth = pad.getBoundingClientRect().width;
+window.addEventListener("resize", () => {
+  const w = pad.getBoundingClientRect().width;
+  if (w !== padWidth) { padWidth = w; sizeCanvas(); submission = null; }
+});
 function pt(e){ const r = pad.getBoundingClientRect(); return {x: e.clientX - r.left, y: e.clientY - r.top}; }
 pad.addEventListener("pointerdown", e => { drawing = true; last = pt(e); pad.setPointerCapture(e.pointerId); $("hint").style.display = "none"; ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(last.x + .01, last.y + .01); ctx.stroke(); });
 pad.addEventListener("pointermove", e => { if (!drawing) return; const p = pt(e); ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(p.x, p.y); ctx.stroke(); last = p; strokes++; });
 ["pointerup", "pointercancel"].forEach(t => pad.addEventListener(t, () => { drawing = false; }));
 $("clear").onclick = () => { ctx.clearRect(0, 0, pad.width, pad.height); strokes = 0; $("hint").style.display = "flex"; };
+// שינוי בטופס אחרי ניסיון שליחה הוא שליחה חדשה, ולכן אם הראשונה כן הגיעה הלקוחה תראה "כבר נחתם"
+let submission = null;
+["input", "change", "pointerdown"].forEach(t => $("form-area").addEventListener(t, ev => { if (ev.target !== $("send")) submission = null; }));
 
 function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
@@ -239,16 +256,20 @@ $("signform").addEventListener("submit", async ev => {
   const email = $("email").value.trim();
   if (email && !/^\S+@\S+\.\S+$/.test(email)) { err.textContent = "המייל לא נראה תקין."; return; }
   const sig = pad.toDataURL("image/png");
-  const consents = [...document.querySelectorAll('#contract input[type=checkbox]')].map(c => ({text: c.parentNode.querySelector("span").textContent, checked: c.checked}));
+  const consents = [...document.querySelectorAll('#contract input[type=checkbox]')].map(c => c.checked);
   const html = frozenContract();
-  const payload = { token: CONFIG.token, id: (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random()),
-    version: CONFIG.version, name, email, order, photoChoice: photo.parentNode.querySelector("span").textContent, consents,
-    signature: sig, contractHtml: html, clientTime: new Date().toISOString(), agent: navigator.userAgent };
+  // אותו מזהה נשלח גם בניסיון חוזר, כך שרשת איטית לא יוצרת הסכם כפול
+  submission = submission || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random());
+  const payload = { order: orderId, submission, version: CONFIG.version, agreed: true, name, email,
+    photo: [...document.querySelectorAll('input[name="photo"]')].indexOf(photo), consents, signature: sig };
   const btn = $("send"); btn.disabled = true; btn.textContent = "שולחת...";
   try {
     const res = await fetch(CONFIG.scriptUrl, { method: "POST", headers: {"Content-Type": "text/plain;charset=utf-8"}, body: JSON.stringify(payload) });
     const out = await res.json();
-    if (!out.ok) throw new Error(out.error || "failed");
+    if (!out.ok) {
+      if (MESSAGES[out.error]) { blockSigning(MESSAGES[out.error]); btn.textContent = "אני מאשרת וחותמת"; window.scrollTo(0, 0); return; }
+      throw new Error(out.error || "failed");
+    }
   } catch (e) {
     btn.disabled = false; btn.textContent = "אני מאשרת וחותמת";
     err.textContent = "לא הצלחתי לשלוח. נסי שוב בעוד רגע, ואם זה חוזר, כתבי לעינת בוואטסאפ.";
