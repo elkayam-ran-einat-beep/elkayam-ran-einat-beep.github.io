@@ -196,7 +196,7 @@ $("send").disabled = true;
   if (!out.ok) { blockSigning(MESSAGES[out.error] || MESSAGES.load); return; }
   const order = out.order;
   if (order.version !== CONFIG.version) { blockSigning(MESSAGES.version); return; }
-  const rows = [["שם הלקוחה", order.n], ["התהליך", "תהליך סטיילינג מלא"], ["מועדי המפגשים", order.dates], ["מקום המפגשים", order.place], ["מחיר כולל", order.price], ["תוספת נסיעות", order.travel]];
+  const rows = [["שם הלקוחה", order.n], [order.serviceLabel, order.service], ["מועדים", order.dates], ["מקום", order.place], ["מחיר כולל", order.price], ["תוספת נסיעות", order.travel]];
   $("sumlist").innerHTML = rows.filter(r => r[1]).map(r => "<dt></dt><dd></dd>").join("");
   const dts = $("sumlist").querySelectorAll("dt"), dds = $("sumlist").querySelectorAll("dd");
   rows.filter(r => r[1]).forEach((r, i) => { dts[i].textContent = r[0]; dds[i].textContent = r[1]; });
