@@ -205,7 +205,7 @@ $("send").disabled = true;
     const radios = document.querySelectorAll('#contract input[name="photo"]');
     if (radios.length) radios[radios.length - 1].checked = true;
     const h = [...document.querySelectorAll("#contract h2")].find(x => (x.querySelector(".n") || {}).textContent === "10");
-    if (h) { let n = h.nextElementSibling; h.remove(); while (n && n.tagName !== "H2") { const nx = n.nextElementSibling; n.remove(); n = nx; } }
+    if (h) { let n = h; do { n.style.display = "none"; n.dataset.np = "1"; n = n.nextElementSibling; } while (n && n.tagName !== "H2"); }
   }
   $("send").disabled = false;
 })();
@@ -247,6 +247,7 @@ function frozenContract(){
     l.replaceWith(p);
   });
   clone.querySelectorAll(".req").forEach(n => n.remove());
+  clone.querySelectorAll("[data-np]").forEach(n => n.remove());
   return clone.innerHTML;
 }
 
