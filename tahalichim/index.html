@@ -59,6 +59,13 @@ p{margin:0;}
 .yes{color:var(--accent);}
 .no{color:var(--rule-strong);}
 
+/* העמודה המומלצת: מסגרת בורדו סביב כל הטור */
+.cmp .hl{border-left:2px solid var(--accent);border-right:2px solid var(--accent);background:rgba(245,227,221,.45);}
+.cmp thead .hl{border-top:2px solid var(--accent);position:relative;padding-top:44px;}
+.cmp tfoot .hl{border-bottom:2px solid var(--accent);padding-bottom:22px;}
+.badge{display:inline-block;background:var(--accent);color:var(--on-accent);font-size:.78rem;font-weight:700;letter-spacing:.14em;padding:5px 14px;line-height:1.4;}
+.cmp thead .badge{position:absolute;top:-2px;right:-2px;}
+
 /* כרטיסים בטלפון */
 .cards{display:none;}
 .card{display:flex;flex-direction:column;gap:18px;padding:34px 0 40px;border-top:2px solid var(--accent);}
@@ -66,6 +73,9 @@ p{margin:0;}
 .card li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-bottom:1px solid var(--rule);}
 .card .k{font-size:.86rem;font-weight:700;color:var(--accent-deep);}
 .card .v{font-size:1rem;line-height:1.6;}
+.card.hl{border:2px solid var(--accent);padding:0 18px 26px;margin:34px 0 0;background:rgba(245,227,221,.45);}
+.card.hl .badge{align-self:flex-start;margin:0 -18px 0 0;}
+.card.hl + .card{margin-top:34px;}
 
 .after{padding:40px 0 100px;}
 .after .wrap{display:flex;flex-direction:column;gap:16px;}
@@ -104,21 +114,21 @@ footer{padding:48px 0 60px;text-align:center;border-top:1px solid var(--rule);}
 <section class="table-sec">
   <div class="wrap">
 <table class="cmp">
-<thead><tr><th scope="col" class="corner">מה כלול בתהליך</th><th scope="col"><span class="pk">התהליך הבסיסי</span><span class="pr">4,200 ₪</span></th><th scope="col"><span class="pk">התהליך המפנק</span><span class="pr">6,400 ₪</span></th><th scope="col"><span class="pk">תהליך הפרימיום</span><span class="pr">9,800 ₪</span></th></tr></thead>
+<thead><tr><th scope="col" class="corner">מה כלול בתהליך</th><th scope="col"><span class="pk">התהליך הבסיסי</span><span class="pr">4,200 ₪</span></th><th scope="col" class="hl"><span class="badge">מומלץ</span><span class="pk">התהליך המפנק</span><span class="pr">6,400 ₪</span></th><th scope="col"><span class="pk">תהליך הפרימיום</span><span class="pr">9,800 ₪</span></th></tr></thead>
 <tbody>
-<tr><th scope="row">מספר הפגישות עם עינת</th><td>3</td><td>4</td><td>עד 3, בהתאם לגודל המלתחה שלך</td></tr>
-<tr><th scope="row">אפיון ומעבר על המלתחה</th><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td></tr>
-<tr><th scope="row">התאמה אישית</th><td>אבחון גזרות וצבעים ובניית רשימת קניות</td><td>אבחון גזרות וצבעים ובניית רשימת קניות</td><td>אבחון גזרות וצבעים ובניית רשימת קניות</td></tr>
-<tr><th scope="row">לוקבוק לפני הקניות</th><td><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
-<tr><th scope="row">קניות</th><td>יום קניות יחד בחנויות</td><td>יום קניות יחד בחנויות ויום קניות נוסף יחד בבוטיק</td><td>עינת מזמינה או אוספת את הפריטים, מביאה הכול עד אלייך ומטפלת בהחזרות ובהחלפות</td></tr>
-<tr><th scope="row">סטיילינג בבית אחרי הקניות</th><td>שילובים עם המלתחה הקיימת וצילום הלוקים</td><td>שילובים עם המלתחה הקיימת וצילום הלוקים</td><td>מדידות והתאמות, שילובים עם המלתחה הקיימת וצילום הלוקים</td></tr>
-<tr><th scope="row">החזרות, החלפות ומעקב אחר זיכויים</th><td><span class="no" aria-label="לא כלול">X</span></td><td><span class="no" aria-label="לא כלול">X</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
-<tr><th scope="row">תיקונים אצל תופרת</th><td><span class="no" aria-label="לא כלול">X</span></td><td><span class="no" aria-label="לא כלול">X</span></td><td>עינת מודדת, לוקחת ומחזירה מהתופרת</td></tr>
-<tr><th scope="row">סידור הארון על ידי אשת מקצוע</th><td><span class="no" aria-label="לא כלול">X</span></td><td><span class="no" aria-label="לא כלול">X</span></td><td>כלול במחיר. אחרי הקניות מגיעה אלייך מסדרת ארונות חיצונית לביקור נפרד</td></tr>
-<tr><th scope="row">ספר סטיילינג אישי</th><td><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
-<tr><th scope="row">ליווי בוואטסאפ ומעקב יזום</th><td>30 יום</td><td>60 יום</td><td>60 יום</td></tr>
+<tr><th scope="row">מספר הפגישות עם עינת</th><td>3</td><td class="hl">4</td><td>עד 3, בהתאם לגודל המלתחה שלך</td></tr>
+<tr><th scope="row">אפיון ומעבר על המלתחה</th><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td class="hl">שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td></tr>
+<tr><th scope="row">התאמה אישית</th><td>אבחון גזרות וצבעים ובניית רשימת קניות</td><td class="hl">אבחון גזרות וצבעים ובניית רשימת קניות</td><td>אבחון גזרות וצבעים ובניית רשימת קניות</td></tr>
+<tr><th scope="row">לוקבוק לפני הקניות</th><td><span class="yes" aria-label="כלול">V</span></td><td class="hl"><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
+<tr><th scope="row">קניות</th><td>יום קניות יחד בחנויות</td><td class="hl">יום קניות יחד בחנויות ויום קניות נוסף יחד בבוטיק</td><td>עינת מזמינה או אוספת את הפריטים, מביאה הכול עד אלייך ומטפלת בהחזרות ובהחלפות</td></tr>
+<tr><th scope="row">סטיילינג בבית אחרי הקניות</th><td>שילובים עם המלתחה הקיימת וצילום הלוקים</td><td class="hl">שילובים עם המלתחה הקיימת וצילום הלוקים</td><td>מדידות והתאמות, שילובים עם המלתחה הקיימת וצילום הלוקים</td></tr>
+<tr><th scope="row">החזרות, החלפות ומעקב אחר זיכויים</th><td><span class="no" aria-label="לא כלול">X</span></td><td class="hl"><span class="no" aria-label="לא כלול">X</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
+<tr><th scope="row">תיקונים אצל תופרת</th><td><span class="no" aria-label="לא כלול">X</span></td><td class="hl"><span class="no" aria-label="לא כלול">X</span></td><td>עינת מודדת, לוקחת ומחזירה מהתופרת</td></tr>
+<tr><th scope="row">סידור הארון על ידי אשת מקצוע</th><td><span class="no" aria-label="לא כלול">X</span></td><td class="hl"><span class="no" aria-label="לא כלול">X</span></td><td>כלול במחיר. אחרי הקניות מגיעה אלייך מסדרת ארונות חיצונית לביקור נפרד</td></tr>
+<tr><th scope="row">ספר סטיילינג אישי</th><td><span class="yes" aria-label="כלול">V</span></td><td class="hl"><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
+<tr><th scope="row">ליווי בוואטסאפ ומעקב יזום</th><td>30 יום</td><td class="hl">60 יום</td><td>60 יום</td></tr>
 </tbody>
-<tfoot><tr><th></th><td><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%91%D7%A1%D7%99%D7%A1%D7%99.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך הבסיסי</a></td><td><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%9E%D7%A4%D7%A0%D7%A7.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך המפנק</a></td><td><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%A4%D7%A8%D7%99%D7%9E%D7%99%D7%95%D7%9D.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך הפרימיום</a></td></tr></tfoot>
+<tfoot><tr><th></th><td><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%91%D7%A1%D7%99%D7%A1%D7%99.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך הבסיסי</a></td><td class="hl"><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%9E%D7%A4%D7%A0%D7%A7.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך המפנק</a></td><td><a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%A4%D7%A8%D7%99%D7%9E%D7%99%D7%95%D7%9D.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך הפרימיום</a></td></tr></tfoot>
 </table>
     <div class="cards">
 <article class="card">
@@ -138,8 +148,8 @@ footer{padding:48px 0 60px;text-align:center;border-top:1px solid var(--rule);}
 </ul>
 <a class="cta" href="https://wa.me/972546443743?text=%D7%94%D7%99%D7%99%20%D7%A2%D7%99%D7%A0%D7%AA%2C%20%D7%91%D7%97%D7%A8%D7%AA%D7%99%20%D7%91%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%94%D7%91%D7%A1%D7%99%D7%A1%D7%99.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%90%D7%AA%20%D7%94%D7%94%D7%A1%D7%9B%D7%9D." target="_blank" rel="noopener">בחרתי בתהליך הבסיסי</a>
 </article>
-<article class="card">
-<h2><span class="pk">התהליך המפנק</span><span class="pr">6,400 ₪</span></h2>
+<article class="card hl">
+<span class="badge">מומלץ</span><h2><span class="pk">התהליך המפנק</span><span class="pr">6,400 ₪</span></h2>
 <ul>
 <li><span class="k">מספר הפגישות עם עינת</span><span class="v">4</span></li>
 <li><span class="k">אפיון ומעבר על המלתחה</span><span class="v">שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</span></li>
