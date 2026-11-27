@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>תהליכי סטיילינג אישי · עינת רן אלקיים</title>
+<title>תהליכי סטיילינג אישי לעונה · עינת רן אלקיים</title>
 <meta name="description" content="השוואה בין שלושת תהליכי הסטיילינג האישי של עינת רן אלקיים: הבסיסי, המפנק והפרימיום.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#7D1631">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="he_IL">
 <meta property="og:site_name" content="עינת רן אלקיים">
-<meta property="og:title" content="תהליכי סטיילינג אישי · עינת רן אלקיים">
+<meta property="og:title" content="תהליכי סטיילינג אישי לעונה · עינת רן אלקיים">
 <meta property="og:description" content="הבסיסי, המפנק והפרימיום: מה כלול בכל תהליך.">
 <meta property="og:url" content="https://www.einatran.com/tahalichim/">
 <meta property="og:image" content="https://www.einatran.com/img-abchon/abchon-hero.jpg">
@@ -36,9 +36,20 @@ p{margin:0;}
 .lede{font-size:1.32rem;line-height:1.7;color:var(--ink-soft);font-weight:300;max-width:660px;}
 .rule-gold{width:64px;height:2px;background:var(--gold);border:0;margin:0;}
 
-.top{background:linear-gradient(180deg,var(--blush) 0,var(--paper) 100%);padding:80px 0 64px;}
-.top .wrap{display:flex;flex-direction:column;gap:26px;}
-.top h1 em{font-style:normal;color:var(--accent);}
+.top{position:relative;overflow:hidden;color:var(--on-accent);padding:80px 0 72px;
+  background:
+    radial-gradient(1100px 440px at 88% -12%,rgba(222,104,134,.42),transparent 62%),
+    radial-gradient(900px 380px at 4% 112%,rgba(190,72,104,.34),transparent 62%),
+    linear-gradient(118deg,#2B0612 0%,var(--accent-deep) 36%,var(--accent) 68%,#A02542 100%);}
+/* רשת דקה שמתפוגגת כלפי מטה: נותנת מראה טכנולוגי בלי לצייר דבר */
+.top::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(252,244,236,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(252,244,236,.06) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0,transparent 92%);mask-image:linear-gradient(180deg,#000 0,transparent 92%);}
+.top .wrap{position:relative;display:flex;flex-direction:column;gap:26px;}
+.top h1{color:var(--on-accent);}
+.top h1 em{font-style:normal;color:#EBCB94;}
+.top .lede{color:rgba(252,244,236,.84);}
 
 .cta{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:var(--on-accent);font-family:'Assistant',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.03em;padding:14px 22px;min-height:54px;border:1px solid var(--accent);border-radius:0;text-decoration:none;text-align:center;line-height:1.3;transition:background .2s ease;}
 .cta:hover{background:var(--accent-deep);border-color:var(--accent-deep);}
@@ -113,7 +124,7 @@ footer{padding:48px 0 60px;text-align:center;border-top:1px solid var(--rule);}
 
 <header class="top">
   <div class="wrap">
-    <h1>שלושה תהליכים של <em>סטיילינג אישי</em></h1>
+    <h1>שלושה תהליכים של <em>סטיילינג אישי</em> לעונה</h1>
     <hr class="rule-gold">
     <p class="lede">כל אחד מהם מתחיל בשאלון ובפגישת אפיון, וממשיך ללוקבוק, לקניות, ללוקים מצולמים ולספר סטיילינג אישי. כאן אפשר לראות מה כלול בכל אחד.</p>
   </div>
@@ -125,7 +136,7 @@ footer{padding:48px 0 60px;text-align:center;border-top:1px solid var(--rule);}
 <table class="cmp">
 <thead><tr><th scope="col" class="corner">מה כלול בתהליך</th><th scope="col"><span class="pk">התהליך הבסיסי</span><span class="pr">4,200 ₪</span></th><th scope="col" class="hl"><span class="badge">מומלץ</span><span class="pk">התהליך המפנק</span><span class="pr">6,400 ₪</span></th><th scope="col"><span class="pk">תהליך הפרימיום</span><span class="pr">9,800 ₪</span></th></tr></thead>
 <tbody>
-<tr><th scope="row">מספר הפגישות עם עינת</th><td>3</td><td class="hl">4</td><td>עד 3, בהתאם לגודל המלתחה שלך</td></tr>
+<tr><th scope="row">מספר הפגישות עם עינת</th><td>3</td><td class="hl">4</td><td>כמה שנדרש, לפי הצורך</td></tr>
 <tr><th scope="row">אפיון ומעבר על המלתחה</th><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td class="hl">שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td><td>שאלון, פגישת אפיון ואבחון, בניית אסטרטגיה לנראות מיטבית ומעבר על המלתחה</td></tr>
 <tr><th scope="row">התאמה אישית</th><td>אבחון גזרות וצבעים ובניית רשימת קניות</td><td class="hl">אבחון גזרות וצבעים ובניית רשימת קניות</td><td>אבחון גזרות וצבעים ובניית רשימת קניות</td></tr>
 <tr><th scope="row">לוקבוק לפני הקניות</th><td><span class="yes" aria-label="כלול">V</span></td><td class="hl"><span class="yes" aria-label="כלול">V</span></td><td><span class="yes" aria-label="כלול">V</span></td></tr>
