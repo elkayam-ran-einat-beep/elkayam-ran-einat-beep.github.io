@@ -79,3 +79,19 @@ p { margin: 0 0 10px; }
   .pdf { display: none; }
   .btn { box-shadow: none; }
 }
+
+/* ---------- ההטבה ---------- */
+.offer { max-width: 520px; margin: 0 auto; padding: 26px 20px 24px; background: #FFFDF9; border-top: 3px solid var(--bordo); box-shadow: 0 14px 34px -18px rgba(94,15,36,.45); }
+.offer-title { font-family: "Heebo", sans-serif; font-weight: 300; color: var(--bordo); font-size: 22px; line-height: 1.35; margin: 0 0 10px; }
+.badge { display: inline-block; background: #F4E1DC; color: var(--bordo); font-weight: 700; font-size: 15.5px; padding: 6px 14px; border-radius: 20px; margin: 0 0 14px; }
+.clock-label { font-size: 14px; color: var(--soft); margin: 0; }
+.clock { font-family: "Bellefair", serif; font-size: 44px; letter-spacing: .06em; color: var(--bordo); direction: ltr; margin: 0 0 16px; line-height: 1.1; }
+.offer-detail { text-align: center; border-top: 1px solid #E3D5C3; margin-top: 6px; padding-top: 16px; }
+.offer-detail h3 { margin-top: 0; }
+.price { font-size: 18px; margin: 10px 0 16px; }
+.price s { color: var(--soft); }
+.price strong { font-family: "Bellefair", serif; font-weight: 400; font-size: 34px; color: var(--bordo); margin-right: 8px; }
+.offer-actions { display: grid; gap: 10px; }
+.btn.ghost { background: #FFFDF9; color: var(--bordo); box-shadow: 0 0 0 1.5px var(--bordo); }
+.offer-detail[hidden], .offer .btn[hidden] { display: none; }
+@media print { .offer, .endbox { display: none; } }
