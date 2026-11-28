@@ -2,7 +2,7 @@
    הקוד של התשובות נשמר כספרות לפי סדר האפשרויות (0, 1, 2...). לא לשנות סדר אפשרויות בלי לעדכן את map.js. */
 window.QUIZ = {
   // כתובת הסקריפט בגוגל (Apps Script). ריקה = מצב בדיקה, שום דבר לא נשלח.
-  endpoint: "",
+  endpoint: "https://script.google.com/macros/s/AKfycbxJ1NOT_iq3FbgCdAlhejKwUb0mtR0CLdavN-w-ez7EBkQii3yAXTkkLQPAEbP0U-lL/exec",
 
   intro: {
     kicker: "מפת הסטייל",
