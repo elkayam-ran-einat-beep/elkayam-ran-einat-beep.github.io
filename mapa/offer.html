@@ -46,12 +46,17 @@
   function show(endMs, skew) {
     var clock = el("div", { class: "clock" });
     var actions = [];
+    if (O.payUrl) {
+      var pay = el("a", { class: "btn", href: O.payUrl, target: "_blank", rel: "noopener" }, [O.payCta]);
+      pay.addEventListener("click", function () { ping("pay"); });
+      actions.push(pay);
+    }
     if (O.calendar) {
-      var cal = el("a", { class: "btn", href: O.calendar, target: "_blank", rel: "noopener" }, [O.calendarCta]);
+      var cal = el("a", { class: "btn" + (O.payUrl ? " ghost" : ""), href: O.calendar, target: "_blank", rel: "noopener" }, [O.calendarCta]);
       cal.addEventListener("click", function () { ping("calendar"); });
       actions.push(cal);
     }
-    var wa = el("a", { class: "btn" + (O.calendar ? " ghost" : ""), href: waLink(O.whatsappText), target: "_blank", rel: "noopener" }, [O.whatsappCta]);
+    var wa = el("a", { class: "btn" + (O.calendar || O.payUrl ? " ghost" : ""), href: waLink(O.whatsappText), target: "_blank", rel: "noopener" }, [O.whatsappCta]);
     wa.addEventListener("click", function () { ping("whatsapp"); });
     actions.push(wa);
     box.replaceChildren(el("div", { class: "offer" }, [
