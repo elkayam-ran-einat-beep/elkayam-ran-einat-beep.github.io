@@ -146,3 +146,6 @@ main, .top { position: relative; z-index: 1; }
 .insta { margin: 26px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); }
 .insta p { margin: 0 0 14px; font-size: 16.5px; }
 a.cta { text-decoration: none; text-align: center; }
+
+/* הכותרת מקבלת פוקוס בקוד בכל מעבר מסך, בלי מסגרת */
+h1:focus, h2:focus, [tabindex="-1"]:focus { outline: none; }
