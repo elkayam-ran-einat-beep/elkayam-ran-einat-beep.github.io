@@ -74,15 +74,17 @@
   if (combo) tryIt += " ובצבעים: " + combo + ".";
 
   /* ---------- משיחת מכחול ---------- */
+  /* דוגמית משי: צורת בד אמיתית (img/silk) שנצבעת בצבע שלה. שתי צורות לסירוגין. */
   function swatch(name, hex, i) {
-    var w = 120, h = 108;
-    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" aria-hidden="true">' +
-      '<path filter="url(#brush)" fill="' + hex + '" d="M14 16 C40 9 82 11 106 15 C110 40 109 70 104 94 C78 99 40 98 16 93 C11 66 10 40 14 16 Z" ' +
-      'transform="rotate(' + ((i % 2 ? 1 : -1) * (1.5 + i)) + ' 60 54)"/></svg>';
-    var fig = el("figure", { class: "sw" + (hex.toUpperCase() === "#FFFFFF" || hex.toUpperCase() === "#F7F7FA" ? " light" : "") });
-    fig.insertAdjacentHTML("afterbegin", svg); // SVG קבוע מתוך הקוד, בלי קלט של משתמשת
-    fig.appendChild(el("figcaption", { text: name }));
-    return fig;
+    var n = i % 2 ? 2 : 1;
+    var color = el("div", { class: "c" }); color.style.background = hex;
+    var silk = el("div", { class: "silk", role: "img", "aria-label": name }, [
+      color,
+      el("img", { class: "sh", src: "img/silk/silk-" + n + "-shade.png", alt: "" }),
+      el("img", { class: "li", src: "img/silk/silk-" + n + "-light.png", alt: "" })
+    ]);
+    silk.style.setProperty("--m", "url(img/silk/silk-" + n + "-mask.png)");
+    return el("figure", { class: "sw" }, [silk, el("figcaption", { text: name })]);
   }
 
   /* ---------- בנייה ---------- */

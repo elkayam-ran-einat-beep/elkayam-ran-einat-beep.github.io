@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>סקיצות · דוגמיות משי</title>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600&family=Heebo:wght@200;300&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #F8EFE2; color: #3E3029; font-family: "Assistant", sans-serif; }
+  main { max-width: 900px; margin: 0 auto; padding: 30px 16px 60px; }
+  h1 { font-family: "Heebo"; font-weight: 200; color: #701C34; font-size: 36px; margin: 0 0 6px; }
+  .lead { color: #6A5145; margin: 0 0 26px; }
+  section { border-top: 1px solid #BC9668; padding: 22px 0 26px; }
+  h2 { font-family: "Heebo"; font-weight: 300; color: #701C34; font-size: 24px; margin: 0 0 4px; }
+  h2 b { font-family: Georgia, serif; font-weight: 400; color: #BC9668; margin-left: 8px; }
+  .desc { margin: 0 0 14px; color: #6A5145; font-size: 15px; }
+  .pal { display: flex; gap: 10px; margin-bottom: 14px; }
+  .pal figure { flex: 1 1 0; margin: 0; text-align: center; min-width: 0; }
+  .pal svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .pal figcaption { font-size: 13px; margin-top: 4px; }
+  .label { font-size: 13px; color: #8A7A70; margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>דוגמיות משי במקום משיכות מכחול</h1>
+  <p class="lead">כל וריאציה מוצגת בשתי פלטות מהמפה: סתיו רך וחורף עמוק. הגוונים נצבעים אוטומטית לפי הפלטה של כל אישה.</p>
+  <div id="out"></div>
+</main>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.4 0.06" numOctaves="2" seed="3" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .07 0" result="g"/>
+      <feComposite in="g" in2="SourceGraphic" operator="in" result="gi"/>
+      <feBlend in="gi" in2="SourceGraphic" mode="screen"/>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#5b3a2a" flood-opacity=".22"/></filter>
+  </defs>
+</svg>
+<script>
+const PALS = [
+  [["שמנת חמה","#EEE1C8"],["קאמל","#B88C5C"],["ירוק זית","#77784B"],["ורוד עץ","#A56E67"]],
+  [["נייבי עמוק","#18243D"],["ירוק אורן","#164D45"],["בורדו קר","#6E233D"],["אדום דובדבן","#B51F3D"]]
+];
+function mix(hex, w, t) { // w: 0..1 toward t (#fff or #000)
+  const a = hex.match(/\w\w/g).map(x => parseInt(x, 16)), b = t.match(/\w\w/g).map(x => parseInt(x, 16));
+  return "#" + a.map((v, i) => Math.round(v + (b[i] - v) * w).toString(16).padStart(2, "0")).join("");
+}
+const L = (c, w) => mix(c, w, "#ffffff"), D = (c, w) => mix(c, w, "#000000");
+let uid = 0;
+/* פסי ברק: רצף עצירות גרדיאנט שמדמה קפלים רכים ומשי שתופס אור */
+function sheen(c, angle, stops) {
+  const id = "g" + (uid++);
+  const s = stops.map(([o, k]) => `<stop offset="${o}" stop-color="${k > 0 ? L(c, k) : D(c, -k)}"/>`).join("");
+  return [id, `<linearGradient id="${id}" gradientTransform="rotate(${angle} .5 .5)">${s}</linearGradient>`];
+}
+const SHEEN = [[0, -.18], [.18, .05], [.32, .42], [.42, .12], [.58, -.12], [.72, .22], [.84, .5], [1, -.1]];
+
+const VARIANTS = [
+  { name: "ריבוע משי", desc: "ריבוע בד חלק עם קצוות ישרים וברק אלכסוני עדין. הכי נקי ומגזיני.",
+    svg: c => { const [g, d] = sheen(c, 32, SHEEN);
+      return `<svg viewBox="0 0 120 120"><defs>${d}</defs><rect x="6" y="6" width="108" height="108" fill="url(#${g})" filter="url(#soft)"/><rect x="6" y="6" width="108" height="108" fill="url(#${g})" filter="url(#grain)"/></svg>`; } },
+  { name: "משי מקופל", desc: "חתיכת בד שהפינה שלה מקופלת, כמו דוגמית שנשלפה ממדף. רואים את הצד השני של הבד.",
+    svg: c => { const [g, d] = sheen(c, 28, SHEEN), [g2, d2] = sheen(c, 120, [[0, .35], [.5, -.05], [1, -.25]]);
+      return `<svg viewBox="0 0 120 120"><defs>${d}${d2}</defs><path d="M6 8 H114 V78 L80 112 H6 Z" fill="url(#${g})" filter="url(#soft)"/><path d="M114 78 L80 112 L84 82 Z" fill="url(#${g2})"/><path d="M114 78 L84 82 L80 112" fill="none" stroke="${D(c,.25)}" stroke-width=".6" opacity=".5"/></svg>`; } },
+  { name: "סרט משי נשפך", desc: "רצועת משי רכה שנופלת בקפלים, עם תנועה. נשי ורך.",
+    svg: c => { const [g, d] = sheen(c, 90, [[0, -.25], [.2, .1], [.35, .5], [.5, .05], [.65, -.2], [.8, .3], [1, -.15]]);
+      return `<svg viewBox="0 0 120 120"><defs>${d}</defs><path d="M28 6 C70 4 96 10 92 30 C88 48 30 44 32 66 C34 86 96 80 92 100 C90 112 60 116 26 114 C40 104 70 104 66 96 C62 86 6 92 8 66 C10 40 70 42 70 28 C70 18 50 14 28 6 Z" fill="url(#${g})" filter="url(#soft)"/></svg>`; } },
+  { name: "דוגמית עם שוליים משוננים", desc: "כמו דוגמית בד מקטלוג של תופרת, עם שוליים בזיגזג. מזכיר עבודה עם בדים אמיתיים.",
+    svg: c => { const [g, d] = sheen(c, 35, SHEEN); let p = "M8 8";
+      for (let x = 8; x < 112; x += 6) p += ` L${x + 3} 4 L${x + 6} 8`; for (let y = 8; y < 112; y += 6) p += ` L116 ${y + 3} L112 ${y + 6}`;
+      for (let x = 112; x > 8; x -= 6) p += ` L${x - 3} 116 L${x - 6} 112`; for (let y = 112; y > 8; y -= 6) p += ` L4 ${y - 3} L8 ${y - 6}`;
+      return `<svg viewBox="0 0 120 120"><defs>${d}</defs><path d="${p} Z" fill="url(#${g})" filter="url(#soft)"/></svg>`; } },
+  { name: "צעיף משי עגול", desc: "עיגול בד עם קפלים שיוצאים מהמרכז, כמו צעיף משי שנאסף. עשיר ומבריק.",
+    svg: c => { const id = "r" + (uid++);
+      let s = ""; for (let i = 0; i < 12; i++) { const a = i * 30; s += `<path d="M60 60 L${60 + 56 * Math.cos(a * Math.PI / 180)} ${60 + 56 * Math.sin(a * Math.PI / 180)} A56 56 0 0 1 ${60 + 56 * Math.cos((a + 30) * Math.PI / 180)} ${60 + 56 * Math.sin((a + 30) * Math.PI / 180)} Z" fill="${i % 2 ? L(c, .22) : D(c, .08)}" opacity=".55"/>`; }
+      return `<svg viewBox="0 0 120 120"><defs><radialGradient id="${id}" cx=".38" cy=".32" r=".75"><stop offset="0" stop-color="${L(c,.45)}"/><stop offset=".45" stop-color="${c}"/><stop offset="1" stop-color="${D(c,.22)}"/></radialGradient></defs><circle cx="60" cy="60" r="56" fill="url(#${id})" filter="url(#soft)"/>${s}<circle cx="60" cy="60" r="56" fill="url(#${id})" opacity=".55"/></svg>`; } }
+];
+
+const out = document.getElementById("out");
+VARIANTS.forEach((v, i) => {
+  const sec = document.createElement("section");
+  sec.innerHTML = `<h2><b>${i + 1}</b>${v.name}</h2><p class="desc">${v.desc}</p>` +
+    PALS.map(p => `<div class="pal">${p.map(([n, c]) => `<figure>${v.svg(c)}<figcaption>${n}</figcaption></figure>`).join("")}</div>`).join("");
+  out.appendChild(sec);
+});
+</script>
+</body>
+</html>
