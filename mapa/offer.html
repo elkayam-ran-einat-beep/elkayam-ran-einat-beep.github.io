@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>אבחון סטייל מקצועי · עינת רן אלקיים</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&family=Heebo:wght@200;300;400&family=Bellefair&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="map.css">
+</head>
+<body>
+<main class="map offer-page" id="op">
+  <header class="mast">
+    <p class="pre">EINAT RAN ELKAYAM</p>
+    <h1 id="h">אבחון סטייל מקצועי</h1>
+  </header>
+  <section class="row end" id="box"><p class="closing">רגע, טוענת את ההטבה שלך…</p></section>
+  <footer class="sig"><span>עינת רן אלקיים | סטיילינג · תדמית · מסר חזותי</span><span class="site">Einatran.com</span></footer>
+</main>
+<script src="questions.js"></script>
+<script src="map-data.js"></script>
+<script src="offer-common.js"></script>
+<script>
+(function () {
+  var D = window.MAPDATA, O = D.offer, api = (window.QUIZ && window.QUIZ.endpoint) || "";
+  var t = new URLSearchParams(location.search).get("t") || "";
+  var box = document.getElementById("box");
+  function el(tag, attrs, kids) {
+    var n = document.createElement(tag);
+    for (var k in (attrs || {})) { if (k === "text") n.textContent = attrs[k]; else n.setAttribute(k, attrs[k]); }
+    (kids || []).forEach(function (c) { n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); });
+    return n;
+  }
+  function ping(what) {
+    if (!api || !/^[0-9a-f]{32}$/.test(t)) return;
+    try { fetch(api + "?k=click&w=" + what + "&t=" + t, { mode: "no-cors", keepalive: true }); } catch (e) {}
+  }
+  function waLink(text) { return "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(text); }
+  function expired() {
+    var a = el("a", { class: "btn", href: waLink(D.whatsappText), target: "_blank", rel: "noopener" }, ["לכתוב לי בוואטסאפ"]);
+    a.addEventListener("click", function () { ping("regular"); });
+    box.replaceChildren(el("p", { class: "closing", text: O.expired }), a);
+  }
+  function show(endMs, skew) {
+    var clock = el("div", { class: "clock" });
+    var actions = [];
+    if (O.calendar) {
+      var cal = el("a", { class: "btn", href: O.calendar, target: "_blank", rel: "noopener" }, [O.calendarCta]);
+      cal.addEventListener("click", function () { ping("calendar"); });
+      actions.push(cal);
+    }
+    var wa = el("a", { class: "btn" + (O.calendar ? " ghost" : ""), href: waLink(O.whatsappText), target: "_blank", rel: "noopener" }, [O.whatsappCta]);
+    wa.addEventListener("click", function () { ping("whatsapp"); });
+    actions.push(wa);
+    box.replaceChildren(el("div", { class: "offer" }, [
+      el("p", { class: "badge", text: window.offerBadge(O) }),
+      el("p", { class: "clock-label", text: O.timerLabel }), clock,
+      el("div", { class: "offer-detail" }, [
+        el("p", { text: O.what }),
+        el("p", { class: "price" }, [el("s", { text: O.priceWas }), " ", el("strong", { text: O.priceNow })]),
+        el("div", { class: "offer-actions" }, actions)
+      ])
+    ]));
+    window.runClock(clock, endMs, skew, expired);
+  }
+  if (!api || !/^[0-9a-f]{32}$/.test(t)) { expired(); return; }
+  ping("offer"); // נכנסה לדף ההטבה
+  fetch(api + "?o=" + t).then(function (r) { return r.json(); }).then(function (j) {
+    if (j && j.end && j.end > j.now) show(j.end, j.now - Date.now()); else expired();
+  }).catch(expired);
+})();
+</script>
+</body>
+</html>

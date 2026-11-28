@@ -145,39 +145,18 @@
     el("button", { class: "pdf", type: "button", id: "pdf" }, ["לשמור את המפה כ־PDF"])
   ]));
 
+  /* התיבה במפה: טיימר וכפתור שמוביל לדף ההטבה. המחיר והקביעה רק בדף הבא, כדי לספור מי עברה. */
   function offerBox(endMs, skew) {
     var O = D.offer;
     var clock = el("div", { class: "clock", "aria-live": "off" });
-    var detail = el("div", { class: "offer-detail", hidden: "hidden" });
-    var openBtn = el("button", { class: "btn", type: "button" }, [O.open]);
-    var waOffer = el("a", { class: "btn ghost", href: "https://wa.me/" + D.whatsapp + "?text=" + encodeURIComponent(O.whatsappText), target: "_blank", rel: "noopener" }, [O.whatsappCta]);
-    waOffer.addEventListener("click", function () { ping("whatsapp"); });
-    var actions = [];
-    if (O.calendar) {
-      var cal = el("a", { class: "btn", href: O.calendar, target: "_blank", rel: "noopener" }, [O.calendarCta]);
-      cal.addEventListener("click", function () { ping("calendar"); });
-      actions.push(cal);
-    }
-    actions.push(waOffer);
-    [el("h3", { text: O.name }), el("p", { text: O.what }),
-     el("p", { class: "price" }, [el("s", { text: O.priceWas }), " ", el("strong", { text: O.priceNow })]),
-     el("div", { class: "offer-actions" }, actions)].forEach(function (n) { detail.appendChild(n); });
-    openBtn.addEventListener("click", function () { detail.hidden = false; openBtn.hidden = true; ping("offer"); });
+    var go = el("a", { class: "btn", href: "offer.html?t=" + mapId }, [O.open]);
     var box = el("div", { class: "offer" }, [
       el("p", { class: "offer-title", text: D.cta }),
-      el("p", { class: "badge", text: O.badge }),
-      el("p", { class: "clock-label", text: O.timerLabel }), clock, openBtn, detail
+      el("p", { class: "badge", text: window.offerBadge(O) }),
+      el("p", { class: "clock-label", text: O.timerLabel }), clock, go
     ]);
-    function pad(n) { return (n < 10 ? "0" : "") + n; }
-    function tick() {
-      var left = Math.max(0, endMs - (Date.now() + skew));
-      if (!left) { endBox.replaceChildren(regularBtn); return; }
-      var s = Math.floor(left / 1000);
-      clock.textContent = pad(Math.floor(s / 3600)) + ":" + pad(Math.floor(s / 60) % 60) + ":" + pad(s % 60);
-      setTimeout(tick, 1000);
-    }
+    window.runClock(clock, endMs, skew, function () { endBox.replaceChildren(regularBtn); });
     endBox.replaceChildren(box);
-    tick();
   }
   if (api && mapId && /^[0-9a-f]{32}$/.test(mapId)) {
     fetch(api + "?o=" + mapId).then(function (r) { return r.json(); }).then(function (j) {
