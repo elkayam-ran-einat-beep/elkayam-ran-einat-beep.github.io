@@ -99,12 +99,14 @@
   root.appendChild(el("section", { class: "row two" }, [
     el("div", { class: "cell" }, [el("h2", { text: bodyTitle }), body ? el("p", { class: "sub", text: body.title }) : null, el("p", { text: bodyText })]),
     figImg ? el("div", { class: "figcell" }, [figImg]) : null,
-    el("div", { class: "cell" }, [el("h2", { text: "סגנון הלבוש שלך" }), el("p", { class: "sub", text: styleTitle })].concat(
+    el("div", { class: "cell" }, ((form || styles.length)
+        ? [el("h2", { text: "הסטייל שלך הוא " + styleTitle })]
+        : [el("h2", { text: "הסטייל שלך" }), el("p", { class: "sub", text: styleTitle })]).concat(
       styleText.map(function (t) { return el("p", { text: t }); })))
   ]));
 
   root.appendChild(el("section", { class: "row looks" }, [
-    el("h2", { text: "שלושה שילובי גזרות שכדאי לך לנסות" }),
+    el("h2", {}, ["שלושה שילובי גזרות שכדאי לך לנסות ", el("span", { class: "h2note", text: "(התאימי לסטייל ולצבעים שלך)" })]),
     el("div", { class: "strip" }, looks.map(function (l, i) {
       return el("figure", { class: "look" }, [
         el("img", { src: "img/" + (modest ? "looks-modest" : "looks") + "/" + lookKey + "_" + (i + 1) + ".jpg", alt: l.t + ". " + l.d, loading: "lazy" }),
