@@ -27,7 +27,7 @@ window.QUIZ = {
         { label: "בערך באותו רוחב", img: "img/bodies/H.png" },
         { label: "קשה לי להעריך", plain: true }
       ] },
-    { id: "q2", section: "body", kind: "pics", title: "איזה תיאור הכי דומה לקו הגוף שלך?",
+    { id: "q2", section: "body", kind: "pics", title: "איזה תיאור הכי דומה לקו המותן שלך?",
       options: [
         { label: "המותן שלי צרה בבירור ביחס לכתפיים ולאגן", img: "img/bodies/X.png" },
         { label: "המותן שלי פחות מודגשת, וקו הגוף די ישר", img: "img/bodies/H.png" },
