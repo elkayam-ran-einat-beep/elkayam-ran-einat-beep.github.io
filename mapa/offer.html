@@ -51,7 +51,8 @@
       pay.addEventListener("click", function () { ping("pay"); });
       actions.push(pay);
     }
-    if (O.calendar) {
+    // היומן נפתח רק אחרי התשלום, בעמוד התודה (החלטה של עינת, 28.11). כאן רק כשאין קישור תשלום.
+    if (O.calendar && !O.payUrl) {
       var cal = el("a", { class: "btn" + (O.payUrl ? " ghost" : ""), href: O.calendar, target: "_blank", rel: "noopener" }, [O.calendarCta]);
       cal.addEventListener("click", function () { ping("calendar"); });
       actions.push(cal);
