@@ -64,7 +64,9 @@
       el("p", { class: "badge", text: window.offerBadge(O) }),
       el("p", { class: "clock-label", text: O.timerLabel }), clock,
       el("div", { class: "offer-detail" }, [
-        el("p", { text: O.what }),
+        el("p", { class: "what", text: O.what }),
+        el("p", { class: "get-title", text: O.getTitle }),
+        el("ul", { class: "get" }, O.getList.map(function (t) { return el("li", { text: t }); })),
         el("p", { class: "price" }, [el("s", { text: O.priceWas }), " ", el("strong", { text: O.priceNow })]),
         el("div", { class: "offer-actions" }, actions)
       ])
