@@ -73,7 +73,7 @@
   if (!api || !/^[0-9a-f]{32}$/.test(t)) { expired(); return; }
   ping("offer"); // נכנסה לדף ההטבה
   fetch(api + "?o=" + t).then(function (r) { return r.json(); }).then(function (j) {
-    if (j && j.end && j.end > j.now) show(j.end, j.now - Date.now()); else expired();
+    if (j && j.end && j.end > j.now) { O.payUrl = j.pay || ""; show(j.end, j.now - Date.now()); } else expired();
   }).catch(expired);
 })();
 </script>
